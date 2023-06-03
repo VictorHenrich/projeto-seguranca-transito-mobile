@@ -4,24 +4,28 @@ import {
     Stack, 
     Text
 } from 'native-base';
+import Fontisto from "react-native-vector-icons/Fontisto";
+import Entypo from "react-native-vector-icons/Entypo";
 
 import InputDefault from '../../Components/InputDefault';
 import HeadingDefault from '../../Components/HeadingDefault';
 import BackgroundApp from '../../Components/BackgroundApp';
 import ButtonDefault from '../../Components/ButtonDefault';
+import ContainerDefault from '../../Components/ContainerDefault';
 
 
 export default function LoginPage(props: any){
     return (
         <>
             <BackgroundApp />
-            <Center
+            <ContainerDefault
                 width="full" 
                 height="full"
                 display="flex"
                 padding={5}
                 flexDirection="column"
                 justifyContent="space-evenly"
+                minHeightContainer={900}
 
             >
                 <Box>
@@ -34,8 +38,15 @@ export default function LoginPage(props: any){
                 </Box>
                 <Box width="full">
                     <Stack direction="column" space={10}>
-                        <InputDefault placeholder='Email'/>
-                        <InputDefault placeholder='Senha'/>
+                        <InputDefault 
+                            placeholder='Email'
+                            icon={<Entypo name="email"/>}
+                        />
+                        <InputDefault 
+                            placeholder='Senha'
+                            type="password"
+                            icon={<Fontisto name="locked"/>}
+                        />
                         <Text
                             color="primary"
                             textAlign="right"
@@ -54,7 +65,7 @@ export default function LoginPage(props: any){
                     {" "}
                     <Text color="primary">Cadastre-se</Text>
                 </Text>
-            </Center>
+            </ContainerDefault>
         </>
     )
 }

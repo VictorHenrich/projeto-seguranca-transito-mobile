@@ -6,7 +6,7 @@ import RegisterPerson from './src/Pages/Register/RegisterPerson';
 export default function App() {
   return (
     <NativeBaseProvider theme={globalTheme}>
-      <RegisterPerson/>
+      <LoginPage/>
     </NativeBaseProvider>
   );
 }
