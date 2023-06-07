@@ -1,5 +1,4 @@
 import {  createNativeStackNavigator } from "@react-navigation/native-stack";
-import {Center, Text} from "native-base";
 import ComponentRegisterPerson from "./ComponentRegisterPerson";
 import ComponentRegisterAddress from "./ComponentRegisterAddress";
 import RegisterProvider from "./RegisterProvider";

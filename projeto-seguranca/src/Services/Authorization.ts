@@ -24,18 +24,19 @@ export default class AuthorizationService implements IService{
             senha: this.password
         }
 
-        const response: AxiosResponse = await api.post(
-            AuthorizationService.urlAuthentication,
-            data
-        );
+        try{
+            const response = await api.post(
+                AuthorizationService.urlAuthentication,
+                data
+            );
 
-        if(response.status >= 400)
+            const { data: token }: any = response.data;
+
+            api.defaults.headers["Authorization"] = token;
+
+        }catch(error){
             throw new AuthenticationError();
-
-        const { data: token }: any = response.data;
-
-        api.defaults.headers["Authorization"] = token
-
+        }
     }
     
 }
