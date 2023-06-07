@@ -1,12 +1,12 @@
 import { NativeBaseProvider } from 'native-base';
 import globalTheme from './src/Themes/GlobalTheme';
 import LoginPage from './src/Pages/Login';
-import RegisterPerson from './src/Pages/Register/RegisterPerson';
+import RegisterPage from './src/Pages/Register';
 
 export default function App() {
   return (
     <NativeBaseProvider theme={globalTheme}>
-      <LoginPage/>
+      <RegisterPage/>
     </NativeBaseProvider>
   );
 }
