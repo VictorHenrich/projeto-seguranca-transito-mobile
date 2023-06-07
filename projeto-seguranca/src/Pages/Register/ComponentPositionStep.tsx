@@ -1,4 +1,4 @@
-import {Stack, Box} from "native-base";
+import {Stack, Box, Circle} from "native-base";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import { useContext } from "react";
 
@@ -11,14 +11,14 @@ export default function ComponentPositionStep(props: any){
     return (
         <Stack direction="row" width="full" space={10} justifyContent="center">
             {[1,2,3,4,5].map((index)=>{
-                const backgroundColor: string = index == pageIndex ? "primary" : "#000000"
+                const backgroundColor: string = index == pageIndex ? "primary" : "rgb(100, 100, 100)"
 
                 return (
-                    <Box 
+                    <Circle
+                        key={"a" + index}
                         width={5}
                         height={5}
                         backgroundColor={backgroundColor}
-                        borderRadius="100%"
                     />
                 );
             })}

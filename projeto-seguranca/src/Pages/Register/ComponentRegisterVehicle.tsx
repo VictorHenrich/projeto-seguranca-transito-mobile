@@ -5,25 +5,17 @@ import {
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-
+import { ContextRegister, IContextRegister } from "./RegisterProvider";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
-import SelectDefault from "../../Components/SelectDefault";
-import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 
 
-const states = [
-    {text: "SC"},
-    {text: "RS"},
-    {text: "PR"},
-    {text: "SP"},
-    {text: "RJ"},
-]
 
 
-export default function ComponentRegisterAddress(props: any){
+export default function ComponentRegisterVehicle(props: any){
+
     const {
         setUserPayload,
         userPayload
@@ -31,27 +23,27 @@ export default function ComponentRegisterAddress(props: any){
 
     return (
         <ComponentContainerRegister 
-            heading="Agora precisamos dos dados de seu endereço atual."
+            heading="Vamos registrar seu primeiro veículo."
+            minHeightContainer={1200}
         >
             <Stack 
                 direction="column" 
                 space={10} 
                 width="full"
             >
-                <SelectDefault 
-                    placeholder='UF'
-                    selectItem={{
-                        itens: states
-                    }}
-                    onValueChange={(itemValue) => {
+                <InputDefault
+                    placeholder='Placa'
+                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    value={userPayload.name}
+                    onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
-                            stateIssue: itemValue
+                            name: value
                         })
                     }}
                 />
                 <InputDefault 
-                    placeholder='Cidade'
+                    placeholder='Renavam'
                     icon={<MaterialCommunityIcons name="format-text"/>}
                     onChangeText={(value) => {
                         setUserPayload({
@@ -61,7 +53,7 @@ export default function ComponentRegisterAddress(props: any){
                     }}
                 />
                 <InputDefault 
-                    placeholder='Bairro'
+                    placeholder='Modelo (Opcional)'
                     icon={<MaterialCommunityIcons name="format-text"/>}
                     onChangeText={(value) => {
                         setUserPayload({
@@ -71,7 +63,17 @@ export default function ComponentRegisterAddress(props: any){
                     }}
                 />
                 <InputDefault 
-                    placeholder='Logradouro'
+                    placeholder='Ano (Opcional)'
+                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    onChangeText={(value) => {
+                        setUserPayload({
+                            ...userPayload,
+                            documentRg: value
+                        })
+                    }}
+                />
+                <InputDefault 
+                    placeholder='Cor (Opcional)'
                     icon={<MaterialCommunityIcons name="format-text"/>}
                 />
             </Stack>
@@ -80,9 +82,6 @@ export default function ComponentRegisterAddress(props: any){
                 rightIcon={
                     <Icon as={<FontAwesome name="arrow-right"/>}/>
                 }
-                onTouchStart={()=> {
-                    props.navigation.navigate("RegisterVehicle");
-                }}
             />
             <ButtonDefault 
                 text="Anterior"
@@ -90,7 +89,7 @@ export default function ComponentRegisterAddress(props: any){
                     <Icon as={<FontAwesome name="arrow-left"/>}/>
                 }
                 onTouchStart={()=> {
-                    props.navigation.navigate("RegisterPerson");
+                    props.navigation.navigate("RegisterAddress");
                 }}
             />
             

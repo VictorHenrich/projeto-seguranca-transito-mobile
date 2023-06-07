@@ -9,10 +9,10 @@ import {
 
 
 export interface InputDefaultProps extends IInputProps{
-    colorDefault: void | string,
-    colorFocus: void | string,
-    icon: void | any,
-    backgroundColor: void | string
+    colorDefault: string,
+    colorFocus: string,
+    icon: any,
+    backgroundColor: string
 }
 
 
@@ -29,7 +29,7 @@ export default function InputDefault({
     backgroundColor = "rgba(0,0,0, 0.5)",
     icon,
     ...props
-}: InputDefaultProps){
+}: Partial<InputDefaultProps>){
 
     const [styleInput, setSyleInput] = useState<IStyleInput>({
         color: colorDefault,
