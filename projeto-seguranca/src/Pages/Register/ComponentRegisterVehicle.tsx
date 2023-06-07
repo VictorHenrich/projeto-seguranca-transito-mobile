@@ -5,8 +5,8 @@ import {
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { ContextRegister, IContextRegister } from "./RegisterProvider";
 
+import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
@@ -25,6 +25,7 @@ export default function ComponentRegisterVehicle(props: any){
         <ComponentContainerRegister 
             heading="Vamos registrar seu primeiro veículo."
             minHeightContainer={1200}
+            navigation={props.navigation}
         >
             <Stack 
                 direction="column" 
@@ -80,13 +81,22 @@ export default function ComponentRegisterVehicle(props: any){
             <ButtonDefault 
                 text="Próximo"
                 rightIcon={
-                    <Icon as={<FontAwesome name="arrow-right"/>}/>
+                    <Icon
+                        size="lg"
+                        as={<FontAwesome name="arrow-right"/>}
+                    />
                 }
+                onTouchStart={()=>{
+                    props.navigation.navigate("RegisterAccess");
+                }}
             />
             <ButtonDefault 
                 text="Anterior"
                 leftIcon={
-                    <Icon as={<FontAwesome name="arrow-left"/>}/>
+                    <Icon
+                        size="lg"
+                        as={<FontAwesome name="arrow-left"/>}
+                    />
                 }
                 onTouchStart={()=> {
                     props.navigation.navigate("RegisterAddress");

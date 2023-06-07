@@ -33,6 +33,7 @@ export default function ComponentRegisterPerson(props: any){
     return (
         <ComponentContainerRegister 
             heading="Vamos começar com as informações da sua carteira."
+            navigation={props.navigation}
         >
             <Stack 
                 direction="column" 
@@ -90,7 +91,10 @@ export default function ComponentRegisterPerson(props: any){
             <ButtonDefault 
                 text="Próximo"
                 rightIcon={
-                    <Icon as={<FontAwesome name="arrow-right"/>}/>
+                    <Icon 
+                        as={<FontAwesome name="arrow-right"/>}
+                        size="lg"
+                    />
                 }
                 onTouchStart={() => {
                     props.navigation.navigate("RegisterAddress");

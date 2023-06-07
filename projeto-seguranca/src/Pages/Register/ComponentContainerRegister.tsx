@@ -1,5 +1,4 @@
-import { ReactElement } from "react";
-import { Text } from "native-base";
+import { Text, Link } from "native-base";
 
 import BackgroundApp from "../../Components/BackgroundApp";
 import HeadingDefault from "../../Components/HeadingDefault";
@@ -9,13 +8,15 @@ import ComponentPositionStep from "./ComponentPositionStep";
 
 
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
-    heading: string
+    heading: string,
+    navigation: void | any
 }
 
 
 
 export default function ComponentContainerRegister({
     heading,
+    navigation,
     minHeightContainer = 1000,
     ...props
 }: ComponentContainerRegisterProps){
@@ -36,7 +37,22 @@ export default function ComponentContainerRegister({
 
                 {props.children}
 
-                <Text color="primary" fontWeight={700}>Voltar ao inicio</Text>
+                {navigation && (
+                    <Link
+                        onTouchStart={() =>{
+                            if(navigation)
+                                navigation.navigate("RegisterPerson");
+                        }}
+                    >
+                        <Text
+                            color="primary" 
+                            fontWeight={700}
+                        >
+                            Voltar ao inicio
+                        </Text>
+                    </Link>
+                )}
+                
             </ContainerDefault>
         </>
     )

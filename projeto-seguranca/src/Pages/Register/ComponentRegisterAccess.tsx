@@ -1,29 +1,20 @@
 import {useContext} from "react";
-import {
-    Stack,
-    Icon
-} from "native-base";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Stack, Icon } from "native-base";
+import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Entypo from "react-native-vector-icons/Entypo";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 
-import InputDefault from '../../Components/InputDefault';
-import ButtonDefault from "../../Components/ButtonDefault";
-import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
+import ButtonDefault from "../../Components/ButtonDefault";
+import InputDefault from "../../Components/InputDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 
 
-const states = [
-    {text: "SC"},
-    {text: "RS"},
-    {text: "PR"},
-    {text: "SP"},
-    {text: "RJ"},
-]
 
 
-export default function ComponentRegisterAddress(props: any){
+export default function ComponentRegisterAccess(props: any){
     const {
         setUserPayload,
         userPayload
@@ -31,29 +22,17 @@ export default function ComponentRegisterAddress(props: any){
 
     return (
         <ComponentContainerRegister 
-            heading="Agora precisamos dos dados de seu endereço atual."
+            heading="Finalizando agora com seus dados de acesso."
             navigation={props.navigation}
         >
-            <Stack 
+            <Stack
                 direction="column" 
                 space={10} 
                 width="full"
             >
-                <SelectDefault 
-                    placeholder='UF'
-                    selectItem={{
-                        itens: states
-                    }}
-                    onValueChange={(itemValue) => {
-                        setUserPayload({
-                            ...userPayload,
-                            stateIssue: itemValue
-                        })
-                    }}
-                />
                 <InputDefault 
-                    placeholder='Cidade'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    placeholder='Email'
+                    icon={<Entypo name="email"/>}
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
@@ -62,8 +41,8 @@ export default function ComponentRegisterAddress(props: any){
                     }}
                 />
                 <InputDefault 
-                    placeholder='Bairro'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    placeholder='Senha'
+                    icon={<Fontisto name="locked"/>}
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
@@ -72,15 +51,21 @@ export default function ComponentRegisterAddress(props: any){
                     }}
                 />
                 <InputDefault 
-                    placeholder='Logradouro'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    placeholder='Confirmar Senha'
+                    icon={<Fontisto name="locked"/>}
+                    onChangeText={(value) => {
+                        setUserPayload({
+                            ...userPayload,
+                            documentRg: value
+                        })
+                    }}
                 />
             </Stack>
             <ButtonDefault 
-                text="Próximo"
-                rightIcon={
+                text="Anterior"
+                leftIcon={
                     <Icon 
-                        as={<FontAwesome name="arrow-right"/>}
+                        as={<FontAwesome name="arrow-left"/>}
                         size="lg"
                     />
                 }
@@ -89,18 +74,18 @@ export default function ComponentRegisterAddress(props: any){
                 }}
             />
             <ButtonDefault 
-                text="Anterior"
-                leftIcon={
+                text="Cadastrar"
+                rightIcon={
                     <Icon
                         size="lg"
-                        as={<FontAwesome name="arrow-left"/>}
-                    />
+                        as={<FontAwesome5 name="address-card"/>
+                        
+                    }/>
                 }
                 onTouchStart={()=> {
-                    props.navigation.navigate("RegisterPerson");
+                    props.navigation.navigate("RegisterFinish");
                 }}
             />
-            
         </ComponentContainerRegister>
     )
 }
