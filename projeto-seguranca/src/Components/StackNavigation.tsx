@@ -1,32 +1,49 @@
-import { ComponentType } from "react";
-import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
-import { NavigationContainer,  } from '@react-navigation/native';
+;
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NativeStackNavigatorProps } from "@react-navigation/native-stack/lib/typescript/src/types";
+import { NavigationContainer, NavigationContainerProps } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 
-export interface IStackNavigation extends NativeStackNavigationOptions{
-    routeDefault: string
+export interface IStackScreen{
+    component: any,
+    name: string
 }
 
+export interface IStackNavigation extends Omit<NativeStackNavigatorProps, "children">{
+    screens: IStackScreen[],
+    navigationContainerProps?: Omit<NavigationContainerProps, "children">
+}
 
 export default function StackNavigation({
-    routeDefault,
-    ...props
+    screens,
+    navigationContainerProps = {},
+  ...props
 }: IStackNavigation){
-    <NavigationContainer>
-        <Stack.Navigator
-            initialRouteName={routeDefault}
-            screenOptions={{
-                headerTransparent: true,
-                headerBackVisible: false,
-                headerShadowVisible: false,
-                headerBackTitleVisible: false,
-                ...props
-            }}
+    return (
+        <NavigationContainer {...navigationContainerProps}>
+            <Stack.Navigator
+                screenOptions={{
+                    title: "",
+                    headerTransparent: true,
+                    headerBackVisible: false,
+                    headerShadowVisible: false,
+                    headerBackTitleVisible: false
+                }}
+                {...props}
 
-        >
-
-        </Stack.Navigator>
-    </NavigationContainer>
+            >
+                {screens.map((item, index) => {
+                    return (
+                        <Stack.Screen 
+                            component={item.component}
+                            name={item.name}
+                            key={index}
+                        />
+                    )
+                })}
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }

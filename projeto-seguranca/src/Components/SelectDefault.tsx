@@ -6,16 +6,16 @@ import { Select, Text, ISelectProps, ISelectItemProps } from "native-base"
 export interface SelectDefaultItensProps extends Omit<ISelectItemProps, "label" | "key" | "value">{
     itens: [{
         text: string,
-        icon: void | any
+        icon?: any
     }]
 }
 
 
 export interface SelectDefaultProps extends ISelectProps{
     selectItem: SelectDefaultItensProps,
-    colorDefault: void | string,
-    colorFocus: void | string,
-    backgroundColor: void | string
+    colorDefault?: string,
+    colorFocus?: string,
+    backgroundColor?: string
 }
 
 interface IStyleSelect{

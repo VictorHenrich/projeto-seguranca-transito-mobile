@@ -1,5 +1,4 @@
-import { createContext, useState, Context} from "react";
-import {NavigationContainer} from "@react-navigation/native"
+import { createContext, useState, Context, } from "react";
 
 
 export interface IUserPayload{
@@ -45,12 +44,7 @@ export default function RegisterProvider({ children }: any){
             pageIndex,
             setPageIndex
         }}>
-            <NavigationContainer onStateChange={(state) => {
-                const index: number = (state?.index || 0) + 1;
-                setPageIndex(index);
-            }}>
-                {children}
-            </NavigationContainer>
+            {children}
         </ContextRegister.Provider>
     )
 }

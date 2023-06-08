@@ -1,5 +1,6 @@
 import { 
     Box, 
+    Link, 
     Stack, 
     Text
 } from 'native-base';
@@ -94,14 +95,22 @@ export default function LoginPage(props: any){
                     </Stack>
                 </Box>
                 <ButtonDefault text="SIGN IN" onTouchStart={authenticate}/>
-                <Text 
-                    color="#97A6B4"
-                    fontWeight={700}
+                <Link
+                    onTouchStart={() =>{
+                        props.navigation.navigate("RegisterPage")  
+                    }}
                 >
-                    Ainda não possui uma conta?
-                    {" "}
-                    <Text color="primary">Cadastre-se</Text>
-                </Text>
+                    <Text 
+                        color="#97A6B4"
+                        fontWeight={700}
+                    >
+                        Ainda não possui uma conta?
+                        {" "}
+                        <Text color="primary" fontWeight={700}>
+                            Cadastre-se
+                        </Text>
+                    </Text>
+                </Link>
             </ContainerDefault>
         </>
     )

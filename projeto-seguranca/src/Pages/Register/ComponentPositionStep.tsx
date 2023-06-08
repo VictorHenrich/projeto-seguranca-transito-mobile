@@ -15,7 +15,7 @@ export default function ComponentPositionStep(props: any){
 
                 return (
                     <Circle
-                        key={"a" + index}
+                        key={index}
                         width={5}
                         height={5}
                         backgroundColor={backgroundColor}

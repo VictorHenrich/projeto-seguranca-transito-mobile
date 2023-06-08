@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-
 import api from "./Api";
 import IService from "./IService";
 import AuthenticationError from "../Exceptions/AuthenticationError";

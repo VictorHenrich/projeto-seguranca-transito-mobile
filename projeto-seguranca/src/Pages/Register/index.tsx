@@ -1,37 +1,45 @@
-import {  createNativeStackNavigator } from "@react-navigation/native-stack";
 import ComponentRegisterPerson from "./ComponentRegisterPerson";
 import ComponentRegisterAddress from "./ComponentRegisterAddress";
 import RegisterProvider from "./RegisterProvider";
 import ComponentRegisterVehicle from "./ComponentRegisterVehicle";
 import ComponentRegisterAccess from "./ComponentRegisterAccess";
 import ComponentRegisterFinish from "./ComponentRegisterFinish";
+import RegisterNavigation from "./RegisterNavigation";
+import { IStackScreen } from "../../Components/StackNavigation";
 
 
-
-const Stack = createNativeStackNavigator();
+const screens: IStackScreen[] = [
+    {
+        component: ComponentRegisterPerson,
+        name: "RegisterPerson"
+    },
+    {
+        component: ComponentRegisterAddress,
+        name: "RegisterAddress"
+    },
+    {
+        component: ComponentRegisterVehicle,
+        name: "RegisterVehicle"
+    },
+    {
+        component: ComponentRegisterAccess,
+        name: "RegisterAccess"
+    },
+    {
+        component: ComponentRegisterFinish,
+        name: "RegisterFinish"
+    }
+]
 
 
 export default function RegisterPage(props: any){
 
     return (
         <RegisterProvider>
-            <Stack.Navigator 
+            <RegisterNavigation 
+                screens={screens}
                 initialRouteName="RegisterPerson"
-                screenOptions={{
-                    headerTransparent: true,
-                    headerTintColor: "primary",
-                    headerBackVisible: false,
-                    headerShadowVisible: false,
-                    headerBackTitleVisible: false,
-                    title: ""
-                }}
-            >
-                <Stack.Screen name="RegisterPerson" component={ComponentRegisterPerson}/>
-                <Stack.Screen name="RegisterAddress" component={ComponentRegisterAddress}/>
-                <Stack.Screen name="RegisterVehicle" component={ComponentRegisterVehicle}/>
-                <Stack.Screen name="RegisterAccess" component={ComponentRegisterAccess}/>
-                <Stack.Screen name="RegisterFinish" component={ComponentRegisterFinish}/>
-            </Stack.Navigator>
+            />
         </RegisterProvider>
     )
 }

@@ -9,7 +9,7 @@ import ComponentPositionStep from "./ComponentPositionStep";
 
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
     heading: string,
-    navigation: void | any
+    navigation?: any
 }
 
 
