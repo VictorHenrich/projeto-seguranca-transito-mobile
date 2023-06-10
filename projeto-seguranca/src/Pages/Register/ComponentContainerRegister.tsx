@@ -4,12 +4,13 @@ import BackgroundApp from "../../Components/BackgroundApp";
 import HeadingDefault from "../../Components/HeadingDefault";
 import ContainerDefault, {ContainerDefaultProps} from "../../Components/ContainerDefault";
 import ComponentPositionStep from "./ComponentPositionStep";
-
+import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
     heading: string,
-    navigation?: any
+    navigation?: any,
+    AlertProps?: AlertDefaultProps
 }
 
 
@@ -17,15 +18,22 @@ export interface ComponentContainerRegisterProps extends Partial<ContainerDefaul
 export default function ComponentContainerRegister({
     heading,
     navigation,
+    AlertProps = {
+        open: false,
+        stateOpen: (open: boolean) => null,
+        status: "info",
+        text: "",
+    },
     minHeightContainer = 1000,
     ...props
-}: ComponentContainerRegisterProps){
+}: ComponentContainerRegisterProps){;
+
     return (
         <>
             <BackgroundApp />
             <ContainerDefault
                 display="flex"
-                justifyContent="space-evenly"
+                justifyContent="space-between"
                 padding={10}
                 overflowY="auto"
                 minHeightContainer={minHeightContainer}
@@ -54,6 +62,9 @@ export default function ComponentContainerRegister({
                 )}
                 
             </ContainerDefault>
+            <AlertDefault
+                {...AlertProps}
+            />
         </>
     )
 }

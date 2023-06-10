@@ -1,25 +1,24 @@
 import api from "./Api";
-import IService from "./IService";
+import AbstractService from "./AbstractService";
 import AuthenticationError from "../Exceptions/AuthenticationError";
 
 
 
+export interface AuthorizationPayload{
+    email: string,
+    password: string
+}
 
 
-export default class AuthorizationService implements IService{
+
+
+export default class AuthorizationService extends AbstractService<AuthorizationPayload>{
     private static urlAuthentication: string = "/usuario/autenticacao";
-
-    constructor(
-        private readonly email: string,
-        private readonly password: string
-    ){
-
-    }
 
     async execute(): Promise<void>{
         const data: any = {
-            email: this.email,
-            senha: this.password
+            email: this.payload.email,
+            senha: this.payload.password
         }
 
         try{

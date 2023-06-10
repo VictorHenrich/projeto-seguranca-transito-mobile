@@ -13,29 +13,36 @@ import HeadingDefault from '../../Components/HeadingDefault';
 import BackgroundApp from '../../Components/BackgroundApp';
 import ButtonDefault from '../../Components/ButtonDefault';
 import ContainerDefault from '../../Components/ContainerDefault';
-import AuthorizationService from '../../Services/Authorization';
+import AuthorizationService, {AuthorizationPayload} from '../../Services/AuthorizationService';
+import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 
-
-
-export interface UserAuthenticationPayload{
-    email: string,
-    password: string
-}
 
 
 export default function LoginPage(props: any){
 
-    const [userAuthPayload, setUserAuthPayload] = useState<UserAuthenticationPayload>({
+    const [userAuthPayload, setUserAuthPayload] = useState<AuthorizationPayload>({
         email: "",
         password: ""
     });
 
+    const [alertState, setAlertState] = useState<Omit<AlertDefaultProps, "stateOpen">>({
+        text: "",
+        open: false,
+        status: "info"
+    });
+
 
     async function authenticate(){
-        await new AuthorizationService(
-            userAuthPayload.email,
-            userAuthPayload.password
-        ).execute();
+        try{
+            await new AuthorizationService(userAuthPayload).execute();
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                text: "Falha ao realizar autenticação",
+                status: "error"
+            });
+        }
     }
 
     return (
@@ -112,6 +119,12 @@ export default function LoginPage(props: any){
                     </Text>
                 </Link>
             </ContainerDefault>
+            <AlertDefault 
+                {...alertState}
+                stateOpen={(open) =>{
+                    setAlertState({ ...alertState, open })
+                }}
+            />
         </>
     )
 }

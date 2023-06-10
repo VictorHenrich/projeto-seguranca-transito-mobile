@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import { Stack, Icon } from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,6 +10,8 @@ import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ButtonDefault from "../../Components/ButtonDefault";
 import InputDefault from "../../Components/InputDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
+import UserCreateService from "../../Services/UserCreateService";
+import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 
 
@@ -20,10 +22,40 @@ export default function ComponentRegisterAccess(props: any){
         userPayload
     } = useContext<IContextRegister>(ContextRegister);
 
+    const [alertState, setAlertState] = useState<Omit<AlertDefaultProps, "stateOpen">>({
+        text: "",
+        open: false,
+        status: "info"
+    });
+
+
+    async function createUser(){
+        try{
+            await new UserCreateService(
+                userPayload
+            ).execute();
+
+            props.navigation.navigate("RegisterFinish")
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                text: "Falha ao realizar cadastro. Tente novamente!",
+                status: "error"
+            });
+        }
+    }
+
     return (
         <ComponentContainerRegister 
             heading="Finalizando agora com seus dados de acesso."
             navigation={props.navigation}
+            AlertProps={{
+                ...alertState,
+                stateOpen: (open: boolean) => {
+                    setAlertState({...alertState, open });
+                }
+            }}
         >
             <Stack
                 direction="column" 
@@ -36,7 +68,7 @@ export default function ComponentRegisterAccess(props: any){
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
-                            document: value
+                            email: value
                         })
                     }}
                 />
@@ -46,46 +78,41 @@ export default function ComponentRegisterAccess(props: any){
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
-                            documentRg: value
-                        })
-                    }}
-                />
-                <InputDefault 
-                    placeholder='Confirmar Senha'
-                    icon={<Fontisto name="locked"/>}
-                    onChangeText={(value) => {
-                        setUserPayload({
-                            ...userPayload,
-                            documentRg: value
+                            password: value
                         })
                     }}
                 />
             </Stack>
-            <ButtonDefault 
-                text="Anterior"
-                leftIcon={
-                    <Icon 
-                        as={<FontAwesome name="arrow-left"/>}
-                        size="lg"
-                    />
-                }
-                onTouchStart={()=> {
-                    props.navigation.navigate("RegisterVehicle");
-                }}
-            />
-            <ButtonDefault 
-                text="Cadastrar"
-                rightIcon={
-                    <Icon
-                        size="lg"
-                        as={<FontAwesome5 name="address-card"/>
-                        
-                    }/>
-                }
-                onTouchStart={()=> {
-                    props.navigation.navigate("RegisterFinish");
-                }}
-            />
+            <Stack
+                direction="column"
+                width="full"
+                alignItems="center"
+                space={10}
+            >
+                <ButtonDefault 
+                    text="Anterior"
+                    leftIcon={
+                        <Icon 
+                            as={<FontAwesome name="arrow-left"/>}
+                            size="lg"
+                        />
+                    }
+                    onTouchStart={()=> {
+                        props.navigation.navigate("RegisterVehicle");
+                    }}
+                />
+                <ButtonDefault 
+                    text="Cadastrar"
+                    rightIcon={
+                        <Icon
+                            size="lg"
+                            as={<FontAwesome5 name="address-card"/>
+                            
+                        }/>
+                    }
+                    onTouchStart={()=> createUser()}
+                />
+            </Stack>
         </ComponentContainerRegister>
     )
 }

@@ -54,6 +54,7 @@ export default function ComponentRegisterPerson(props: any){
                 <InputDefault 
                     placeholder='CPF'
                     icon={<MaterialCommunityIcons name="format-text"/>}
+                    value={userPayload.document}
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
@@ -64,6 +65,7 @@ export default function ComponentRegisterPerson(props: any){
                 <InputDefault 
                     placeholder='RG'
                     icon={<MaterialCommunityIcons name="format-text"/>}
+                    value={userPayload.documentRg}
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
@@ -73,6 +75,7 @@ export default function ComponentRegisterPerson(props: any){
                 />
                 <SelectDefault 
                     placeholder='Estado Emissor'
+                    selectedValue={userPayload.stateIssue}
                     selectItem={{
                         itens: stateIssue
                     }}

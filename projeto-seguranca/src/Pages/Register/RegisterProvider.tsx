@@ -1,41 +1,48 @@
-import { createContext, useState, Context, } from "react";
+import { createContext, useState, Context } from "react";
+import { UserCreatePayload } from "../../Services/UserCreateService";
 
-
-export interface IUserPayload{
-    name: string,
-    document: string,
-    documentRg: string,
-    stateIssue: string
-}
 
 export interface IContextRegister{
-    userPayload: IUserPayload,
-    setUserPayload: (user: IUserPayload) => void
+    userPayload: UserCreatePayload,
+    setUserPayload: (user: UserCreatePayload) => void
     pageIndex: number,
     setPageIndex: (index: number) => void
 }
 
-const initValues: IUserPayload = {
-    name: "",
-    document: "",
-    documentRg: "",
-    stateIssue: "SANTA CATARINA"
-}
-
-const initialPage: number = 1
-
-
-const ContextRegister: Context<IContextRegister> = createContext<IContextRegister>({
-    userPayload: initValues,
+const initValues: IContextRegister = {
+    userPayload: {
+        name: "",
+        email: "",
+        document: "",
+        documentRg: "",
+        telephone: "",
+        password: "",
+        stateIssue: "SANTA CATARINA",
+        birthday: new Date(),
+        vehicles: [{
+            plate: "",
+            renavam: "",
+            vehicleType: "CARRO"
+        }],
+        address: {
+            city: "",
+            district: "",
+            number: "",
+            state: "",
+            street: ""
+        }
+    },
     setUserPayload: () => null,
     pageIndex: 1,
     setPageIndex: () => null
-});
+}
+
+const ContextRegister: Context<IContextRegister> = createContext<IContextRegister>(initValues);
 
 
 export default function RegisterProvider({ children }: any){
-    const [userPayload, setUserPayload] = useState<IUserPayload>(initValues);
-    const [pageIndex, setPageIndex] = useState<number>(initialPage);
+    const [userPayload, setUserPayload] = useState<UserCreatePayload>(initValues.userPayload);
+    const [pageIndex, setPageIndex] = useState<number>(initValues.pageIndex);
 
     return (
         <ContextRegister.Provider value={{

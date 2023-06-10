@@ -6,6 +6,7 @@ import { Select, Text, ISelectProps, ISelectItemProps } from "native-base"
 export interface SelectDefaultItensProps extends Omit<ISelectItemProps, "label" | "key" | "value">{
     itens: [{
         text: string,
+        value?: string,
         icon?: any
     }]
 }
@@ -42,8 +43,9 @@ export default function SelectDefault({
 
     return (
         <Select
+                maxHeight={80}
+                minHeight={70}
                 {...selectProps}
-                padding={5}
                 variant="outline"
                 borderWidth="3px"
                 backgroundColor={styleInput.backgroundColor}
@@ -72,7 +74,7 @@ export default function SelectDefault({
                 return (
                     <Select.Item
                         key={index}
-                        value={item.text}
+                        value={item.value || item.text}
                         label={item.text}
                         textAlign="center"
                         rightIcon={item.icon && item.icon}
