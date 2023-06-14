@@ -6,12 +6,12 @@ import {
 
 
 export interface ContainerDefaultProps extends ICenterProps{
-    minHeightContainer: number
+    minHeightContainer?: number | string
 }
 
 
 export default function ContainerDefault({
-    minHeightContainer,
+    minHeightContainer = 900,
     ...props
 }: ContainerDefaultProps){
 

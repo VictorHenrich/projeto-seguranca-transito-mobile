@@ -1,28 +1,30 @@
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
+
 import ComponentOccurrencesList from "./ComponentOccurrencesList";
-import ComponentOccurrencesList2 from "./ComponentOccurrencesList2";
 import HomeNavigation, { ScreenNavigationProps } from "./HomeNavigation";
+import OccurrenceListComponent from "./OccurrencesListComponent";
+import OccurrenceRegisterComponent from "./OccurrenceRegisterComponent";
 
 
 
 
 const screens: ScreenNavigationProps[] = [
     {
-        component: ComponentOccurrencesList,
+        component: OccurrenceListComponent,
         icon: <FontAwesome5 name="clipboard-list"/>,
         name: "OccurrencesList",
         title: "Ocorrências"
     },
     {
-        component: ComponentOccurrencesList2,
+        component: OccurrenceRegisterComponent,
         icon: <MaterialIcons name="add-circle"/>,
         name: "OccurrenceRegister",
         title: "Criar Ocorrência"
     },
     {
-        component: ComponentOccurrencesList2,
+        component: ComponentOccurrencesList,
         icon: <FontAwesome5 name="address-card"/>,
         name: "UpdateUser",
         title: "Conta"

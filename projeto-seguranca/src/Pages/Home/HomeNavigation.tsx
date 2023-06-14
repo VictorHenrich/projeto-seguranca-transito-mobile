@@ -42,7 +42,9 @@ export default function HomeNavigation({ screens, ...props }: HomeNavigationProp
                     fontSize: 15
                 },
                 tabBarStyle: {
-                    minHeight:  60
+                    minHeight:  60,
+                    borderTopWidth: 0,
+                    backgroundColor: colorSecondary
                 }
             }}
             {...props}
