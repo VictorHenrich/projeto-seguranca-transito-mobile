@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import api from "./Api";
+import api from "./InstanceApi";
 
 
 export default class SocketFactory{

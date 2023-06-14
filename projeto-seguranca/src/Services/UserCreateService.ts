@@ -1,10 +1,11 @@
-import api from "./Api";
+import api from "./Server/InstanceApi";
 import AbstractService from "./AbstractService";
+import UserCreateError from "../Exceptions/UserCreateError";
 
 type VehicleType = "CARRO" | "MOTO"
 
 
-export interface UserAddressPayload{
+export interface UserAddressProps{
     state: string,
     city: string,
     district: string,
@@ -13,7 +14,7 @@ export interface UserAddressPayload{
 }
 
 
-export interface UserVehiclePayload{
+export interface UserVehicleProps{
     plate: string,
     renavam: string,
     vehicleType: VehicleType,
@@ -26,7 +27,7 @@ export interface UserVehiclePayload{
 }
 
 
-export interface UserCreatePayload{
+export interface CreateUserProps{
     email: string,
     password: string,
     name: string,
@@ -35,14 +36,14 @@ export interface UserCreatePayload{
     stateIssue: string,
     telephone: string,
     birthday: Date,
-    address: UserAddressPayload,
-    vehicles: UserVehiclePayload[]
+    address: UserAddressProps,
+    vehicles: UserVehicleProps[]
 }
 
 
 
-export default class UserCreateService extends AbstractService<UserCreatePayload>{
-    private static urlUserCreation: string = "/usuario/autenticacao";
+export default class CreateUserService extends AbstractService<CreateUserProps>{
+    private static readonly urlUserCreation: string = "/usuario/autenticacao";
 
     private getData(): any {
         return {
@@ -77,11 +78,16 @@ export default class UserCreateService extends AbstractService<UserCreatePayload
     }
 
     async execute(): Promise<void>{
-        const data: any = this.getData()
+        try{
+            const data: any = this.getData()
 
-        await api.post(
-            UserCreateService.urlUserCreation,
-            data
-        );
+            await api.post(
+                CreateUserService.urlUserCreation,
+                data
+            );
+
+        }catch(error){
+            throw new UserCreateError();
+        }
     }
 }

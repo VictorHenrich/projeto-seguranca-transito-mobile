@@ -1,10 +1,10 @@
-import api from "./Api";
+import api from "./Server/InstanceApi";
 import AbstractService from "./AbstractService";
 import AuthenticationError from "../Exceptions/AuthenticationError";
 
 
 
-export interface AuthorizationPayload{
+export interface AuthorizationProps{
     email: string,
     password: string
 }
@@ -12,7 +12,7 @@ export interface AuthorizationPayload{
 
 
 
-export default class AuthorizationService extends AbstractService<AuthorizationPayload>{
+export default class AuthorizationService extends AbstractService<AuthorizationProps>{
     private static urlAuthentication: string = "/usuario/autenticacao";
 
     async execute(): Promise<void>{
