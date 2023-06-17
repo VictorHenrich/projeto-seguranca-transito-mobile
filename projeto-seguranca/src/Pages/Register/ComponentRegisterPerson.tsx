@@ -12,6 +12,7 @@ import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
+import { CommonActions } from "@react-navigation/native";
 
 
 const stateIssue = [
@@ -34,6 +35,12 @@ export default function ComponentRegisterPerson(props: any){
         <ComponentContainerRegister 
             heading="Vamos começar com as informações da sua carteira."
             navigation={props.navigation}
+            LinkProps={{
+                label: "Voltar para o login",
+                onPress() {
+                    props.navigation.pop();
+                },
+            }}
         >
             <Stack 
                 direction="column" 

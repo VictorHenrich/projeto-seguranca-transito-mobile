@@ -10,6 +10,10 @@ import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
     heading: string,
     navigation?: any,
+    LinkProps?: {
+        label: string,
+        onPress?: () => void
+    },
     AlertProps?: AlertDefaultProps
 }
 
@@ -25,6 +29,9 @@ export default function ComponentContainerRegister({
         text: "",
     },
     minHeightContainer = 1000,
+    LinkProps = {
+        label: "Voltar ao inicio"
+    },
     ...props
 }: ComponentContainerRegisterProps){;
 
@@ -48,7 +55,10 @@ export default function ComponentContainerRegister({
                 {navigation && (
                     <Link
                         onTouchStart={() =>{
-                            if(navigation)
+                            if(LinkProps.onPress)
+                                LinkProps.onPress();
+
+                            else(navigation)
                                 navigation.navigate("RegisterPerson");
                         }}
                     >
@@ -56,7 +66,7 @@ export default function ComponentContainerRegister({
                             color="primary" 
                             fontWeight={700}
                         >
-                            Voltar ao inicio
+                            {LinkProps.label}
                         </Text>
                     </Link>
                 )}
