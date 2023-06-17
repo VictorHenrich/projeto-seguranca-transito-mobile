@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Alert, Heading, Stack } from "native-base";
+import { Alert, Heading, Slide } from "native-base";
 
 type AlertStatus = "sucesss" | "error" | "warning" | "info"
 
@@ -32,29 +32,20 @@ export default function AlertDefault({
     }, [open]);
 
     return (
-        open ? (
-                <Alert 
-                    status={status}
-                    opacity={0.8}
-                >
-                    <Stack
-                        space={10}
-                        flexWrap="nowrap"
-                        direction="row"
-                        alignItems="center"
-                    >
-                        <Alert.Icon size="xl"/>
+        <Slide in={open} placement="top" >
+            <Alert 
+                status={status}
+                opacity={0.8}
+            >
+                <Alert.Icon size="xl"/>
 
-                        <Heading 
-                            color="secondary"
-                            fontSize={20}
-                        >
-                            {text}
-                        </Heading>
-                    </Stack>
-                </Alert>
-            )
-             
-        : null
+                <Heading 
+                    color="secondary"
+                    fontSize={20}
+                >
+                    {text}
+                </Heading>
+            </Alert>
+        </Slide>
     )
 }

@@ -1,11 +1,11 @@
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
-
-import ComponentOccurrencesList from "./ComponentOccurrencesList";
 import HomeNavigation, { ScreenNavigationProps } from "./HomeNavigation";
 import OccurrenceListComponent from "./OccurrencesListComponent";
 import OccurrenceRegisterComponent from "./OccurrenceRegisterComponent";
+import UserProfileComponent from "./UserProfileComponent";
+import HomeProvider from "./HomeProvider";
 
 
 
@@ -24,9 +24,9 @@ const screens: ScreenNavigationProps[] = [
         title: "Criar Ocorrência"
     },
     {
-        component: ComponentOccurrencesList,
+        component: UserProfileComponent,
         icon: <FontAwesome5 name="address-card"/>,
-        name: "UpdateUser",
+        name: "UserProfile",
         title: "Conta"
     }
 ]
@@ -34,6 +34,8 @@ const screens: ScreenNavigationProps[] = [
 
 export default function HomePage(props: any){
     return (
-        <HomeNavigation screens={screens}/>
+        <HomeProvider>
+            <HomeNavigation screens={screens}/>
+        </HomeProvider>
     )
 }

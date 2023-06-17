@@ -10,7 +10,7 @@ import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ButtonDefault from "../../Components/ButtonDefault";
 import InputDefault from "../../Components/InputDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
-import UserCreateService from "../../Services/UserCreateService";
+import UserCreateService from "../../Services/CreateUserService";
 import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 

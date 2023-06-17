@@ -1,10 +1,10 @@
 import { createContext, useState, Context } from "react";
-import { UserCreatePayload } from "../../Services/UserCreateService";
+import { CreateUserProps } from "../../Services/CreateUserService";
 
 
 export interface IContextRegister{
-    userPayload: UserCreatePayload,
-    setUserPayload: (user: UserCreatePayload) => void
+    userPayload: CreateUserProps,
+    setUserPayload: (user: CreateUserProps) => void
     pageIndex: number,
     setPageIndex: (index: number) => void
 }
@@ -41,7 +41,7 @@ const ContextRegister: Context<IContextRegister> = createContext<IContextRegiste
 
 
 export default function RegisterProvider({ children }: any){
-    const [userPayload, setUserPayload] = useState<UserCreatePayload>(initValues.userPayload);
+    const [userPayload, setUserPayload] = useState<CreateUserProps>(initValues.userPayload);
     const [pageIndex, setPageIndex] = useState<number>(initValues.pageIndex);
 
     return (

@@ -1,5 +1,5 @@
 import api from "./Server/InstanceApi";
-import AbstractService from "./AbstractService";
+import AbstractService from "../patterns/AbstractService";
 import UserCreateError from "../Exceptions/UserCreateError";
 
 type VehicleType = "CARRO" | "MOTO"
@@ -43,7 +43,7 @@ export interface CreateUserProps{
 
 
 export default class CreateUserService extends AbstractService<CreateUserProps>{
-    private static readonly urlUserCreation: string = "/usuario/autenticacao";
+    private static readonly urlUserCreation: string = "/usuario/registro";
 
     private getData(): any {
         return {
@@ -54,7 +54,7 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
             rg: this.payload.documentRg,
             estado_emissor: this.payload.stateIssue,
             telefone: this.payload.telephone,
-            data_nascimento: this.payload.birthday.toString(),
+            data_nascimento: this.payload.birthday,
             endereco_uf: this.payload.address.state,
             endereco_cidade: this.payload.address.city,
             endereco_bairro: this.payload.address.district,
@@ -87,7 +87,9 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
             );
 
         }catch(error){
-            throw new UserCreateError();
+            const { response: { data : responseData } } = error;
+            
+            throw new UserCreateError(responseData.data);
         }
     }
 }

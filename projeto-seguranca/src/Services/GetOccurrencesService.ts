@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import AbstractService from "./AbstractService";
+import AbstractService from "../patterns/AbstractService";
 import api from "./Server/InstanceApi";
 import GetOccurrencesError from "../Exceptions/GetOccurrencesError";
 

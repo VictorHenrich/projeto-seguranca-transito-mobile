@@ -1,4 +1,4 @@
-import AbstractService from "./AbstractService";
+import AbstractService from "../patterns/AbstractService"
 
 
 
@@ -8,7 +8,7 @@ export interface AttachmentsProps{
 }
 
 
-export interface CreateOccurrencesServiceProps{
+export interface CreateOccurrenceProps{
     vehicleUuid: string,
     lat: string,
     lon: string,
@@ -18,7 +18,7 @@ export interface CreateOccurrencesServiceProps{
 
 
 
-export default class CreateOccurrencesService extends AbstractService<CreateOccurrencesServiceProps>{
+export default class CreateOccurrencesService extends AbstractService<CreateOccurrenceProps>{
     async execute(): Promise<void> {
         const data: any = {
             veiculo_uuid: this.payload.vehicleUuid,

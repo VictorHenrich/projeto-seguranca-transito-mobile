@@ -13,14 +13,14 @@ import HeadingDefault from '../../Components/HeadingDefault';
 import BackgroundApp from '../../Components/BackgroundApp';
 import ButtonDefault from '../../Components/ButtonDefault';
 import ContainerDefault from '../../Components/ContainerDefault';
-import AuthorizationService, {AuthorizationPayload} from '../../Services/AuthorizationService';
+import AuthorizationService, {AuthorizationProps} from '../../Services/AuthorizationService';
 import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 
 
 
 export default function LoginPage(props: any){
 
-    const [userAuthPayload, setUserAuthPayload] = useState<AuthorizationPayload>({
+    const [userAuthPayload, setUserAuthPayload] = useState<AuthorizationProps>({
         email: "",
         password: ""
     });
@@ -35,6 +35,8 @@ export default function LoginPage(props: any){
     async function authenticate(){
         try{
             await new AuthorizationService(userAuthPayload).execute();
+
+            props.navigation.navigate("HomePage");
 
         }catch(error){
             setAlertState({

@@ -2,7 +2,12 @@
 
 
 export default class UserCreateError extends Error{
-    constructor(){
-        super("Falha ao cadastrar usuário");
+    constructor(error: string){
+        let errorMessage: string = (
+            "Falha ao cadastrar usuário!\n" +
+            `Error: ${error}`
+        )
+
+        super(errorMessage);
     }
 }

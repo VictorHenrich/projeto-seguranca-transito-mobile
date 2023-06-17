@@ -12,7 +12,7 @@ import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
-import { UserAddressPayload } from "../../Services/UserCreateService";
+import { UserAddressPayload } from "../../Services/CreateUserService";
 
 
 const states = [

@@ -11,7 +11,7 @@ import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 import CheckboxDefault from "../../Components/CheckboxDefault";
-import { UserVehiclePayload } from "../../Services/UserCreateService";
+import { UserVehiclePayload } from "../../Services/CreateUserService";
 import SelectDefault from "../../Components/SelectDefault";
 
 

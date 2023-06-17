@@ -1,5 +1,5 @@
 import api from "./Server/InstanceApi";
-import AbstractService from "./AbstractService";
+import AbstractService from "../patterns/AbstractService";
 import AuthenticationError from "../Exceptions/AuthenticationError";
 
 
