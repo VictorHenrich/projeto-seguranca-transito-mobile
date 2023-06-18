@@ -25,7 +25,13 @@ const initialValues: IContextHome = {
         password: "1234",
         stateIssue: "SC",
         telephone: "48999187582",
-        vehicles: [],
+        vehicles: [
+            {
+                plate: "111111",
+                renavam: "222222",
+                vehicleType: "CARRO"
+            }
+        ],
         address: {
             city: "CAPIVARI DE BAIXO",
             district: "CAÇADOR",
@@ -59,3 +65,5 @@ export default function HomeProvider(props: any){
         </ContextHome.Provider>
     );
 }
+
+export {ContextHome};

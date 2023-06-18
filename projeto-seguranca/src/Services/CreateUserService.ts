@@ -81,10 +81,12 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
         try{
             const data: any = this.getData()
 
-            await api.post(
+            const { data: { data: token } } = await api.post(
                 CreateUserService.urlUserCreation,
                 data
             );
+
+            api.defaults.headers["Authorization"] = token;
 
         }catch(error){
             const { response: { data : responseData } } = error;

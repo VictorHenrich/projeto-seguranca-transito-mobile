@@ -1,3 +1,4 @@
+import {useContext, Context} from "react";
 import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -7,33 +8,14 @@ import InputUser from "./InputUser";
 import IUserVehiclePayload from "../../../patterns/IUserVehiclePayload";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../Components/ButtonDefault";
+import { ContextHome, IContextHome } from "../HomeProvider";
 
 
 
 export default function UserProfileComponent(props: any){
-
-    const vehicles: IUserVehiclePayload[] = [
-        {
-            plate: "111-22aa",
-            renavam: "1111111",
-            vehicleType: "CARRO"
-        },
-        {
-            plate: "111-22aa",
-            renavam: "1111111",
-            vehicleType: "CARRO"
-        },
-        {
-            plate: "111-22aa",
-            renavam: "1111111",
-            vehicleType: "CARRO"
-        },
-        {
-            plate: "111-22aa",
-            renavam: "1111111",
-            vehicleType: "CARRO"
-        }
-    ]
+    const {
+        user
+    } =  useContext<IContextHome>(ContextHome);
 
     return (
         <ContainerDefault 
@@ -57,8 +39,9 @@ export default function UserProfileComponent(props: any){
                         fontWeight={700}
                         color="primary"
                         textAlign="center"
+                        textTransform="capitalize"
                     >
-                        Victor Henrich
+                        {user.name}
                     </Heading>
                 </Stack>
                 <Stack
@@ -84,7 +67,7 @@ export default function UserProfileComponent(props: any){
                             </Text>
                             <Icon
                                 size="xl"
-                                as={<FontAwesome5 name="user"/>}
+                                as={<FontAwesome5 name="user-cog"/>}
                                 color="primary"
                             />
                         </Stack>
@@ -100,15 +83,27 @@ export default function UserProfileComponent(props: any){
                     >
                         <InputUser 
                             label="EMAIL"
+                            InputDefaultProps={{
+                                value: user.email
+                            }}
                         />
                         <InputUser 
                             label="CPF"
+                            InputDefaultProps={{
+                                value: user.document
+                            }}
                         />
                         <InputUser 
                             label="RG"
+                            InputDefaultProps={{
+                                value: user.documentRg
+                            }}
                         />
                         <InputUser 
                             label="TELEFONE"
+                            InputDefaultProps={{
+                                value: user.telephone
+                            }}
                         />
                     </Stack>
                 </Stack>
@@ -151,18 +146,33 @@ export default function UserProfileComponent(props: any){
                     >
                         <InputUser 
                             label="UF"
+                            InputDefaultProps={{
+                                value: user.address.state
+                            }}
                         />
                         <InputUser 
                             label="CIDADE"
+                            InputDefaultProps={{
+                                value: user.address.city
+                            }}
                         />
                         <InputUser 
                             label="BAIRRO"
+                            InputDefaultProps={{
+                                value: user.address.district
+                            }}
                         />
                         <InputUser 
                             label="LOGRADOURO"
+                            InputDefaultProps={{
+                                value: user.address.street
+                            }}
                         />
                         <InputUser 
                             label="NUMERO"
+                            InputDefaultProps={{
+                                value: user.address.number
+                            }}
                         />
                     </Stack>
                 </Stack>
@@ -200,7 +210,7 @@ export default function UserProfileComponent(props: any){
                         />
                     </Stack>
                     <FlatList 
-                        data={vehicles}
+                        data={user.vehicles}
                         renderItem={(itemData) => {
                             return (
                                 <VehicleItemComponent {...itemData.item} key={itemData.index}/>
