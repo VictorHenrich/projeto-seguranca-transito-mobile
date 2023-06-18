@@ -8,9 +8,10 @@ export default function HeadingDefault(props: IHeadingProps){
 
     return (
         <Heading
-            color="#FFFFFF"
+            color="#a6a6a6"
             fontWeight={700}
             fontSize={25}
+            display="inline"
             {...props}
         />
     )

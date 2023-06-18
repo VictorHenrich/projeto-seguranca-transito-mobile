@@ -6,13 +6,14 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
-import { CommonActions } from "@react-navigation/native";
+import HeadingDefault from "../../Components/HeadingDefault";
 
 
 const stateIssue = [
@@ -33,7 +34,23 @@ export default function ComponentRegisterPerson(props: any){
 
     return (
         <ComponentContainerRegister 
-            heading="Vamos começar com as informações da sua carteira."
+            heading={(
+                <Stack 
+                    space={8} 
+                    direction="row"
+                    alignItems="center"
+                >
+                    <Icon 
+                        as={<FontAwesome5 name="user-plus"/>}
+                        size="xl"
+                        color="primary"
+                    />
+                    <HeadingDefault textAlign="left">
+                        Vamos começar com as informações da sua {` `}
+                        <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
+                    </HeadingDefault>
+                </Stack>
+            )}
             navigation={props.navigation}
             LinkProps={{
                 label: "Voltar para o login",

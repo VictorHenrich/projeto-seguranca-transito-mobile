@@ -2,7 +2,9 @@ import {
     Box, 
     Link, 
     Stack, 
-    Text
+    Text,
+    Image,
+    Center
 } from 'native-base';
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -60,14 +62,36 @@ export default function LoginPage(props: any){
                 minHeightContainer={900}
 
             >
-                <Box>
-                    <HeadingDefault>
-                        Seja muito bem vindo!
-                    </HeadingDefault>
-                    <HeadingDefault>
-                        Faça seu login agora
-                    </HeadingDefault>
-                </Box>
+                <Stack
+                    width="full"
+                    direction="column" 
+                    space={5}
+                    alignItems="flex-start"
+                >
+                    <Stack space={2} direction="column">
+                        <HeadingDefault 
+                            textAlign="left"
+                            fontSize={30}
+                            color="primary"
+                        >
+                            Seja muito bem vindo!
+                        </HeadingDefault>
+                        <HeadingDefault 
+                            textAlign="left"
+                            fontSize={25}
+                        >
+                            Faça seu login agora.
+                        </HeadingDefault>
+                    </Stack>
+                    <Center width="full">
+                        <Image 
+                            source={require("../../../assets/lock.png")}
+                            minWidth={200}
+                            minHeight={200}
+                        />
+                    </Center>
+                    
+                </Stack>
                 <Box width="full">
                     <Stack direction="column" space={10}>
                         <InputDefault 

@@ -11,7 +11,8 @@ import ButtonDefault from "../../Components/ButtonDefault";
 import InputDefault from "../../Components/InputDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 import UserCreateService from "../../Services/CreateUserService";
-import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
+import { AlertDefaultProps } from "../../Components/AlertDefault";
+import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
@@ -49,6 +50,25 @@ export default function ComponentRegisterAccess(props: any){
     return (
         <ComponentContainerRegister 
             heading="Finalizando agora com seus dados de acesso."
+            heading={(
+                <Stack 
+                    space={8} 
+                    direction="row"
+                    alignItems="center"
+                >
+                    <Icon 
+                        as={<FontAwesome5 name="user-lock"/>}
+                        size="xl"
+                        color="primary"
+                    />
+                    <HeadingDefault textAlign="left">
+                        Finalizando agora com seus {` `}
+                        <HeadingDefault color="primary">
+                            Dados de Acesso
+                        </HeadingDefault>
+                    </HeadingDefault>
+                </Stack>
+            )}
             navigation={props.navigation}
             AlertProps={{
                 ...alertState,

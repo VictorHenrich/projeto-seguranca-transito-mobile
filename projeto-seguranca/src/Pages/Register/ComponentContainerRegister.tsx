@@ -8,7 +8,7 @@ import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
-    heading: string,
+    heading: any,
     navigation?: any,
     LinkProps?: {
         label: string,
@@ -45,9 +45,7 @@ export default function ComponentContainerRegister({
                 overflowY="auto"
                 minHeightContainer={minHeightContainer}
             >
-                <HeadingDefault textAlign="center">
-                    {heading}
-                </HeadingDefault>
+                {heading}
                 <ComponentPositionStep />
 
                 {props.children}

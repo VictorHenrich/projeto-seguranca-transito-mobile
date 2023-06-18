@@ -5,6 +5,7 @@ import {
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 
 import InputDefault from '../../Components/InputDefault';
@@ -13,6 +14,7 @@ import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 import { UserAddressPayload } from "../../Services/CreateUserService";
+import HeadingDefault from "../../Components/HeadingDefault";
 
 
 const states = [
@@ -43,7 +45,23 @@ export default function ComponentRegisterAddress(props: any){
 
     return (
         <ComponentContainerRegister 
-            heading="Agora precisamos dos dados de seu endereço atual."
+            heading={(
+                <Stack 
+                    space={8} 
+                    direction="row"
+                    alignItems="center"
+                >
+                    <Icon 
+                        as={<FontAwesome5 name="map-marked-alt"/>}
+                        size="xl"
+                        color="primary"
+                    />
+                    <HeadingDefault textAlign="left">
+                        Agora precisamos dos dados de seu {` `}
+                        <HeadingDefault color="primary">Endereço Atual</HeadingDefault>
+                    </HeadingDefault>
+                </Stack>
+            )}
             navigation={props.navigation}
             minHeightContainer={1200}
         >

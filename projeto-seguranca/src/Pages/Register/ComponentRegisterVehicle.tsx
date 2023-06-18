@@ -5,6 +5,7 @@ import {
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import InputDefault from '../../Components/InputDefault';
@@ -13,6 +14,7 @@ import ComponentContainerRegister from "./ComponentContainerRegister";
 import CheckboxDefault from "../../Components/CheckboxDefault";
 import { UserVehiclePayload } from "../../Services/CreateUserService";
 import SelectDefault from "../../Components/SelectDefault";
+import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
@@ -50,8 +52,26 @@ export default function ComponentRegisterVehicle(props: any){
     }
 
     return (
-        <ComponentContainerRegister 
-            heading="Vamos registrar seu primeiro veículo."
+        <ComponentContainerRegister
+            heading={(
+                <Stack 
+                    space={8} 
+                    direction="row"
+                    alignItems="center"
+                >
+                    <Icon 
+                        as={<FontAwesome5 name="car"/>}
+                        size="xl"
+                        color="primary"
+                    />
+                    <HeadingDefault textAlign="left">
+                        Vamos registrar seu {` `}
+                        <HeadingDefault color="primary">
+                            primeiro veículo
+                        </HeadingDefault>
+                    </HeadingDefault>
+                </Stack>
+            )}
             minHeightContainer={1200}
             navigation={props.navigation}
         >
