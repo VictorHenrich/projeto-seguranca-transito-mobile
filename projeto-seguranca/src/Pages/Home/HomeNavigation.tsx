@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Icon } from 'native-base';
+import { Icon, useTheme, ITheme } from 'native-base';
 
 
 export interface ScreenNavigationProps{
@@ -20,14 +20,16 @@ export interface HomeNavigationStyle{
 }
 
 
-const Tab = createBottomTabNavigator();
-
-const colorPrimary: string = "#93c5fd";
-
-const colorSecondary: string = "#52525b";
-
 
 export default function HomeNavigation({ screens, ...props }: HomeNavigationProps){
+    const { colors }: ITheme = useTheme();
+
+    const Tab = createBottomTabNavigator();
+
+    const colorPrimary: any = colors.primary;
+
+    const colorSecondary: any = colors.secondary;
+
     return (
         <Tab.Navigator 
             screenOptions={{
