@@ -26,7 +26,7 @@ export default function App() {
   return (
     <NativeBaseProvider theme={globalTheme}>
       <StackNavigation
-          initialRouteName="LoginPage"
+          initialRouteName="HomePage"
           screens={screens}
       />
     </NativeBaseProvider>

@@ -1,12 +1,40 @@
-import { Stack, Avatar, Heading, Text, Divider, Icon } from "native-base";
+import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ContainerDefault from "../../../Components/ContainerDefault";
 import InputUser from "./InputUser";
+import IUserVehiclePayload from "../../../patterns/IUserVehiclePayload";
+import VehicleItemComponent from "./VehicleItemComponent";
+import ButtonDefault from "../../../Components/ButtonDefault";
 
 
 
 export default function UserProfileComponent(props: any){
+
+    const vehicles: IUserVehiclePayload[] = [
+        {
+            plate: "111-22aa",
+            renavam: "1111111",
+            vehicleType: "CARRO"
+        },
+        {
+            plate: "111-22aa",
+            renavam: "1111111",
+            vehicleType: "CARRO"
+        },
+        {
+            plate: "111-22aa",
+            renavam: "1111111",
+            vehicleType: "CARRO"
+        },
+        {
+            plate: "111-22aa",
+            renavam: "1111111",
+            vehicleType: "CARRO"
+        }
+    ]
+
     return (
         <ContainerDefault 
             background="secondary"
@@ -142,24 +170,82 @@ export default function UserProfileComponent(props: any){
                     width="full"
                     space={10}
                 >
-                    <Stack 
-                        direction="row"
-                        alignItems="flex-end"
-                        space={5}
-                        paddingBottom={2}
+                    <Stack
+                        width="full"
+                        space={2}
+                        direction="column"
                     >
-                        <Text
-                            fontWeight={700}
-                            color="primary"
+                        <Stack 
+                            direction="row"
+                            alignItems="flex-end"
+                            space={5}
+                            paddingBottom={2}
                         >
-                            VEÍCULOS CADASTRADOS
-                        </Text>
-                        <Icon
-                            size="xl"
-                            as={<FontAwesome5 name="car"/>}
-                            color="primary"
+                            <Text
+                                fontWeight={700}
+                                color="primary"
+                            >
+                                VEÍCULOS CADASTRADOS
+                            </Text>
+                            <Icon
+                                size="xl"
+                                as={<FontAwesome5 name="car"/>}
+                                color="primary"
+                            />
+                        </Stack>
+                        <Divider 
+                            backgroundColor="primary" 
+                            height={1}
+                            borderRadius={5}
                         />
                     </Stack>
+                    <FlatList 
+                        data={vehicles}
+                        renderItem={(itemData) => {
+                            return (
+                                <VehicleItemComponent {...itemData.item} key={itemData.index}/>
+                            )
+                        }}
+                    />
+                </Stack>
+
+                <Stack 
+                    width="full"
+                    direction="column"
+                    alignItems="center"
+                    space={5}
+                    borderTopWidth={1}
+                    borderTopColor="#999999"
+                    paddingTop={5}
+                >
+                    <ButtonDefault 
+                        text="Salvar Alterações"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="user-edit"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
+                    <ButtonDefault 
+                        text="Adicionar Veículo"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="car-side"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
+                    <ButtonDefault
+                        backgroundColor="red"
+                        text="Logout"
+                        rightIcon={
+                            <Icon 
+                                as={<MaterialCommunityIcons name="logout"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
                 </Stack>
             </Stack>
         </ContainerDefault>

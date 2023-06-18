@@ -201,7 +201,7 @@ export default function OccurrenceItemComponent({
                             text="Excluir" 
                             maxWidth={100}
                             borderRadius={2}
-                            backgroundColor="#ff6666"
+                            backgroundColor="red"
                         />
                     </Stack>
                 </Stack>
