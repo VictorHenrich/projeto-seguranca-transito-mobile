@@ -49,7 +49,6 @@ export default function ComponentRegisterAccess(props: any){
 
     return (
         <ComponentContainerRegister 
-            heading="Finalizando agora com seus dados de acesso."
             heading={(
                 <Stack 
                     space={8} 

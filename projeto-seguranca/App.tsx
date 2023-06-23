@@ -5,6 +5,7 @@ import globalTheme from './src/Themes/GlobalTheme';
 import LoginPage from './src/Pages/Login';
 import RegisterPage from './src/Pages/Register';
 import StackNavigation, {IStackScreen} from './src/Components/StackNavigation';
+import CameraComponent from './src/Components/Camera';
 
 
 const screens: IStackScreen[] = [
@@ -25,10 +26,11 @@ const screens: IStackScreen[] = [
 export default function App() {
   return (
     <NativeBaseProvider theme={globalTheme}>
-      <StackNavigation
+      {/* <StackNavigation
           initialRouteName="LoginPage"
           screens={screens}
-      />
+      /> */}
+      <CameraComponent />
     </NativeBaseProvider>
   );
 }
