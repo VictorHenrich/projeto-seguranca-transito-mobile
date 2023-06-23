@@ -11,7 +11,7 @@ export default function ButtonDefault(props: ButtonDefaultProps){
         <Button 
             backgroundColor="primary"
             width="80%"
-            height={50}
+            minHeight={50}
             borderRadius={20}
             fontWeight={700}
             {...props}

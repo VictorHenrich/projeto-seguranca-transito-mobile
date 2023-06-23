@@ -1,12 +1,22 @@
-import { Stack, Avatar, Heading, Text, Divider, Icon } from "native-base";
+import {useContext, Context} from "react";
+import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ContainerDefault from "../../../Components/ContainerDefault";
-import InputDefault from "../../../Components/InputDefault";
+import InputUser from "./InputUser";
+import IUserVehiclePayload from "../../../patterns/IUserVehiclePayload";
+import VehicleItemComponent from "./VehicleItemComponent";
+import ButtonDefault from "../../../Components/ButtonDefault";
+import { ContextHome, IContextHome } from "../HomeProvider";
 
 
 
 export default function UserProfileComponent(props: any){
+    const {
+        user
+    } =  useContext<IContextHome>(ContextHome);
+
     return (
         <ContainerDefault 
             background="secondary"
@@ -29,48 +39,71 @@ export default function UserProfileComponent(props: any){
                         fontWeight={700}
                         color="primary"
                         textAlign="center"
+                        textTransform="capitalize"
                     >
-                        Victor Henrich
+                        {user.name}
                     </Heading>
                 </Stack>
                 <Stack
                     width="full"
                     space={10}
                 >
-                    <Text
-                        fontWeight={700}
-                        color="primary"
+                    <Stack
+                        width="full"
+                        space={2}
+                        direction="column"
                     >
-                        DADOS PESSOAIS
+                        <Stack 
+                            direction="row"
+                            alignItems="flex-end"
+                            space={5}
+                            paddingBottom={2}
+                        >
+                            <Text
+                                fontWeight={700}
+                                color="primary"
+                            >
+                                DADOS PESSOAIS
+                            </Text>
+                            <Icon
+                                size="xl"
+                                as={<FontAwesome5 name="user-cog"/>}
+                                color="primary"
+                            />
+                        </Stack>
                         <Divider 
                             backgroundColor="primary" 
                             height={1}
                             borderRadius={5}
                         />
-                    </Text>
+                    </Stack>
                     <Stack
                         width="full"
                         space={10}
                     >
-                        <InputDefault 
-                            width="full"
-                            placeholder="EMAIL"
-                            icon={<FontAwesome5 name="user"/>}
+                        <InputUser 
+                            label="EMAIL"
+                            InputDefaultProps={{
+                                value: user.email
+                            }}
                         />
-                        <InputDefault 
-                            width="full"
-                            placeholder="CPF"
-                            icon={<FontAwesome5 name="user"/>}
+                        <InputUser 
+                            label="CPF"
+                            InputDefaultProps={{
+                                value: user.document
+                            }}
                         />
-                        <InputDefault 
-                            width="full"
-                            placeholder="RG"
-                            icon={<FontAwesome5 name="user"/>}
+                        <InputUser 
+                            label="RG"
+                            InputDefaultProps={{
+                                value: user.documentRg
+                            }}
                         />
-                        <InputDefault
-                            width="full"
-                            placeholder="TELEFONE"
-                            icon={<FontAwesome5 name="user"/>}
+                        <InputUser 
+                            label="TELEFONE"
+                            InputDefaultProps={{
+                                value: user.telephone
+                            }}
                         />
                     </Stack>
                 </Stack>
@@ -78,40 +111,68 @@ export default function UserProfileComponent(props: any){
                     width="full"
                     space={10}
                 >
-                    <Text
-                        fontWeight={700}
-                        color="primary"
+                    <Stack
+                        width="full"
+                        space={2}
+                        direction="column"
                     >
-                        DADOS DE ENDEREÇO
+                        <Stack 
+                            direction="row"
+                            alignItems="flex-end"
+                            space={5}
+                            paddingBottom={2}
+                        >
+                            <Text
+                                fontWeight={700}
+                                color="primary"
+                            >
+                                DADOS DE ENDEREÇO
+                            </Text>
+                            <Icon
+                                size="xl"
+                                as={<FontAwesome5 name="map-marker-alt"/>}
+                                color="primary"
+                            />
+                        </Stack>
                         <Divider 
-                            backgroundColor="primary"
+                            backgroundColor="primary" 
                             height={1}
                             borderRadius={5}
                         />
-                    </Text>
+                    </Stack>
                     <Stack
                         width="full"
                         space={10}
                     >
-                        <InputDefault 
-                            width="full"
-                            placeholder="UF"
-                            icon={<FontAwesome5 name="map-marker-alt"/>}
+                        <InputUser 
+                            label="UF"
+                            InputDefaultProps={{
+                                value: user.address.state
+                            }}
                         />
-                        <InputDefault 
-                            width="full"
-                            placeholder="CIDADE"
-                            icon={<FontAwesome5 name="map-marker-alt"/>}
+                        <InputUser 
+                            label="CIDADE"
+                            InputDefaultProps={{
+                                value: user.address.city
+                            }}
                         />
-                        <InputDefault 
-                            width="full"
-                            placeholder="LOGRADOURO"
-                            icon={<FontAwesome5 name="map-marker-alt"/>}
+                        <InputUser 
+                            label="BAIRRO"
+                            InputDefaultProps={{
+                                value: user.address.district
+                            }}
                         />
-                        <InputDefault
-                            width="full"
-                            placeholder="NUMERO"
-                            icon={<FontAwesome5 name="map-marker-alt"/>}
+                        <InputUser 
+                            label="LOGRADOURO"
+                            InputDefaultProps={{
+                                value: user.address.street
+                            }}
+                        />
+                        <InputUser 
+                            label="NUMERO"
+                            InputDefaultProps={{
+                                value: user.address.number
+                            }}
                         />
                     </Stack>
                 </Stack>
@@ -119,17 +180,82 @@ export default function UserProfileComponent(props: any){
                     width="full"
                     space={10}
                 >
-                    <Text
-                        fontWeight={700}
-                        color="primary"
+                    <Stack
+                        width="full"
+                        space={2}
+                        direction="column"
                     >
-                        VEÍCULOS CADASTRADOS
+                        <Stack 
+                            direction="row"
+                            alignItems="flex-end"
+                            space={5}
+                            paddingBottom={2}
+                        >
+                            <Text
+                                fontWeight={700}
+                                color="primary"
+                            >
+                                VEÍCULOS CADASTRADOS
+                            </Text>
+                            <Icon
+                                size="xl"
+                                as={<FontAwesome5 name="car"/>}
+                                color="primary"
+                            />
+                        </Stack>
                         <Divider 
-                            backgroundColor="primary"
+                            backgroundColor="primary" 
                             height={1}
                             borderRadius={5}
                         />
-                    </Text>
+                    </Stack>
+                    <FlatList 
+                        data={user.vehicles}
+                        renderItem={(itemData) => {
+                            return (
+                                <VehicleItemComponent {...itemData.item} key={itemData.index}/>
+                            )
+                        }}
+                    />
+                </Stack>
+
+                <Stack 
+                    width="full"
+                    direction="column"
+                    alignItems="center"
+                    space={5}
+                    borderTopWidth={1}
+                    borderTopColor="#999999"
+                    paddingTop={5}
+                >
+                    <ButtonDefault 
+                        text="Salvar Alterações"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="user-edit"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
+                    <ButtonDefault 
+                        text="Adicionar Veículo"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="car-side"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
+                    <ButtonDefault
+                        backgroundColor="red"
+                        text="Logout"
+                        rightIcon={
+                            <Icon 
+                                as={<MaterialCommunityIcons name="logout"/>}
+                                color="#FFFFFF"
+                            />
+                        }
+                    />
                 </Stack>
             </Stack>
         </ContainerDefault>
