@@ -1,4 +1,4 @@
-import CameraComponent from "../../../../Components/Camera";
+import CameraDefault from "../../../../Components/CameraDefault";
 import StackNavigation, { IStackScreen } from "../../../../Components/StackNavigation";
 import OccurrenceAccessCameraComponent from "./OccurrenceAccessCameraComponent";
 import OccurrenceAddressLocalComponent from "./OccurrenceAddressLocalComponent";
@@ -18,7 +18,7 @@ export default function StartProcessRegisterOccurrenceComponent(props: any){
             name: "OccurrenceAddressLocal"
         },
         {
-            component: CameraComponent,
+            component: CameraDefault,
             name: "Camera"
         }
     ]
