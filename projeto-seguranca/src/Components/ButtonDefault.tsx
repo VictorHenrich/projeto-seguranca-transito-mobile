@@ -1,11 +1,12 @@
-import { Button, IButtonProps, Text } from "native-base"
+import { Button, IButtonProps, Text, ITextProps } from "native-base"
 
 export interface ButtonDefaultProps extends IButtonProps{
-    text: string
+    text: string,
+    TextProps?: ITextProps
 }
 
 
-export default function ButtonDefault(props: ButtonDefaultProps){
+export default function ButtonDefault({ text, TextProps = {}, ...props}: ButtonDefaultProps){
 
     return (
         <Button 
@@ -19,8 +20,9 @@ export default function ButtonDefault(props: ButtonDefaultProps){
             <Text
                 color="#FFFFFF"
                 fontWeight={700}
+                {...TextProps}
             >
-                {props.text}
+                {text}
             </Text>
         </Button>
     )

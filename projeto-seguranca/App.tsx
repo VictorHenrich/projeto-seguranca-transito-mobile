@@ -6,6 +6,7 @@ import LoginPage from './src/Pages/Login';
 import RegisterPage from './src/Pages/Register';
 import StackNavigation, {IStackScreen} from './src/Components/StackNavigation';
 import CameraComponent from './src/Components/Camera';
+import StartProcessRegisterOccurrenceComponent from './src/Pages/Home/OccurrenceRegisterComponent/Start';
 
 
 const screens: IStackScreen[] = [
@@ -21,16 +22,19 @@ const screens: IStackScreen[] = [
     component: HomePage,
     name: "HomePage"
   },
+  {
+    component: StartProcessRegisterOccurrenceComponent,
+    name: "OccurrenceRegister"
+  }
 ];
 
 export default function App() {
   return (
     <NativeBaseProvider theme={globalTheme}>
-      {/* <StackNavigation
-          initialRouteName="LoginPage"
+      <StackNavigation
+          initialRouteName="OccurrenceRegister"
           screens={screens}
-      /> */}
-      <CameraComponent />
+      />
     </NativeBaseProvider>
   );
 }

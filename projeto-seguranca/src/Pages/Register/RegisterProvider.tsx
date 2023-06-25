@@ -1,4 +1,4 @@
-import { createContext, useState, Context } from "react";
+import { createContext, useState, Context, PropsWithChildren } from "react";
 import { CreateUserProps } from "../../Services/CreateUserService";
 
 
@@ -40,7 +40,7 @@ const initValues: IContextRegister = {
 const ContextRegister: Context<IContextRegister> = createContext<IContextRegister>(initValues);
 
 
-export default function RegisterProvider({ children }: any){
+export default function RegisterProvider({ children }: PropsWithChildren){
     const [userPayload, setUserPayload] = useState<CreateUserProps>(initValues.userPayload);
     const [pageIndex, setPageIndex] = useState<number>(initValues.pageIndex);
 

@@ -88,6 +88,7 @@ export default function LoginPage(props: any){
                             source={require("../../../assets/lock.png")}
                             minWidth={200}
                             minHeight={200}
+                            alt="lock"
                         />
                     </Center>
                     

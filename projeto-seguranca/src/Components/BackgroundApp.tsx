@@ -1,18 +1,20 @@
-import {
-    Center,
-    Image
-} from "native-base";
+
+import { Image, IImageProps } from "native-base";
 
 
-export default function BackgroundApp(props: any){
+export interface BackgroundAppProps extends Pick<IImageProps, "source">{}
+
+
+export default function BackgroundApp({
+    source = require(`../../assets/background_default.png`)
+}: BackgroundAppProps){
 
     return (
         <Image
-            background="secondary"
-            source={require("../../assets/background_login.png")}
+            source={source}
             width="full"
             height="full"
-            alt="background-login"
+            alt="background"
             position="absolute"
         />
     )
