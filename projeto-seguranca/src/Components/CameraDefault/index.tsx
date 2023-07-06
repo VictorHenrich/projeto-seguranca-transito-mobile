@@ -9,6 +9,11 @@ import CameraUtils, { CameraStateProps, CameraComponentPosition, CameraComponent
 import ModalAttachments from "./ModalAttachmentsComponent";
 
 
+export interface MediaItemType extends Pick<CameraCapturedPicture, "uri">{
+    type: "video" | "image"
+} 
+
+
 export default function CameraDefault(props: any){
     const [cameraPayload, setCameraPayload] = useState<CameraStateProps>({
         buttonRecordPressed: false,
@@ -17,21 +22,27 @@ export default function CameraDefault(props: any){
         cameraType: "photo",
         cameraRef: null
     });
-    const [photosPicked, setPhotosPicked] = useState<CameraCapturedPicture[]>([]);
-    const [videosPicked, setVideosPicked] = useState<Pick<CameraCapturedPicture, "uri">[]>([]);
     const [openModalAttachments, setOpenModalAttachments] = useState<boolean>(false);
-
+    const [medias, setMedias] = useState<MediaItemType[]>([]);
 
     useEffect(()=>{
         CameraUtils.requestCameraPermission();
     }, [])
+
+
+    function addMediaItem(media: MediaItemType): void{
+        setMedias([...medias, media]);
+    }
 
     async function handleCapturePhoto(){
         const newPhoto: CameraCapturedPicture | void  = await CameraUtils.capturePhoto(cameraPayload.cameraRef);
 
         if(!newPhoto) return;
 
-        setPhotosPicked([...photosPicked, newPhoto ]);
+        addMediaItem({
+            ...newPhoto,
+            type: "image"
+        });
     }
 
     async function handleStartingVideo(){
@@ -39,7 +50,10 @@ export default function CameraDefault(props: any){
 
         if(!newVideo) return;
 
-        setVideosPicked([...videosPicked, newVideo]);
+        addMediaItem({
+            ...newVideo,
+            type: "video"
+        });
     }
 
     async function handleStopingVideo(){
@@ -110,13 +124,13 @@ export default function CameraDefault(props: any){
                         direction="row"
                         justifyContent="space-between"
                     >
-                        {photosPicked.length || videosPicked.length ? (
+                        {medias.length ? (
                             <Center
                                 onTouchStart={()=> setOpenModalAttachments(true)}
                             >
                                 <Image 
                                     source={{
-                                        uri: (photosPicked.length ? photosPicked[0] : videosPicked[0]).uri
+                                        uri: medias[medias.length - 1].uri
                                     }}
 
                                     width={100}
@@ -211,7 +225,7 @@ export default function CameraDefault(props: any){
                 </Stack>
             </Camera>
             <ModalAttachments 
-                attachments={[...photosPicked, ...videosPicked]}
+                attachments={[...medias]}
                 open={openModalAttachments}
                 onClose={() => setOpenModalAttachments(false)}
             />

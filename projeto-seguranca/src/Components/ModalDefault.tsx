@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactElement } from "react";
-import { Modal, Stack } from "native-base";
+import { Modal, Stack, IModalProps } from "native-base";
 import ButtonDefault from "./ButtonDefault";
 import HeadingDefault from "./HeadingDefault";
 import ContainerDefault from "./ContainerDefault";
@@ -9,7 +9,8 @@ import ContainerDefault from "./ContainerDefault";
 export interface ModalDefaultProps extends PropsWithChildren{
     heading: string,
     open?: boolean,
-    onClose?: () => void
+    onClose?: () => void,
+    ModalProps?: IModalProps
 }
 
 
@@ -17,10 +18,15 @@ export default function ModalDefault({
     heading,
     open = true,
     onClose = () => null,
-    ...props
+    ModalProps = {},
+    ...props 
 }: ModalDefaultProps): ReactElement{
     return (
-        <Modal isOpen={open} size="lg" >
+        <Modal 
+            isOpen={open} 
+            size="full"
+            {...ModalProps}
+        >
             <Modal.Content>
                 <Modal.Header 
                     backgroundColor="primary"
@@ -28,13 +34,7 @@ export default function ModalDefault({
                     <HeadingDefault color="secondary">{heading}</HeadingDefault>
                 </Modal.Header>
                 <Modal.Body backgroundColor="secondary">
-                    <ContainerDefault 
-                        justifyContent="flex-start"
-                        minHeight={100}
-                        boxSize="container"
-                    >
-                        {props.children}
-                    </ContainerDefault>
+                    {props.children}
                 </Modal.Body>
                 <Modal.Footer 
                     backgroundColor="secondary"
