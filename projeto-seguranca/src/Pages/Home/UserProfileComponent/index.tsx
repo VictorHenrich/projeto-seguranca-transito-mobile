@@ -5,7 +5,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import ContainerDefault from "../../../Components/ContainerDefault";
 import InputUser from "./InputUser";
-import IUserVehiclePayload from "../../../patterns/IUserVehiclePayload";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import { ContextHome, IContextHome } from "../HomeProvider";

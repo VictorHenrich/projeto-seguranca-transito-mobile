@@ -2,6 +2,13 @@ import IUserPayload from "./IUserPayload";
 import IUserVehiclePayload from "./IUserVehiclePayload";
 
 
+export enum OccurrenceStatus{
+    SUCCESS = "SUCESSO",
+    ERROR = "ERRO",
+    PROGRESS = "ANDAMENTO",
+    PROCESSING = "PROCESSAMENTO"
+}
+
 
 export default interface IOccurrencePayload{
     user: Omit<IUserPayload, "vehicles">;
@@ -19,5 +26,5 @@ export default interface IOccurrencePayload{
         content: string;
         type: string
     }];
-    status: "SUCESSO" | "ERRO" | "ANDAMENTO" | "PROCESSAMENTO"
+    status: OccurrenceStatus
 }

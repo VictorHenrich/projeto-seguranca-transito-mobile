@@ -4,6 +4,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ButtonDefault from "../../../../Components/ButtonDefault";
 import HeadingDefault from "../../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
+import SliderDefault from "../../../../Components/SliderDefault";
 
 
 export default function OccurrenceAddressLocalComponent(props: any){
@@ -70,7 +71,6 @@ export default function OccurrenceAddressLocalComponent(props: any){
                         color: "#FFFFFF",
                         fontSize: 18
                     }}
-                    
                 />
             </Stack>
         </OccurrenceRegisterContainer>

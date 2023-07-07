@@ -1,5 +1,6 @@
 import { Icon, Image, Stack } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import * as ImagePicker from 'expo-image-picker';
 
 import HeadingDefault from "../../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
@@ -8,7 +9,17 @@ import ButtonDefault from "../../../../Components/ButtonDefault";
 
 
 
-export default function OccurrenceAccessCameraComponent(props: any){
+export default function OccurrenceCaptureEvidenceComponent(props: any){
+
+    async function accessGallery(): Promise<void>{
+        const { status }: ImagePicker.MediaLibraryPermissionResponse = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if(status !== ImagePicker.PermissionStatus.DENIED)
+            throw new Error("Permissão de acesso a galeria rejeitado!");
+
+        const result: ImagePicker.ImagePickerResult = await ImagePicker.launchImageLibraryAsync();
+    }
+
     return (
         <OccurrenceRegisterContainer>
             <Stack
@@ -67,6 +78,7 @@ export default function OccurrenceAccessCameraComponent(props: any){
                     TextProps={{
                         fontSize: 18
                     }}
+                    onPress={() => accessGallery()}
                 />
             </Stack>
         </OccurrenceRegisterContainer>

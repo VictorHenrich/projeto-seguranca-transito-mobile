@@ -1,234 +1,35 @@
-import {useState, useEffect} from "react";
-
-import { Center, IconButton, Icon, Stack, Image } from 'native-base';
-import { Camera, CameraType, CameraCapturedPicture, FlashMode } from 'expo-camera';
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Entypo from "react-native-vector-icons/Entypo";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import CameraUtils, { CameraStateProps, CameraComponentPosition, CameraComponentType } from "./CameraUtils";
-import ModalAttachments from "./ModalAttachmentsComponent";
-
-
-export interface MediaItemType extends Pick<CameraCapturedPicture, "uri">{
-    type: "video" | "image"
-} 
-
+import StackNavigation, { IStackScreen } from "../StackNavigation";
+import AccessCameraComponent from "./AccessCameraComponent";
+import CameraProvider from "./CameraProvider";
+import MediaViewComponent from "./MediaViewComponent";
+import MediasCapturedComponent from "./MediasCapturedComponent";
 
 export default function CameraDefault(props: any){
-    const [cameraPayload, setCameraPayload] = useState<CameraStateProps>({
-        buttonRecordPressed: false,
-        flashActivated: false,
-        cameraPosition: "back",
-        cameraType: "photo",
-        cameraRef: null
-    });
-    const [openModalAttachments, setOpenModalAttachments] = useState<boolean>(false);
-    const [medias, setMedias] = useState<MediaItemType[]>([]);
 
-    useEffect(()=>{
-        CameraUtils.requestCameraPermission();
-    }, [])
-
-
-    function addMediaItem(media: MediaItemType): void{
-        setMedias([...medias, media]);
-    }
-
-    async function handleCapturePhoto(){
-        const newPhoto: CameraCapturedPicture | void  = await CameraUtils.capturePhoto(cameraPayload.cameraRef);
-
-        if(!newPhoto) return;
-
-        addMediaItem({
-            ...newPhoto,
-            type: "image"
-        });
-    }
-
-    async function handleStartingVideo(){
-        const newVideo: Pick<CameraCapturedPicture, "uri"> | void = await CameraUtils.startingVideo(cameraPayload.cameraRef);
-
-        if(!newVideo) return;
-
-        addMediaItem({
-            ...newVideo,
-            type: "video"
-        });
-    }
-
-    async function handleStopingVideo(){
-        await CameraUtils.stopingVideo(cameraPayload.cameraRef);
-    }
-
-    
-    function setButtonRecordPress(pressed: boolean){
-        setCameraPayload({
-            ...cameraPayload,
-            buttonRecordPressed: pressed
-        });
-    }
-
-    function setCameraType(type: CameraComponentType){
-        setCameraPayload({
-            ...cameraPayload,
-            cameraType: type
-        });
-    }
-
-    function setCameraPosition(position: CameraComponentPosition){
-        setCameraPayload({
-            ...cameraPayload,
-            cameraPosition: position
-        });
-    }
-
-    function setCameraRef(ref: Camera | null){
-        setCameraPayload({
-            ...cameraPayload,
-            cameraRef: ref
-        });
-    }
-
-    function setFlaskActivated(flashActivated: boolean){
-        setCameraPayload({
-            ...cameraPayload,
-            flashActivated
-        })
-    }
+    const componentes: IStackScreen[] = [
+        {
+            component: AccessCameraComponent,
+            name: "AccessCamera"
+        },
+        {
+            component: MediasCapturedComponent,
+            name: "MediasCaptured"
+        },
+        {
+            component: MediaViewComponent,
+            name: "MediaView"
+        }
+    ]
 
     return (
-        <>
-            <Camera
-                type={cameraPayload.cameraPosition === "back" ? CameraType.back : CameraType.front}
-                style={{
-                    height: "100%",
-                    width: "100%",
-                    position: "absolute"
+        <CameraProvider>
+            <StackNavigation
+                initialRouteName="AccessCamera" 
+                screens={componentes}
+                navigationContainerProps={{
+                    independent: true
                 }}
-                ref={(cameraRef) => {
-                    if(!cameraPayload.cameraRef && cameraRef)
-                        setCameraRef(cameraRef);
-                }}
-                flashMode={cameraPayload.flashActivated ? FlashMode.on : FlashMode.off}
-            >
-                <Stack 
-                    width="full"
-                    height="full"
-                    justifyContent="flex-end"
-                    paddingBottom={10}
-                    space={20}
-                    padding={5}
-                >
-                    <Stack
-                        width="full"
-                        direction="row"
-                        justifyContent="space-between"
-                    >
-                        {medias.length ? (
-                            <Center
-                                onTouchStart={()=> setOpenModalAttachments(true)}
-                            >
-                                <Image 
-                                    source={{
-                                        uri: medias[medias.length - 1].uri
-                                    }}
-
-                                    width={100}
-                                    height={100}
-                                    borderRadius={20}
-                                    borderColor="primary"
-                                    borderWidth={5}
-                                    alt="myphoyo"
-                                />
-                            </Center>
-                        ) : null}
-                        <IconButton 
-                            icon={
-                                <Icon 
-                                    as={<MaterialCommunityIcons name={cameraPayload.flashActivated ? "flashlight" : "flashlight-off"}/>}
-                                    size="xl"
-                                    color="primary"
-                                />
-                            }
-                            backgroundColor="secondary"
-                            borderRadius="full"
-                            onTouchStart={() => setFlaskActivated(!cameraPayload.flashActivated)}
-                            width={70}
-                            height={70}
-                        />
-                    </Stack>
-                    <Stack
-                        width="full"
-                        direction="row"
-                        justifyContent="space-between"
-                    >   
-                        <IconButton 
-                            icon={
-                                <Icon 
-                                    as={<FontAwesome5 name={cameraPayload.cameraType == "photo" ? "camera" : "video"}/>}
-                                    size="xl"
-                                    color="primary"
-                                />
-                            }
-                            backgroundColor="secondary"
-                            borderRadius="full"
-                            onTouchStart={() => {
-
-                                const type: CameraComponentType = cameraPayload.cameraType === "photo" ? "video" : "photo"
-
-                                setCameraType(type);
-                            }}
-                            width={70}
-                            height={70}
-                        />
-                        <IconButton
-                            backgroundColor={cameraPayload.buttonRecordPressed ? "primary" : "secondary"}
-                            borderRadius="full"
-                            onPressIn={() =>{
-                                setButtonRecordPress(true);
-
-                                if(cameraPayload.cameraType === "photo")
-                                    handleCapturePhoto();
-
-                                if(cameraPayload.cameraType === "video")
-                                    handleStartingVideo();
-                            }}
-                            onPressOut={()=> {
-                                setButtonRecordPress(false);
-
-                                if(cameraPayload.cameraType === "video")
-                                    handleStopingVideo();
-                            }}
-                            width={70}
-                            height={70}
-                        />
-                        <IconButton 
-                            icon={
-                                <Icon 
-                                    as={<Entypo name="cycle"/>}
-                                    size="xl"
-                                    color="primary"
-                                />
-                            }
-                            backgroundColor="secondary"
-                            borderRadius="full"
-                            width={70}
-                            height={70}
-                            onTouchStart={() => {
-
-                                const position: CameraComponentPosition = cameraPayload.cameraPosition === "back" ? "front" : "back"
-
-                                setCameraPosition(position);
-                            }}
-                        />
-                    </Stack>
-                </Stack>
-            </Camera>
-            <ModalAttachments 
-                attachments={[...medias]}
-                open={openModalAttachments}
-                onClose={() => setOpenModalAttachments(false)}
             />
-        </>
+        </CameraProvider>
     )
 }

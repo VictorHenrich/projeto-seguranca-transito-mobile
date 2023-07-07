@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Video, VideoProps,  AVPlaybackStatus } from "expo-av";
-import { Stack, IconButton } from "native-base";
+import { Stack, IconButton, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import SliderDefault from "./SliderDefault";
@@ -19,6 +19,8 @@ interface VideoState{
 }
 
 export default function VideoDefault(props: VideoProps){
+    const sliderRef = useRef(null);
+
     const [videoDuration, setVideoDuration] = useState<VideoDuration>({
         current: 0,
         total: 0
@@ -47,7 +49,8 @@ export default function VideoDefault(props: VideoProps){
     function handleVideoUpdateStatus(status: AVPlaybackStatus): void{
         if(!status.isLoaded) return;
 
-        handleVideoDuration({ total: 100 });
+        if(status.playableDurationMillis && !videoDuration.total)
+            handleVideoDuration({ total: status.playableDurationMillis });
 
         if(status.isPlaying)
             handleVideoDuration({ current: status.positionMillis });
@@ -61,40 +64,19 @@ export default function VideoDefault(props: VideoProps){
             direction="column"
             width="full"
             height="full"
+            space={10}
         >
             <Video
                 style={{
                     width: "100%",
-                    minHeight: "80%"
+                    height: "100%"
                 }}
                 shouldPlay={videoState.inPause}
                 isLooping={videoState.inLooping}
                 isMuted={videoState.inMute}
-                onPlaybackStatusUpdate={handleVideoUpdateStatus}
+                //onPlaybackStatusUpdate={handleVideoUpdateStatus}
                 {...props}
             />
-            <Stack
-                direction="row"
-                space={5}
-                width="full"
-                alignItems="center"
-            >
-                <IconButton 
-                    as={<FontAwesome5 name={videoState.inPause ? "pause" : "play"} />}
-                    backgroundColor="primary"
-                    color="#FFFFFF"
-                    size="lg"
-                    onPress={() => {
-                        handleStateVideo({
-                            inPause: !videoState.inPause
-                        });
-                    }}
-                />
-                <SliderDefault 
-                    maxValue={videoDuration.total}
-                    value={videoDuration.current}
-                />
-            </Stack>
         </Stack>
     )
 }

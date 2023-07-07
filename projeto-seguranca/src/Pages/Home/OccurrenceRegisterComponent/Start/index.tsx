@@ -1,6 +1,6 @@
 import CameraDefault from "../../../../Components/CameraDefault";
 import StackNavigation, { IStackScreen } from "../../../../Components/StackNavigation";
-import OccurrenceAccessCameraComponent from "./OccurrenceAccessCameraComponent";
+import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
 import OccurrenceAddressLocalComponent from "./OccurrenceAddressLocalComponent";
 import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
 
@@ -10,7 +10,7 @@ import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
 export default function StartProcessRegisterOccurrenceComponent(props: any){
     const screens: IStackScreen[] = [
         {
-            component: OccurrenceAccessCameraComponent,
+            component: OccurrenceCaptureEvidenceComponent,
             name: "OccurrenceAccessCamera"
         },
         {
