@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useState, useEffect } from "react";
+import { ReactElement, useContext, useState, useEffect, memo } from "react";
 import { Center, Icon, Stack, Box} from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -10,14 +10,14 @@ import ButtonDefault from "../ButtonDefault";
 
 
 
-export default function MediasCapturedComponent(props: any): ReactElement{
+function MediasCapturedComponent(props: any): ReactElement{
     const [indexMediasSelected, setIndexMediasSelected] = useState<number[]>([]);
     const [selectable, setSelectable] = useState<boolean>(false);
 
     const {
         medias,
         setMediaSelected,
-        removeMedia
+        removeMedias
     }: IContextCamera = useContext(ContextCamera);
 
 
@@ -92,13 +92,15 @@ export default function MediasCapturedComponent(props: any): ReactElement{
                             backgroundColor="red"
                             onTouchStart={()=> {
                                 if(medias.length)
-                                    indexMediasSelected.forEach(indexItem => removeMedia(indexItem));
+                                    removeMedias(...indexMediasSelected);
+
+                                setIndexMediasSelected([]);
                             }}
                         />
                     )
                 }
             </Box>
-            <ContainerDefault>
+            <ContainerDefault minHeight={500}>
                 <Stack
                     direction="row"
                     flexWrap="wrap"
@@ -167,3 +169,6 @@ export default function MediasCapturedComponent(props: any): ReactElement{
         </Stack>
     );
 }
+
+
+export default memo(MediasCapturedComponent);

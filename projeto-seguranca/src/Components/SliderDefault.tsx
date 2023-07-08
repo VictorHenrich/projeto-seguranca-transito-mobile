@@ -1,4 +1,5 @@
 import { Slider, ISliderProps } from "native-base";
+import { useRef } from "react";
 
 
 

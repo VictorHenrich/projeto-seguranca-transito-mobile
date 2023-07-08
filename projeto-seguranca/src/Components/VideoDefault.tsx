@@ -1,15 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Video, VideoProps,  AVPlaybackStatus } from "expo-av";
-import { Stack, IconButton, Icon } from "native-base";
+import { Stack, IconButton } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import SliderDefault from "./SliderDefault";
-
-
-interface VideoDuration{
-    current: number,
-    total: number
-}
 
 
 interface VideoState{
@@ -19,25 +13,15 @@ interface VideoState{
 }
 
 export default function VideoDefault(props: VideoProps){
-    const sliderRef = useRef(null);
+    const [videoDuration, setVideoDuration] = useState<number>(0);
 
-    const [videoDuration, setVideoDuration] = useState<VideoDuration>({
-        current: 0,
-        total: 0
-    });
+    const [videoPositionCurrent, setVideoPositionCurrent] = useState<number>(0);
 
     const [videoState, setVideoState] = useState<VideoState>({
         inPause: true,
         inLooping: true,
         inMute: false
     });
-
-    function handleVideoDuration(props: Partial<VideoDuration>): void{
-        setVideoDuration({
-            ...videoDuration,
-            ...props
-        });
-    }
 
     function handleStateVideo(props: Partial<VideoState>): void{
         setVideoState({
@@ -49,14 +33,11 @@ export default function VideoDefault(props: VideoProps){
     function handleVideoUpdateStatus(status: AVPlaybackStatus): void{
         if(!status.isLoaded) return;
 
-        if(status.playableDurationMillis && !videoDuration.total)
-            handleVideoDuration({ total: status.playableDurationMillis });
+        if(status.playableDurationMillis && !videoDuration)
+            setVideoDuration(status.playableDurationMillis || 0);
 
         if(status.isPlaying)
-            handleVideoDuration({ current: status.positionMillis });
-
-        if(status.didJustFinish)
-            handleVideoDuration({ current: 0 });
+            setVideoPositionCurrent(status.positionMillis || 0);
     }
 
     return (
@@ -64,19 +45,43 @@ export default function VideoDefault(props: VideoProps){
             direction="column"
             width="full"
             height="full"
-            space={10}
         >
             <Video
                 style={{
                     width: "100%",
-                    height: "100%"
+                    height: "90%"
                 }}
                 shouldPlay={videoState.inPause}
                 isLooping={videoState.inLooping}
                 isMuted={videoState.inMute}
-                //onPlaybackStatusUpdate={handleVideoUpdateStatus}
+                onPlaybackStatusUpdate={handleVideoUpdateStatus}
                 {...props}
             />
+            <Stack
+                width="full"
+                height="10%"
+                direction="row"
+                justifyContent="space-around"
+                alignItems="center"
+                backgroundColor="secondary"
+            >
+                <IconButton 
+                    as={<FontAwesome5 name={videoState.inPause ? "pause" : "play"}/>}
+                    backgroundColor="primary"
+                    onTouchStart={()=> {
+                        handleStateVideo({ inPause: !videoState.inPause });
+                    }}
+                    padding={1}
+                    color="#FFFFFF"
+                />
+                <SliderDefault
+                    width="80%"
+                    minValue={0}
+                    maxValue={videoDuration}
+                    step={0.1}
+                    value={videoPositionCurrent}
+                />
+            </Stack>
         </Stack>
     )
 }

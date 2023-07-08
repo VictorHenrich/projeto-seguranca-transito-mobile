@@ -1,10 +1,11 @@
+import { memo } from "react";
 import StackNavigation, { IStackScreen } from "../StackNavigation";
 import AccessCameraComponent from "./AccessCameraComponent";
 import CameraProvider from "./CameraProvider";
 import MediaViewComponent from "./MediaViewComponent";
 import MediasCapturedComponent from "./MediasCapturedComponent";
 
-export default function CameraDefault(props: any){
+function CameraDefault(props: any){
 
     const componentes: IStackScreen[] = [
         {
@@ -33,3 +34,6 @@ export default function CameraDefault(props: any){
         </CameraProvider>
     )
 }
+
+
+export default memo(CameraDefault);

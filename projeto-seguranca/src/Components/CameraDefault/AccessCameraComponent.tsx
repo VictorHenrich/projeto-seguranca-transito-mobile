@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext, memo} from "react";
 
 import { Center, IconButton, Icon, Stack, Image } from 'native-base';
 import { Camera, CameraType, CameraCapturedPicture, FlashMode } from 'expo-camera';
@@ -10,7 +10,7 @@ import { ContextCamera, IContextCamera, MediaTypes } from "./CameraProvider";
 
 
 
-export default function AccessCameraComponent(props: any){
+function AccessCameraComponent(props: any){
     const {
         addMedia,
         medias
@@ -219,3 +219,6 @@ export default function AccessCameraComponent(props: any){
         </Camera>
     )
 }
+
+
+export default memo(AccessCameraComponent);

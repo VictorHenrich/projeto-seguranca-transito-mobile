@@ -1,4 +1,4 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement, useContext, memo } from "react";
 import VideoDefault from "../VideoDefault";
 import  { ModalDefaultProps } from "../ModalDefault";
 import ImageDefault from "../ImageDefault";
@@ -12,7 +12,7 @@ export interface ModalViewAttachmentProps extends Omit<ModalDefaultProps, "headi
 }
 
 
-export default function MediaViewComponent(props: any): ReactElement{
+function MediaViewComponent(props: any): ReactElement{
     const {
         mediaSelected
     }: IContextCamera = useContext(ContextCamera);
@@ -41,3 +41,6 @@ export default function MediaViewComponent(props: any): ReactElement{
         </ContainerDefault>
     )
 }
+
+
+export default memo(MediaViewComponent);
