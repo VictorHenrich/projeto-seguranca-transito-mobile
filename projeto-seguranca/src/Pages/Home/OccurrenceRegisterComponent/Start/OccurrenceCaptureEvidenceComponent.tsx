@@ -14,7 +14,7 @@ export default function OccurrenceCaptureEvidenceComponent(props: any){
     async function accessGallery(): Promise<void>{
         const { status }: ImagePicker.MediaLibraryPermissionResponse = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-        if(status !== ImagePicker.PermissionStatus.DENIED)
+        if(status === ImagePicker.PermissionStatus.DENIED)
             throw new Error("Permissão de acesso a galeria rejeitado!");
 
         const result: ImagePicker.ImagePickerResult = await ImagePicker.launchImageLibraryAsync();

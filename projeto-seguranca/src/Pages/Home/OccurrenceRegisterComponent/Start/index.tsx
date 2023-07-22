@@ -3,6 +3,7 @@ import StackNavigation, { IStackScreen } from "../../../../Components/StackNavig
 import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
 import OccurrenceAddressLocalComponent from "./OccurrenceAddressLocalComponent";
 import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
+import OccurrenceVehicleComponent from "./OccurrenceVehicleComponent";
 
 
 
@@ -20,6 +21,10 @@ export default function StartProcessRegisterOccurrenceComponent(props: any){
         {
             component: CameraDefault,
             name: "Camera"
+        },
+        {
+            name: "OccurrenceVehicle",
+            component: OccurrenceVehicleComponent
         }
     ]
 

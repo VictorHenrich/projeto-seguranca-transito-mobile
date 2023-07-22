@@ -14,6 +14,15 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow ProjetoSegurançaTransito to access your camera.",
+          "microphonePermission": "Allow ProjetoSegurançaTransito to access your microphone"
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },

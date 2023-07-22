@@ -1,17 +1,12 @@
-import { Camera, PermissionResponse, CameraCapturedPicture } from 'expo-camera';
+import { Camera, PermissionResponse, CameraCapturedPicture, CameraType } from 'expo-camera';
 import RequestCameraPermissionsError from '../../Exceptions/RequestCameraPermissionsError';
-
-
-export type CameraComponentType = "video" | "photo"
-
-export type CameraComponentPosition = "front" | "back"
-
+import { MediaTypes } from './CameraProvider';
 
 export interface CameraStateProps{
     buttonRecordPressed: boolean,
     flashActivated: boolean,
-    cameraPosition: CameraComponentPosition,
-    cameraType: CameraComponentType,
+    mediaType: MediaTypes,
+    cameraType: CameraType,
     cameraRef: null | Camera
 }
 

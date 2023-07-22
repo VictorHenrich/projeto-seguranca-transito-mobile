@@ -1,7 +1,9 @@
 import { ReactElement, useContext, useState, useEffect, memo } from "react";
 import { Center, Icon, Stack, Box} from "native-base";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 import ContainerDefault from "../ContainerDefault";
 import ImageDefault from "../ImageDefault";
@@ -11,6 +13,8 @@ import ButtonDefault from "../ButtonDefault";
 
 
 function MediasCapturedComponent(props: any): ReactElement{
+    const navigation: NavigationProp<any> = useNavigation();
+
     const [indexMediasSelected, setIndexMediasSelected] = useState<number[]>([]);
     const [selectable, setSelectable] = useState<boolean>(false);
 
@@ -23,8 +27,13 @@ function MediasCapturedComponent(props: any): ReactElement{
 
     useEffect(()=>{
         if(!medias.length)
-            props.navigation.navigate("AccessCamera");
+            returnToCamera()
     },[medias]);
+
+
+    function returnToCamera(): void{
+        navigation.navigate("AccessCamera");
+    }
 
 
     function addIndex(index: number): void{
@@ -54,7 +63,7 @@ function MediasCapturedComponent(props: any): ReactElement{
         }else{
             setMediaSelected(media);
 
-            props.navigation.navigate("MediaView");
+            navigation.navigate("MediaView");
         }
     }
 
@@ -76,13 +85,20 @@ function MediasCapturedComponent(props: any): ReactElement{
             >
                 <ButtonDefault 
                     text={!selectable ? "Selecionar" : "Cancelar"}
-                    width={100}
+                    width={150}
                     onTouchStart={()=> {
                         setSelectable(!selectable);
 
                         if(!selectable)
                             setIndexMediasSelected([]);
                     }}
+                    rightIcon={
+                        <Icon 
+                            as={<AntDesign name="select1"/>}
+                            color="#ffffff"
+                            size="lg"   
+                        />
+                    }
                 />
                 {
                     selectable && (
@@ -113,7 +129,7 @@ function MediasCapturedComponent(props: any): ReactElement{
                         height="30%"
                         backgroundColor="#000000"
                         onTouchStart={()=> {
-                            props.navigation.navigate("AccessCamera");
+                            navigation.navigate("AccessCamera");
                         }}
                     >
                         <Icon 
