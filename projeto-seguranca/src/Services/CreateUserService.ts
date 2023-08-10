@@ -1,4 +1,4 @@
-import api from "./Server/InstanceApi";
+import ApiFactory from "./Server/ApiFactory";
 import AbstractService from "../patterns/AbstractService";
 import UserCreateError from "../Exceptions/UserCreateError";
 
@@ -79,6 +79,8 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
 
     async execute(): Promise<void>{
         try{
+            const api = await ApiFactory.create();
+
             const data: any = this.getData()
 
             const { data: { data: token } } = await api.post(

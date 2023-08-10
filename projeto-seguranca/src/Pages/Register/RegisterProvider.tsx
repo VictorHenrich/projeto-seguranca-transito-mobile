@@ -40,7 +40,7 @@ const initValues: IContextRegister = {
 const ContextRegister: Context<IContextRegister> = createContext<IContextRegister>(initValues);
 
 
-export default function RegisterProvider({ children }: PropsWithChildren){
+export default function RegisterProvider({ children }: PropsWithChildren): React.ReactElement{
     const [userPayload, setUserPayload] = useState<CreateUserProps>(initValues.userPayload);
     const [pageIndex, setPageIndex] = useState<number>(initValues.pageIndex);
 

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {
     Stack,
     Icon
@@ -10,7 +10,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
-import SelectDefault from "../../Components/SelectDefault";
+import SelectDefault,  { SelectDefaultItensProps } from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 import { UserAddressPayload } from "../../Services/CreateUserService";
@@ -26,7 +26,7 @@ const states = [
 ]
 
 
-export default function ComponentRegisterAddress(props: any){
+function ComponentRegisterAddress(props: any): React.ReactElement{
     const {
         setUserPayload,
         userPayload
@@ -47,9 +47,10 @@ export default function ComponentRegisterAddress(props: any){
         <ComponentContainerRegister 
             heading={(
                 <Stack 
-                    space={8} 
+                    width="full"
                     direction="row"
                     alignItems="center"
+                    justifyContent="space-between"
                 >
                     <Icon 
                         as={<FontAwesome5 name="map-marked-alt"/>}
@@ -157,3 +158,6 @@ export default function ComponentRegisterAddress(props: any){
         </ComponentContainerRegister>
     )
 }
+
+
+export default React.memo(ComponentRegisterAddress);

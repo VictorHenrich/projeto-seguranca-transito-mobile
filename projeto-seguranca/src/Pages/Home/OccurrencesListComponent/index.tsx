@@ -1,81 +1,17 @@
+import React, { useContext } from "react";
 import { FlatList } from "native-base";
 
 import ContainerDefault from "../../../Components/ContainerDefault"
-import OccurrenceItemComponent, {OccurrenceItemComponentProps} from "./OccurrenceItemComponent";
+import OccurrenceItemComponent from "./OccurrenceItemComponent";
+import { ContextHome, IContextHome } from "../HomeProvider";
 
 
 
+function OccurrenceListComponent(props: any): React.ReactElement{
 
-
-
-export default function OccurrenceListComponent(props: any){
-
-    const data: OccurrenceItemComponentProps[] = [
-        {
-            address: {
-                city: "Capivari de Baixo",
-                street: "Rua antonio Manuel dos Santos",
-                district: "Caçador",
-                number: "393",
-                state: "SC"
-            },
-            vehicle: {
-                plate: "IHK-339-92",
-                renavam: "222.1111-00",
-                type: "MOTO"
-            },
-            created: "14/06/2023 00:00:00",
-            status: "SUCESSO"
-        },
-        {
-            address: {
-                city: "Tubarão",
-                street: "Rua não sei da onde",
-                district: "Andrino",
-                number: "S/N",
-                state: "SC"
-            },
-            vehicle: {
-                plate: "IHK-339-92",
-                renavam: "222.1111-00",
-                type: "CARRO"
-            },
-            created: "14/06/2023 00:00:00",
-            status: "ERRO"
-        },
-        {
-            address: {
-                city: "Joenvilhe",
-                street: "Rua Alguma coisa",
-                district: "Centro",
-                number: "s/n",
-                state: "SC"
-            },
-            vehicle: {
-                plate: "IHK-339-92",
-                renavam: "222.1111-00",
-                type: "CARRO"
-            },
-            created: "14/06/2023 00:00:00",
-            status: "ANDAMENTO"
-        },
-        {
-            address: {
-                city: "Joenvilhe",
-                street: "Rua Alguma coisa",
-                district: "Centro",
-                number: "s/n",
-                state: "SC"
-            },
-            vehicle: {
-                plate: "IHK-339-92",
-                renavam: "222.1111-00",
-                type: "CARRO"
-            },
-            created: "14/06/2023 00:00:00",
-            status: "PROCESSANDO"
-        }
-    ]
+    const {
+        occurrences
+    } = useContext<IContextHome>(ContextHome);
 
     return (
         <ContainerDefault
@@ -84,10 +20,13 @@ export default function OccurrenceListComponent(props: any){
             <FlatList
                 width="full"
                 padding={5}
-                data={data}
+                data={occurrences}
                 renderItem={(itemData) => {
                     return (
-                        <OccurrenceItemComponent 
+                        <OccurrenceItemComponent
+                            description={itemData.item.description}
+                            lat={itemData.item.lat}
+                            lon={itemData.item.lon}
                             address={itemData.item.address}
                             created={itemData.item.created}
                             status={itemData.item.status}
@@ -100,3 +39,6 @@ export default function OccurrenceListComponent(props: any){
         </ContainerDefault>
     )
 }
+
+
+export default React.memo(OccurrenceListComponent);

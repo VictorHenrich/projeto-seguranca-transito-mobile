@@ -1,10 +1,10 @@
+import React from "react";
 import { Image, Stack } from "native-base";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import HeadingDefault from "../../../../Components/HeadingDefault";
 
 
-
-export default function OccurrenceVehicleComponent(props: any): React.ReactNode{
+function OccurrenceVehicleComponent(props: any): React.ReactElement{
     return (
         <OccurrenceRegisterContainer>
             <Stack
@@ -32,3 +32,6 @@ export default function OccurrenceVehicleComponent(props: any): React.ReactNode{
         </OccurrenceRegisterContainer>
     );
 }
+
+
+export default React.memo(OccurrenceVehicleComponent);

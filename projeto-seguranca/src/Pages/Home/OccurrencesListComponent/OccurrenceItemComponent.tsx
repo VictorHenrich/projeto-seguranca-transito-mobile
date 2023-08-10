@@ -1,35 +1,21 @@
 import {useState} from "react";
-import { Center, Badge, Text, PresenceTransition, Stack, Icon} from "native-base";
+import { Badge, Text, PresenceTransition, Stack, Icon} from "native-base";
 import Fontisto from "react-native-vector-icons/FontAwesome5";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ButtonDefault from "../../../Components/ButtonDefault";
-
-
-export interface OccurrenceItemComponentProps{
-    address: {
-        city: string,
-        street: string,
-        district: string,
-        state: string,
-        number: string
-    },
-    vehicle: {
-        plate: string,
-        renavam: string,
-        type: "CARRO" | "MOTO"
-    },
-    created: string,
-    status: "SUCESSO" | "ANDAMENTO" | "ERRO" | "PROCESSANDO"
-}
-
+import { OccurrenceItemType } from "../../../Services/GetOccurrencesService";
+import { OccurrenceStatus } from "../../../patterns/IOccurrencePayload";
 
 
 export default function OccurrenceItemComponent({
-    status,
     address,
     created,
+    description,
+    lat,
+    lon,
+    status,
     vehicle
-}: OccurrenceItemComponentProps){
+}: OccurrenceItemType){
 
     const [openCard, setOpenCard] = useState<boolean>(false);
 
@@ -52,13 +38,13 @@ export default function OccurrenceItemComponent({
             >
                 <Badge 
                     colorScheme={
-                        status === "SUCESSO"
+                        status === OccurrenceStatus.SUCCESS
                             ? "success"
-                            : status === "ERRO"
+                            : status === OccurrenceStatus.ERROR
                             ? "error"
-                            : status == "ANDAMENTO"
+                            : status == OccurrenceStatus.PROCESSING
                             ? "warmGray"
-                            : status === "PROCESSANDO"
+                            : status === OccurrenceStatus.PROGRESS
                             ? "warning"
                             : "text"
                     }
@@ -71,7 +57,7 @@ export default function OccurrenceItemComponent({
                     color="#a6a6a6"
                     fontSize={12}
                 >
-                    {created}
+                    {`${created}`}
                 </Text>
                 <Icon
                     color="primary"
@@ -182,7 +168,7 @@ export default function OccurrenceItemComponent({
                             </Text>
                             <Text fontWeight={500} color="#999999">
                                 <Text color="#e6e6e6">TIPO VEÍCULO: </Text> 
-                                {vehicle.type}
+                                {vehicle.vehicleType.toUpperCase()}
                             </Text>
                         </Stack>
                     </Stack>

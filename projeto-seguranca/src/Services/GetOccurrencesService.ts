@@ -1,43 +1,30 @@
 import { AxiosResponse } from "axios";
 import AbstractService from "../patterns/AbstractService";
-import api from "./Server/InstanceApi";
+import ApiFactory from "./Server/ApiFactory";
 import GetOccurrencesError from "../Exceptions/GetOccurrencesError";
+import IOccurrencePayload from "../patterns/IOccurrencePayload";
 
 
-export interface GetOccurrencesProps{
-    description: string,
-    addressState: string,
-    addressCity: string,
-    addressDistrict: string,
-    addressStreet: string,
-    addressNumber: string | number,
-    lat: string,
-    lon: string,
-    created: Date,
-    vehicle: {
-        uuid: string,
-        plate: string,
-        renavam: string,
-        vehicleType: string
-    }
-}
+export type OccurrenceItemType = Omit<IOccurrencePayload, "attachments" | "user">
 
 
-export default class GetOccurrencesService extends AbstractService<void, GetOccurrencesProps[]>{
-    private static readonly urlGetOccurrences: string = "/ocorrencia/registro";
+export default class GetOccurrencesService extends AbstractService<void, OccurrenceItemType[]>{
+    private static readonly URL: string = "/user/occurrence/query";
 
-    getData(occurrencesPayload: any[]): GetOccurrencesProps[]{
+    getData(occurrencesPayload: any[]): OccurrenceItemType[]{
         return occurrencesPayload.map(item => {
             return {
+                address: {
+                    state: item.address.state,
+                    city: item.address.city,
+                    district: item.address.district,
+                    street: item.address.street
+                },
                 description: item.description,
-                addressState: item.address_state,
-                addressCity: item.address_city,
-                addressDistrict: item.address_district,
-                addressStreet: item.address_street,
-                addressNumber: item.address_number,
                 lat: item.lat,
                 lon: item.lon,
-                created: new Date(item.created),
+                status: item.status,
+                created: item.created,
                 vehicle: {
                     uuid: item.vehicle.uuid,
                     plate: item.vehicle.plate,
@@ -48,13 +35,13 @@ export default class GetOccurrencesService extends AbstractService<void, GetOccu
         });
     }
 
-    async execute(): Promise<GetOccurrencesProps[]> {
+    async execute(): Promise<OccurrenceItemType[]> {
+        const api = await ApiFactory.create();
+        
         try{
-            const response: AxiosResponse = await api.get(GetOccurrencesService.urlGetOccurrences);
+            const { data: { result: occurrences }}: AxiosResponse = await api.get(GetOccurrencesService.URL);
 
-            const {data: occurrences } = response;
-
-            return this.getData(occurrences.data);
+            return this.getData(occurrences);
 
         }catch(error){
             throw new GetOccurrencesError();

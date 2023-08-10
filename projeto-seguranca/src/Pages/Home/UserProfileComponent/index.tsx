@@ -1,4 +1,4 @@
-import {useContext, Context} from "react";
+import React, {useContext, Context} from "react";
 import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -11,7 +11,7 @@ import { ContextHome, IContextHome } from "../HomeProvider";
 
 
 
-export default function UserProfileComponent(props: any){
+function UserProfileComponent(props: any): React.ReactElement{
     const {
         user
     } =  useContext<IContextHome>(ContextHome);
@@ -260,3 +260,6 @@ export default function UserProfileComponent(props: any){
         </ContainerDefault>
     );
 }
+
+
+export default React.memo(UserProfileComponent);

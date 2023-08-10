@@ -5,11 +5,10 @@ import IUserVehiclePayload from "./IUserVehiclePayload";
 
 export default interface IUserPayload{
     email: string;
-    password: string;
     name: string;
-    document: string;
+    documentCpf: string;
     documentRg: string;
-    stateIssue: string;
+    issuerState: string;
     telephone: string;
     birthday: Date;
     address: IUserAddressPayload;

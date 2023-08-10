@@ -35,17 +35,18 @@ export default function ComponentRegisterPerson(props: any){
     return (
         <ComponentContainerRegister 
             heading={(
-                <Stack 
-                    space={8} 
+                <Stack
+                    width="full"
                     direction="row"
                     alignItems="center"
+                    justifyContent="space-between"
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-plus"/>}
                         size="xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="left">
+                    <HeadingDefault textAlign="right">
                         Vamos começar com as informações da sua {` `}
                         <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
                     </HeadingDefault>

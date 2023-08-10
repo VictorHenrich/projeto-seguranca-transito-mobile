@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import React, {  useState } from "react";
 import { Modal, IModalProps } from "native-base";
 import ProtocolSegurityComponent1 from "./ProtocolSegurityComponent1";
 import ButtonDefault from "../../../../../Components/ButtonDefault";
@@ -36,8 +36,7 @@ const itens: ProtocolSecurityItemProps[] = [
     }
 ]
 
-
-export default function ModalProtocolsSegurity(props: IModalProps){
+function ModalProtocolsSegurity(props: IModalProps): React.ReactElement{
 
     const [itemSelected, setItemSelected] = useState<ProtocolSecurityItemProps>(itens[0]);
 
@@ -70,3 +69,5 @@ export default function ModalProtocolsSegurity(props: IModalProps){
         </Modal>
     );
 }
+
+export default React.memo(ModalProtocolsSegurity);

@@ -1,26 +1,39 @@
 import AbstractService from "../patterns/AbstractService";
+import IUserPayload from "../patterns/IUserPayload";
+import ApiFactory from "./Server/ApiFactory";
 
 
-export interface GetUserServiceProps{
-    uuid: string;
-    email: string;
-    name: string;
-    document: string;
-    documentRg: string;
-    birthday: Date;
-    telephone: string;
-    addressState: string;
-    addressCity: string;
-    addressDistrict: string;
-    addressStreet: string;
-    addressNumber: string;
-}
+export type UserGetPayload = Omit<IUserPayload, "vehicles">;
 
 
+export default class GetUserService extends AbstractService<void, UserGetPayload>{
+    static readonly URL: string = "/user/query";
 
-export default class GetUserService extends AbstractService<void, GetUserServiceProps>{
-    execute(): Promise<GetUserServiceProps> {
-        throw new Error("Method not implemented.");
+    handleUserData(userData: any): UserGetPayload{
+        return {
+            name: userData.name,
+            email: userData.email,
+            birthday: userData.birthday,
+            documentCpf: userData.document_cpf,
+            documentRg: userData.document_rg,
+            issuerState: userData.issuerState,
+            telephone: userData.telephone,
+            address: {
+                state: userData.address_state,
+                city: userData.address_city,
+                district: userData.address_district,
+                street: userData.address_street,
+                number: userData.address_number
+            }
+        }
+    }
+
+    async execute(): Promise<UserGetPayload> {
+        const api = await ApiFactory.create();
+
+        const { data: { result: userData }} = await api.get(GetUserService.URL);
+
+        return this.handleUserData(userData);
     }
 
 }

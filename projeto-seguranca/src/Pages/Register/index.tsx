@@ -1,3 +1,5 @@
+import React from "react";
+
 import ComponentRegisterPerson from "./ComponentRegisterPerson";
 import ComponentRegisterAddress from "./ComponentRegisterAddress";
 import RegisterProvider from "./RegisterProvider";
@@ -32,7 +34,7 @@ const screens: IStackScreen[] = [
 ]
 
 
-export default function RegisterPage(props: any){
+function RegisterPage(props: any): React.ReactElement{
 
     return (
         <RegisterProvider>
@@ -43,3 +45,6 @@ export default function RegisterPage(props: any){
         </RegisterProvider>
     )
 }
+
+
+export default React.memo(RegisterPage);

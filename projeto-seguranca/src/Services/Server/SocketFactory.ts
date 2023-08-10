@@ -1,17 +1,17 @@
-import { io } from "socket.io-client";
-import api from "./InstanceApi";
+import { io, Socket } from "socket.io-client";
+import { WS_BASE_URL, AUTH_KEY } from "@env";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default class SocketFactory{
-    private static baseURL: string = "ws://localhost:3000";
-
-    public static create(): any{
+    static async create(): Promise<Socket>{
+        const authToken: string | void = await AsyncStorage.getItem(AUTH_KEY) || undefined;
 
         return io(
-            SocketFactory.baseURL, 
+            WS_BASE_URL, 
             {
                 extraHeaders: {
-                    "Authorization": `${api.defaults.headers["Authorization"]}`
+                    "Authorization": `${authToken}`
                 }
             }
         )

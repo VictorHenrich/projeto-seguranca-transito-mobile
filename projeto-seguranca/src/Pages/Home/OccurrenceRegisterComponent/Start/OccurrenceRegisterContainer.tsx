@@ -1,3 +1,4 @@
+import React from "react";
 import { Stack, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -6,7 +7,7 @@ import ContainerDefault, {ContainerDefaultProps} from "../../../../Components/Co
 import ButtonDefault from "../../../../Components/ButtonDefault";
 
 
-export default function OccurrenceRegisterContainer(props: ContainerDefaultProps){
+function OccurrenceRegisterContainer(props: ContainerDefaultProps): React.ReactElement{
     return (
         <>
             <BackgroundApp source={require("../../../../../assets/background_occurrence.png")}/>
@@ -40,3 +41,6 @@ export default function OccurrenceRegisterContainer(props: ContainerDefaultProps
         </>
     )
 }
+
+
+export default React.memo(OccurrenceRegisterContainer);

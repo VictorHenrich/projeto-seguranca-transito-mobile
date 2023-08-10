@@ -1,6 +1,8 @@
-import api from "./Server/InstanceApi";
+import ApiFactory from "./Server/ApiFactory";
 import AbstractService from "../patterns/AbstractService";
 import AuthenticationError from "../Exceptions/AuthenticationError";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AUTH_KEY } from "@env";
 
 
 
@@ -11,23 +13,24 @@ export interface AuthorizationProps{
 
 
 
-
 export default class AuthorizationService extends AbstractService<AuthorizationProps>{
-    private static urlAuthentication: string = "/usuario/autenticacao";
+    private static urlAuthentication: string = "/user/authentication";
 
     async execute(): Promise<void>{
-        const data: any = {
-            email: this.payload.email,
-            senha: this.payload.password
-        }
+        const api = await ApiFactory.create();
 
         try{
-            const response = await api.post(
+            const { data: { result: token }} = await api.post(
                 AuthorizationService.urlAuthentication,
-                data
+                this.payload
             );
 
-            const { data: token }: any = response.data;
+            console.log(token);
+
+            await AsyncStorage.setItem(
+                AUTH_KEY,
+                token
+            );
 
             api.defaults.headers["Authorization"] = token;
 

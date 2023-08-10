@@ -1,3 +1,5 @@
+import React from "react";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -32,10 +34,13 @@ const screens: ScreenNavigationProps[] = [
 ]
 
 
-export default function HomePage(props: any){
+function HomePage(props: any){
     return (
         <HomeProvider>
             <HomeNavigation screens={screens}/>
         </HomeProvider>
     )
 }
+
+
+export default React.memo(HomePage);

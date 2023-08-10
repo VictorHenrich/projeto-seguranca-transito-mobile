@@ -1,3 +1,5 @@
+import React from "react";
+
 import { 
     Box, 
     Link, 
@@ -20,7 +22,7 @@ import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 
 
 
-export default function LoginPage(props: any){
+function LoginPage(props: any): React.ReactElement{
 
     const [userAuthPayload, setUserAuthPayload] = useState<AuthorizationProps>({
         email: "",
@@ -86,8 +88,8 @@ export default function LoginPage(props: any){
                     <Center width="full">
                         <Image 
                             source={require("../../../assets/lock.png")}
-                            minWidth={200}
-                            minHeight={200}
+                            width={200}
+                            height={200}
                             alt="lock"
                         />
                     </Center>
@@ -155,3 +157,5 @@ export default function LoginPage(props: any){
         </>
     )
 }
+
+export default React.memo(LoginPage);

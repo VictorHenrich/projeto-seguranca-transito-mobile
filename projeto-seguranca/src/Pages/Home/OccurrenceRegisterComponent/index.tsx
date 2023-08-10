@@ -1,3 +1,4 @@
+import React from "react";
 import { Stack, Image } from "native-base";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import ContainerDefault from "../../../Components/ContainerDefault";
@@ -6,7 +7,7 @@ import BackgroundApp from "../../../Components/BackgroundApp";
 
 
 
-export default function OccurrenceRegisterComponent(props: any){
+function OccurrenceRegisterComponent(props: any): React.ReactElement{
     return (
         <ContainerDefault backgroundColor="secondary">
             <Stack
@@ -28,3 +29,6 @@ export default function OccurrenceRegisterComponent(props: any){
         </ContainerDefault>
     )
 }
+
+
+export default React.memo(OccurrenceRegisterComponent);

@@ -1,4 +1,4 @@
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import { Stack, Icon } from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -17,7 +17,7 @@ import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
-export default function ComponentRegisterAccess(props: any){
+function ComponentRegisterAccess(props: any): React.ReactElement{
     const {
         setUserPayload,
         userPayload
@@ -50,10 +50,11 @@ export default function ComponentRegisterAccess(props: any){
     return (
         <ComponentContainerRegister 
             heading={(
-                <Stack 
-                    space={8} 
+                <Stack
+                    width="full"
                     direction="row"
                     alignItems="center"
+                    justifyContent="space-between"
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-lock"/>}
@@ -135,3 +136,6 @@ export default function ComponentRegisterAccess(props: any){
         </ComponentContainerRegister>
     )
 }
+
+
+export default React.memo(ComponentRegisterAccess);

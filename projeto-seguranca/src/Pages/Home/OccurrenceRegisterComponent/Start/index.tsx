@@ -1,3 +1,5 @@
+import React from "react";
+
 import CameraDefault from "../../../../Components/CameraDefault";
 import StackNavigation, { IStackScreen } from "../../../../Components/StackNavigation";
 import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
@@ -8,7 +10,7 @@ import OccurrenceVehicleComponent from "./OccurrenceVehicleComponent";
 
 
 
-export default function StartProcessRegisterOccurrenceComponent(props: any){
+function StartProcessRegisterOccurrenceComponent(props: any): React.ReactElement{
     const screens: IStackScreen[] = [
         {
             component: OccurrenceCaptureEvidenceComponent,
@@ -40,3 +42,6 @@ export default function StartProcessRegisterOccurrenceComponent(props: any){
         </OccurrenceRegisterProvider>
     )
 }
+
+
+export default React.memo(StartProcessRegisterOccurrenceComponent);

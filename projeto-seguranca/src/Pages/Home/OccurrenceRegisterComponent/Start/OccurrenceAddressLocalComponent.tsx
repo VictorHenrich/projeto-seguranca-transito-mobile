@@ -1,3 +1,4 @@
+import React from "react";
 import {Image, Stack, Icon} from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -6,7 +7,7 @@ import HeadingDefault from "../../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 
 
-export default function OccurrenceAddressLocalComponent(props: any){
+function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
 
     return (
         <OccurrenceRegisterContainer>
@@ -75,3 +76,6 @@ export default function OccurrenceAddressLocalComponent(props: any){
         </OccurrenceRegisterContainer>
     );
 }
+
+
+export default React.memo(OccurrenceAddressLocalComponent);

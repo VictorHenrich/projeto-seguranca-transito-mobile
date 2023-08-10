@@ -1,48 +1,45 @@
-import { createContext, Context, useState } from "react";
+import { createContext, Context, useState, useEffect } from "react";
 import IUserPayload from "../../patterns/IUserPayload";
-import IOccurrencePayload from "../../patterns/IOccurrencePayload";
+import GetOccurrencesService, { OccurrenceItemType } from "../../Services/GetOccurrencesService";
+import GetUserService, { UserGetPayload } from "../../Services/GetUserService";
+import IUserVehiclePayload from "../../patterns/IUserVehiclePayload";
+import GetVehiclesService from "../../Services/GetVehiclesService";
 
-
-
-type OccurrencesPayloadType = Omit<IOccurrencePayload, "user">[];
 
 
 export interface IContextHome{
     user: IUserPayload;
-    occurrences: OccurrencesPayloadType;
+    occurrences: OccurrenceItemType[];
     setUser: (user: IUserPayload) => void;
-    setOccurrences: (occurrences: OccurrencesPayloadType) => void;
+    setOccurrences: (occurrences: OccurrenceItemType[]) => void;
+    loadUser: () => Promise<void>
+    loadOccurrences: () => Promise<void>
 }
 
 
 const initialValues: IContextHome = {
     user: {
-        name: "Victor Henrich",
-        email: "victorhenrich993@gmail.com",
+        name: "",
+        email: "",
         birthday: new Date(),
-        document: "02988790000",
-        documentRg: "111111111",
-        password: "1234",
-        stateIssue: "SC",
-        telephone: "48999187582",
-        vehicles: [
-            {
-                plate: "111111",
-                renavam: "222222",
-                vehicleType: "CARRO"
-            }
-        ],
+        documentCpf: "",
+        documentRg: "",
+        issuerState: "",
+        telephone: "",
+        vehicles: [],
         address: {
-            city: "CAPIVARI DE BAIXO",
-            district: "CAÇADOR",
-            number: "1",
-            state: "SC",
-            street: "RUA ANTONIO MANUEL DOS SANTOS"
+            city: "",
+            district: "",
+            number: "",
+            state: "",
+            street: ""
         }
     },
     occurrences: [],
-    setOccurrences: (occurrences: OccurrencesPayloadType)=> null,
-    setUser: (user: IUserPayload)=> null
+    setOccurrences: (occurrences: OccurrenceItemType[])=> undefined,
+    setUser: (user: IUserPayload)=> undefined,
+    loadOccurrences: async () => undefined,
+    loadUser: async() => undefined
 }
 
 
@@ -50,7 +47,32 @@ const ContextHome: Context<IContextHome> = createContext(initialValues);
 
 export default function HomeProvider(props: any){
     const [userPayload, setUserPayload] = useState<IUserPayload>(initialValues.user);
-    const [occurrencesPayload, setOccurrencesPayload] = useState<OccurrencesPayloadType>(initialValues.occurrences);
+
+    const [occurrencesPayload, setOccurrencesPayload] = useState<OccurrenceItemType[]>(initialValues.occurrences);
+
+
+    async function loadOccurrencesPayload(): Promise<void>{
+        const occurrences: OccurrenceItemType[] = await new GetOccurrencesService().execute();
+
+        setOccurrencesPayload(occurrences);
+    }
+
+    async function loadUserPayload(): Promise<void>{
+        const user: UserGetPayload = await new GetUserService().execute();
+
+        const vehicles: IUserVehiclePayload[] = await new GetVehiclesService().execute();
+
+        setUserPayload({
+            ...user,
+            vehicles
+        });
+    }
+
+    useEffect(()=>{
+        loadOccurrencesPayload()
+
+        loadUserPayload();
+    }, []);
 
     return (
         <ContextHome.Provider 
@@ -58,7 +80,9 @@ export default function HomeProvider(props: any){
                 user: userPayload,
                 occurrences: occurrencesPayload,
                 setOccurrences: setOccurrencesPayload,
-                setUser: setUserPayload
+                setUser: setUserPayload,
+                loadOccurrences: loadOccurrencesPayload,
+                loadUser: loadUserPayload
             }}
         >
             {props.children}

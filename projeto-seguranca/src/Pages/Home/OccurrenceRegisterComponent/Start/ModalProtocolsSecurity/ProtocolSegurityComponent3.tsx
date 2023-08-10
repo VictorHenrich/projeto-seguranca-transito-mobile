@@ -1,8 +1,9 @@
+import React from "react";
 import { Stack } from "native-base";
 import ContainerDefault from "../../../../../Components/ContainerDefault";
 import HeadingDefault from "../../../../../Components/HeadingDefault";
 
-export default function ProtocolSegurityComponent3(props: any){
+function ProtocolSegurityComponent3(props: any): React.ReactElement{
 
     return (
         <ContainerDefault backgroundColor="secondary">
@@ -15,3 +16,5 @@ export default function ProtocolSegurityComponent3(props: any){
         </ContainerDefault>
     );
 }
+
+export default React.memo(ProtocolSegurityComponent3);

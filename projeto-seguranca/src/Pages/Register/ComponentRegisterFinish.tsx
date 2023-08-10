@@ -1,3 +1,4 @@
+import React from "react";
 import { Image, Icon, Center } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import ComponentContainerRegister from "./ComponentContainerRegister";
@@ -7,8 +8,7 @@ import ButtonDefault from "../../Components/ButtonDefault";
 
 
 
-export default function ComponentRegisterFinish(props: any){
-
+function ComponentRegisterFinish(props: any): React.ReactElement{
     return (
         <ComponentContainerRegister 
             heading="Cadastro Concluido!"
@@ -33,3 +33,6 @@ export default function ComponentRegisterFinish(props: any){
         </ComponentContainerRegister>
     )
 }
+
+
+export default React.memo(ComponentRegisterFinish);

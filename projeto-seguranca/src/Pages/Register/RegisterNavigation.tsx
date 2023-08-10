@@ -5,7 +5,7 @@ import { ContextRegister, IContextRegister } from "./RegisterProvider";
 
 
 
-export default function RegisterNavigation(props: Omit<IStackNavigation, "navigationContainerProps">){
+export default function RegisterNavigation(props: Omit<IStackNavigation, "navigationContainerProps">): React.ReactElement{
     const {
         setPageIndex
     } = useContext<IContextRegister>(ContextRegister);

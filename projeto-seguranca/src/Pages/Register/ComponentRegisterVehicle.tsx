@@ -55,9 +55,10 @@ export default function ComponentRegisterVehicle(props: any){
         <ComponentContainerRegister
             heading={(
                 <Stack 
-                    space={8} 
+                    width="full"
                     direction="row"
                     alignItems="center"
+                    justifyContent="space-between"
                 >
                     <Icon 
                         as={<FontAwesome5 name="car"/>}

@@ -1,3 +1,4 @@
+import React from "react";
 import { Icon, Image, Stack } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from 'expo-image-picker';
@@ -8,9 +9,7 @@ import ButtonDefault from "../../../../Components/ButtonDefault";
 
 
 
-
-export default function OccurrenceCaptureEvidenceComponent(props: any){
-
+function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
     async function accessGallery(): Promise<void>{
         const { status }: ImagePicker.MediaLibraryPermissionResponse = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -84,3 +83,6 @@ export default function OccurrenceCaptureEvidenceComponent(props: any){
         </OccurrenceRegisterContainer>
     );
 }
+
+
+export default React.memo(OccurrenceCaptureEvidenceComponent);

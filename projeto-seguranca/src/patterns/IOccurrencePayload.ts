@@ -19,6 +19,7 @@ export default interface IOccurrencePayload{
         district: string;
         street: string;
     };
+    created: Date;
     lat: string;
     lon: string;
     description: string;
