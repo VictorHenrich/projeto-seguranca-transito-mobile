@@ -1,6 +1,6 @@
 import AbstractService from "../patterns/AbstractService";
 import IUserVehiclePayload, { VehicleTypes } from "../patterns/IUserVehiclePayload";
-import api from "./Server/ApiFactory";
+import ApiFactory from "./Server/ApiFactory";
 
 
 export default class GetVehiclesService extends AbstractService<void, IUserVehiclePayload[]>{
@@ -38,6 +38,8 @@ export default class GetVehiclesService extends AbstractService<void, IUserVehic
     }
 
     async execute(): Promise<IUserVehiclePayload[]> {
+        const api = await ApiFactory.create();
+
         const { data: { result: vehicles } } = await api.get(GetVehiclesService.URL);
 
         return this.handleVehicles(vehicles);

@@ -25,8 +25,6 @@ export default class AuthorizationService extends AbstractService<AuthorizationP
                 this.payload
             );
 
-            console.log(token);
-
             await AsyncStorage.setItem(
                 AUTH_KEY,
                 token
