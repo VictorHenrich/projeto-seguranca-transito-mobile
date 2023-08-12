@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import AbstractService from "../patterns/AbstractService";
-import IUserPayload from "../patterns/IUserPayload";
+import AbstractService from "../Patterns/AbstractService";
+import IUserPayload from "../Patterns/IUserPayload";
 import ApiFactory from "./Factories/ApiFactory";
 
 

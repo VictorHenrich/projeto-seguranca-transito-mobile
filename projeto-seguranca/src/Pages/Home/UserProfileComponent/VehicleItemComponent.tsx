@@ -3,7 +3,7 @@ import { Text, PresenceTransition, Stack, Icon} from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
 import ButtonDefault from "../../../Components/ButtonDefault";
-import IUserVehiclePayload from "../../../patterns/IUserVehiclePayload";
+import IUserVehiclePayload from "../../../Patterns/IUserVehiclePayload";
 
 
 

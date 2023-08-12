@@ -3,7 +3,7 @@ import { AUTH_KEY } from "@env";
 import { AxiosInstance, AxiosResponse } from 'axios';
 
 import ApiFactory from "./Factories/ApiFactory";
-import AbstractService from "../patterns/AbstractService";
+import AbstractService from "../Patterns/AbstractService";
 import AuthenticationError from "../Exceptions/AuthenticationError";
 
 

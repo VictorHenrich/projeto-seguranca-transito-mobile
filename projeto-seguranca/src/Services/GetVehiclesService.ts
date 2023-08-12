@@ -1,5 +1,5 @@
-import AbstractService from "../patterns/AbstractService";
-import IUserVehiclePayload, { VehicleTypes } from "../patterns/IUserVehiclePayload";
+import AbstractService from "../Patterns/AbstractService";
+import IUserVehiclePayload, { VehicleTypes } from "../Patterns/IUserVehiclePayload";
 import ApiFactory from "./Factories/ApiFactory";
 
 

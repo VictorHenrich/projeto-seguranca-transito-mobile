@@ -1,4 +1,4 @@
-import AbstractService from "../patterns/AbstractService"
+import AbstractService from "../Patterns/AbstractService"
 
 
 

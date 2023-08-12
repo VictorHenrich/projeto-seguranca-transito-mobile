@@ -1,8 +1,8 @@
 import { createContext, Context, useState, useEffect } from "react";
-import IUserPayload from "../../patterns/IUserPayload";
+import IUserPayload from "../../Patterns/IUserPayload";
 import GetOccurrencesService, { OccurrenceItemType } from "../../Services/GetOccurrencesService";
 import GetUserService, { UserGetPayload } from "../../Services/GetUserService";
-import IUserVehiclePayload from "../../patterns/IUserVehiclePayload";
+import IUserVehiclePayload from "../../Patterns/IUserVehiclePayload";
 import GetVehiclesService from "../../Services/GetVehiclesService";
 
 

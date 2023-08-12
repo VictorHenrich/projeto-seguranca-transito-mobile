@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AUTH_KEY } from "@env";
 
-import AbstractService from "../patterns/AbstractService";
+import AbstractService from "../Patterns/AbstractService";
 import { AxiosInstance, AxiosResponse } from 'axios';
 import ApiFactory from './Factories/ApiFactory';
 import TokenExpiredError from '../Exceptions/TokenExpiredError';

@@ -4,7 +4,7 @@ import Fontisto from "react-native-vector-icons/FontAwesome5";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import { OccurrenceItemType } from "../../../Services/GetOccurrencesService";
-import { OccurrenceStatus } from "../../../patterns/IOccurrencePayload";
+import { OccurrenceStatus } from "../../../Patterns/IOccurrencePayload";
 
 
 export default function OccurrenceItemComponent({
