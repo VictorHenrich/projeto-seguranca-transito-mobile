@@ -1,4 +1,6 @@
-import ApiFactory from "./Server/ApiFactory";
+import { AxiosInstance, AxiosResponse } from "axios";
+
+import ApiFactory from "./Factories/ApiFactory";
 import AbstractService from "../patterns/AbstractService";
 import UserCreateError from "../Exceptions/UserCreateError";
 
@@ -43,7 +45,7 @@ export interface CreateUserProps{
 
 
 export default class CreateUserService extends AbstractService<CreateUserProps>{
-    private static readonly urlUserCreation: string = "/usuario/registro";
+    private static readonly urlUserCreation: string = "/user/register";
 
     private getData(): any {
         return {
@@ -79,11 +81,11 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
 
     async execute(): Promise<void>{
         try{
-            const api = await ApiFactory.create();
+            const api: AxiosInstance = await ApiFactory.create();
 
             const data: any = this.getData()
 
-            const { data: { data: token } } = await api.post(
+            const { data: { data: token } }: AxiosResponse = await api.post(
                 CreateUserService.urlUserCreation,
                 data
             );
@@ -91,7 +93,7 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
             api.defaults.headers["Authorization"] = token;
 
         }catch(error){
-            const { response: { data : responseData } } = error;
+            const { response: { data : responseData } }: any = error;
             
             throw new UserCreateError(responseData.data);
         }

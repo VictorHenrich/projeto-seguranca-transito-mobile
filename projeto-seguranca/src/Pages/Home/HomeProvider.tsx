@@ -58,9 +58,10 @@ export default function HomeProvider(props: any){
     }
 
     async function loadUserPayload(): Promise<void>{
-        const user: UserGetPayload = await new GetUserService().execute();
-
-        const vehicles: IUserVehiclePayload[] = await new GetVehiclesService().execute();
+        const [ user, vehicles]: [UserGetPayload, IUserVehiclePayload[]] = await Promise.all([
+            new GetUserService().execute(),
+            new GetVehiclesService().execute()
+        ])
 
         setUserPayload({
             ...user,
@@ -68,10 +69,16 @@ export default function HomeProvider(props: any){
         });
     }
 
-    useEffect(()=>{
-        loadOccurrencesPayload()
+    async function loadFull(): Promise<void>{
+        await Promise.all([
+            loadOccurrencesPayload(),
+            loadUserPayload()
+        ]);
+    }
 
-        loadUserPayload();
+    useEffect(() => {
+        
+        loadFull();
     }, []);
 
     return (

@@ -1,8 +1,11 @@
-import ApiFactory from "./Server/ApiFactory";
-import AbstractService from "../patterns/AbstractService";
-import AuthenticationError from "../Exceptions/AuthenticationError";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AUTH_KEY } from "@env";
+import { AxiosInstance, AxiosResponse } from 'axios';
+
+import ApiFactory from "./Factories/ApiFactory";
+import AbstractService from "../patterns/AbstractService";
+import AuthenticationError from "../Exceptions/AuthenticationError";
+
 
 
 
@@ -17,10 +20,10 @@ export default class AuthorizationService extends AbstractService<AuthorizationP
     private static urlAuthentication: string = "/user/authentication";
 
     async execute(): Promise<void>{
-        const api = await ApiFactory.create();
+        const api: AxiosInstance = await ApiFactory.create();
 
         try{
-            const { data: { result: token }} = await api.post(
+            const { data: { result: token }}: AxiosResponse = await api.post(
                 AuthorizationService.urlAuthentication,
                 this.payload
             );
@@ -29,8 +32,6 @@ export default class AuthorizationService extends AbstractService<AuthorizationP
                 AUTH_KEY,
                 token
             );
-
-            api.defaults.headers["Authorization"] = token;
 
         }catch(error){
             throw new AuthenticationError();

@@ -1,6 +1,7 @@
+import { AxiosInstance, AxiosResponse } from "axios";
 import AbstractService from "../patterns/AbstractService";
 import IUserPayload from "../patterns/IUserPayload";
-import ApiFactory from "./Server/ApiFactory";
+import ApiFactory from "./Factories/ApiFactory";
 
 
 export type UserGetPayload = Omit<IUserPayload, "vehicles">;
@@ -29,9 +30,9 @@ export default class GetUserService extends AbstractService<void, UserGetPayload
     }
 
     async execute(): Promise<UserGetPayload> {
-        const api = await ApiFactory.create();
+        const api: AxiosInstance = await ApiFactory.create();
 
-        const { data: { result: userData }} = await api.get(GetUserService.URL);
+        const { data: { result: userData }}: AxiosResponse = await api.get(GetUserService.URL);
 
         return this.handleUserData(userData);
     }

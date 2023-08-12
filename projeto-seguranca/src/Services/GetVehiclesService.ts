@@ -1,6 +1,6 @@
 import AbstractService from "../patterns/AbstractService";
 import IUserVehiclePayload, { VehicleTypes } from "../patterns/IUserVehiclePayload";
-import ApiFactory from "./Server/ApiFactory";
+import ApiFactory from "./Factories/ApiFactory";
 
 
 export default class GetVehiclesService extends AbstractService<void, IUserVehiclePayload[]>{

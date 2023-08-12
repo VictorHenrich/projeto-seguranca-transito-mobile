@@ -1,6 +1,6 @@
-import { AxiosResponse } from "axios";
+import { AxiosInstance, AxiosResponse } from "axios";
 import AbstractService from "../patterns/AbstractService";
-import ApiFactory from "./Server/ApiFactory";
+import ApiFactory from "./Factories/ApiFactory";
 import GetOccurrencesError from "../Exceptions/GetOccurrencesError";
 import IOccurrencePayload from "../patterns/IOccurrencePayload";
 
@@ -36,7 +36,7 @@ export default class GetOccurrencesService extends AbstractService<void, Occurre
     }
 
     async execute(): Promise<OccurrenceItemType[]> {
-        const api = await ApiFactory.create();
+        const api: AxiosInstance = await ApiFactory.create();
         
         try{
             const { data: { result: occurrences }}: AxiosResponse = await api.get(GetOccurrencesService.URL);
