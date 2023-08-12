@@ -1,7 +1,7 @@
 import { Text, Link } from "native-base";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import BackgroundApp from "../../Components/BackgroundApp";
-import HeadingDefault from "../../Components/HeadingDefault";
 import ContainerDefault, {ContainerDefaultProps} from "../../Components/ContainerDefault";
 import ComponentPositionStep from "./ComponentPositionStep";
 import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
@@ -9,11 +9,6 @@ import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 export interface ComponentContainerRegisterProps extends Partial<ContainerDefaultProps>{
     heading: any,
-    navigation?: any,
-    LinkProps?: {
-        label: string,
-        onPress?: () => void
-    },
     AlertProps?: AlertDefaultProps
 }
 
@@ -21,7 +16,6 @@ export interface ComponentContainerRegisterProps extends Partial<ContainerDefaul
 
 export default function ComponentContainerRegister({
     heading,
-    navigation,
     AlertProps = {
         open: false,
         stateOpen: (open: boolean) => null,
@@ -29,11 +23,9 @@ export default function ComponentContainerRegister({
         text: "",
     },
     minHeightContainer = 1000,
-    LinkProps = {
-        label: "Voltar ao inicio"
-    },
     ...props
-}: ComponentContainerRegisterProps){;
+}: ComponentContainerRegisterProps){
+    const navigation: NavigationProp<any> = useNavigation<any>();
 
     return (
         <>
@@ -50,24 +42,19 @@ export default function ComponentContainerRegister({
 
                 {props.children}
 
-                {navigation && (
-                    <Link
-                        onTouchStart={() =>{
-                            if(LinkProps.onPress)
-                                LinkProps.onPress();
-
-                            else(navigation)
-                                navigation.navigate("RegisterPerson");
-                        }}
+                <Link
+                    onTouchStart={() =>{
+                        if(navigation.canGoBack())
+                            navigation.goBack();
+                    }}
+                >
+                    <Text
+                        color="primary" 
+                        fontWeight={700}
                     >
-                        <Text
-                            color="primary" 
-                            fontWeight={700}
-                        >
-                            {LinkProps.label}
-                        </Text>
-                    </Link>
-                )}
+                        Voltar ao início
+                    </Text>
+                </Link>
                 
             </ContainerDefault>
             <AlertDefault

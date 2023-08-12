@@ -39,14 +39,15 @@ export default function ComponentRegisterPerson(props: any){
                     width="full"
                     direction="row"
                     alignItems="center"
-                    justifyContent="space-between"
+                    justifyContent="center"
+                    space={10}
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-plus"/>}
                         size="xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="right">
+                    <HeadingDefault textAlign="left">
                         Vamos começar com as informações da sua {` `}
                         <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
                     </HeadingDefault>

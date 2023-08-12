@@ -54,7 +54,8 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                     width="full"
                     direction="row"
                     alignItems="center"
-                    justifyContent="space-between"
+                    justifyContent="center"
+                    space={10}
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-lock"/>}
