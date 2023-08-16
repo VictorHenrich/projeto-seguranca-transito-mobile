@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default class SocketFactory{
-    static async create(): Promise<Socket>{
+    async create(): Promise<Socket>{
         const authToken: string | void = await AsyncStorage.getItem(AUTH_KEY) || undefined;
 
         return io(
