@@ -89,7 +89,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                         <InputUser 
                             label="CPF"
                             InputDefaultProps={{
-                                value: user.document
+                                value: user.documentCpf
                             }}
                         />
                         <InputUser 
@@ -170,7 +170,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                         <InputUser 
                             label="NUMERO"
                             InputDefaultProps={{
-                                value: user.address.number
+                                value: `${user.address.number}`
                             }}
                         />
                     </Stack>
@@ -247,7 +247,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                     />
                     <ButtonDefault
                         backgroundColor="red"
-                        text="Logout"
+                        text="Sair"
                         rightIcon={
                             <Icon 
                                 as={<MaterialCommunityIcons name="logout"/>}

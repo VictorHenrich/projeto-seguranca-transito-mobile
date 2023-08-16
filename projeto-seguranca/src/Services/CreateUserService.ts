@@ -81,7 +81,9 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
 
     async execute(): Promise<void>{
         try{
-            const api: AxiosInstance = await ApiFactory.create();
+            const apiFactory: ApiFactory = new ApiFactory();
+
+            const api: AxiosInstance = await apiFactory.create();
 
             const data: any = this.getData()
 

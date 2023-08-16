@@ -38,7 +38,9 @@ export default class GetVehiclesService extends AbstractService<void, IUserVehic
     }
 
     async execute(): Promise<IUserVehiclePayload[]> {
-        const api = await ApiFactory.create();
+        const apiFactory: ApiFactory = new ApiFactory();
+
+        const api = await apiFactory.create();
 
         const { data: { result: vehicles } } = await api.get(GetVehiclesService.URL);
 

@@ -36,7 +36,9 @@ export default class GetOccurrencesService extends AbstractService<void, Occurre
     }
 
     async execute(): Promise<OccurrenceItemType[]> {
-        const api: AxiosInstance = await ApiFactory.create();
+        const apiFactory: ApiFactory = new ApiFactory();
+
+        const api: AxiosInstance = await apiFactory.create();
         
         try{
             const { data: { result: occurrences }}: AxiosResponse = await api.get(GetOccurrencesService.URL);

@@ -29,27 +29,22 @@ const screens: IStackScreen[] = [
 ];
 
 export default function App() {
-  const [userChecked, setUserChecked] = useState<boolean>(false);
+  const [userLogged, setUserLogged] = useState<boolean>(false);
 
   useEffect(() => {
     verifyAuthToken();
   }, []);
 
   async function verifyAuthToken(): Promise<void>{
-    try{
-      new AuthRefreshService().execute();
+    const userLogged: boolean = await new AuthRefreshService().execute();
 
-      setUserChecked(true);
-
-    }catch(error){
-      setUserChecked(false);
-    }
+    setUserLogged(userLogged);
   }
 
   return (
     <NativeBaseProvider theme={globalTheme}>
       <StackNavigation
-          initialRouteName={userChecked ? "HomePage" : "LoginPage"}
+          initialRouteName={userLogged ? "HomePage" : "LoginPage"}
           screens={screens}
       />
     </NativeBaseProvider>

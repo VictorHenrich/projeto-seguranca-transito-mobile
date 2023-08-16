@@ -11,6 +11,7 @@ import {
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Entypo from "react-native-vector-icons/Entypo";
 import { useState } from 'react';
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import InputDefault from '../../Components/InputDefault';
 import HeadingDefault from '../../Components/HeadingDefault';
@@ -23,6 +24,7 @@ import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 
 
 function LoginPage(props: any): React.ReactElement{
+    const navigation: NavigationProp<any> = useNavigation<any>();
 
     const [userAuthPayload, setUserAuthPayload] = useState<AuthorizationProps>({
         email: "",
@@ -40,7 +42,7 @@ function LoginPage(props: any): React.ReactElement{
         try{
             await new AuthorizationService(userAuthPayload).execute();
 
-            props.navigation.navigate("HomePage");
+            navigation.navigate("HomePage");
 
         }catch(error){
             setAlertState({
@@ -133,7 +135,7 @@ function LoginPage(props: any): React.ReactElement{
                 <ButtonDefault text="SIGN IN" onTouchStart={authenticate}/>
                 <Link
                     onTouchStart={() =>{
-                        props.navigation.navigate("RegisterPage")  
+                        navigation.navigate("RegisterPage")  
                     }}
                 >
                     <Text 

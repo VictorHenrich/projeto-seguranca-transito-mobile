@@ -31,13 +31,15 @@ export default function VideoDefault(props: VideoProps){
     }
 
     function handleVideoUpdateStatus(status: AVPlaybackStatus): void{
-        if(!status.isLoaded) return;
+        
 
-        if(status.playableDurationMillis && !videoDuration)
-            setVideoDuration(status.playableDurationMillis || 0);
+        // if(!status.isLoaded) return;
 
-        if(status.isPlaying)
-            setVideoPositionCurrent(status.positionMillis || 0);
+        // if(status.playableDurationMillis && !videoDuration)
+        //     setVideoDuration(status.playableDurationMillis || 0);
+
+        // if(status.isPlaying)
+        //     setVideoPositionCurrent(status.positionMillis || 0);
     }
 
     return (

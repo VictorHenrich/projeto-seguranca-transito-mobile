@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default class ApiFactory{
-    static async create(): Promise<AxiosInstance>{
+    async create(): Promise<AxiosInstance>{
         const authToken: string | void = await AsyncStorage.getItem(AUTH_KEY) || undefined;
 
         const headers: any = {

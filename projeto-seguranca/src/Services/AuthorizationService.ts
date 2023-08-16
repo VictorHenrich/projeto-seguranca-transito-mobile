@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AUTH_KEY } from "@env";
+import { AUTH_KEY, API_BASE_URL } from "@env";
 import { AxiosInstance, AxiosResponse } from 'axios';
 
 import ApiFactory from "./Factories/ApiFactory";
@@ -20,12 +20,19 @@ export default class AuthorizationService extends AbstractService<AuthorizationP
     private static urlAuthentication: string = "/user/authentication";
 
     async execute(): Promise<void>{
-        const api: AxiosInstance = await ApiFactory.create();
+        const apiFactory = new ApiFactory();
+
+        const api: AxiosInstance = await apiFactory.create();
+
+        const data = {
+            email: this.payload.email.trim(),
+            password: this.payload.password.trim()
+        };
 
         try{
             const { data: { result: token }}: AxiosResponse = await api.post(
                 AuthorizationService.urlAuthentication,
-                this.payload
+                data
             );
 
             await AsyncStorage.setItem(

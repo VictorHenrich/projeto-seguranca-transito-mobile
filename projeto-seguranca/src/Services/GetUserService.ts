@@ -30,7 +30,9 @@ export default class GetUserService extends AbstractService<void, UserGetPayload
     }
 
     async execute(): Promise<UserGetPayload> {
-        const api: AxiosInstance = await ApiFactory.create();
+        const apiFactory: ApiFactory = new ApiFactory();
+
+        const api: AxiosInstance = await apiFactory.create();
 
         const { data: { result: userData }}: AxiosResponse = await api.get(GetUserService.URL);
 

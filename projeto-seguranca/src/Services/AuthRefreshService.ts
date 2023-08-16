@@ -4,17 +4,18 @@ import { AUTH_KEY } from "@env";
 import AbstractService from "../Patterns/AbstractService";
 import { AxiosInstance, AxiosResponse } from 'axios';
 import ApiFactory from './Factories/ApiFactory';
-import TokenExpiredError from '../Exceptions/TokenExpiredError';
 
 
 
 
-export default class AuthRefreshService extends AbstractService<void, void>{
+export default class AuthRefreshService extends AbstractService<void, boolean>{
     private static readonly urlRefreshToken: string = "/user/authentication/refresh";
     
-    async execute(): Promise<void> {
+    async execute(): Promise<boolean> {
         try{
-            const api: AxiosInstance = await ApiFactory.create();
+            const apiFactory: ApiFactory = new ApiFactory();
+
+            const api: AxiosInstance = await apiFactory.create();
 
             const token: string | null = await AsyncStorage.getItem(AUTH_KEY);
 
@@ -23,9 +24,13 @@ export default class AuthRefreshService extends AbstractService<void, void>{
             const { data: { result }}: AxiosResponse = await api.post(AuthRefreshService.urlRefreshToken, data);
 
             await AsyncStorage.setItem(AUTH_KEY, result);
+
+            return true;
             
         }catch(error){
-            throw new TokenExpiredError();
+            await AsyncStorage.setItem(AUTH_KEY, "");
+
+            return false;
         }
     }
 

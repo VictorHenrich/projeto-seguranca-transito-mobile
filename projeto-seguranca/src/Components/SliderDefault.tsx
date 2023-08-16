@@ -1,9 +1,13 @@
+import { PropsWithRef } from "react";
 import { Slider, ISliderProps } from "native-base";
-import { useRef } from "react";
 
 
+export interface SliderDefaultProps extends ISliderProps, PropsWithRef<ISliderProps>{
 
-export default function SliderDefault(props: ISliderProps){
+}
+
+
+export default function SliderDefault(props: SliderDefaultProps){
     return (
         <Slider
             minValue={0}
