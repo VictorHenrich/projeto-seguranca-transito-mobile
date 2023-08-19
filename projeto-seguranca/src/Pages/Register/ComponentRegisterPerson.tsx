@@ -1,7 +1,8 @@
 import {useContext} from "react";
 import {
     Stack,
-    Icon
+    Icon,
+    Box
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -38,28 +39,23 @@ export default function ComponentRegisterPerson(props: any){
                 <Stack
                     width="full"
                     direction="row"
+                    space={10}
                     alignItems="center"
                     justifyContent="center"
-                    space={10}
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-plus"/>}
-                        size="xl"
+                        size="4xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="left">
-                        Vamos começar com as informações da sua {` `}
-                        <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
-                    </HeadingDefault>
+                    <Box maxWidth="70%">
+                        <HeadingDefault textAlign="left">
+                            Vamos começar com as informações da sua {` `}
+                            <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
+                        </HeadingDefault>
+                    </Box>
                 </Stack>
             )}
-            navigation={props.navigation}
-            LinkProps={{
-                label: "Voltar para o login",
-                onPress() {
-                    props.navigation.pop();
-                },
-            }}
         >
             <Stack 
                 direction="column" 

@@ -62,7 +62,7 @@ function LoginPage(props: any): React.ReactElement{
                 display="flex"
                 padding={5}
                 flexDirection="column"
-                justifyContent="space-evenly"
+                justifyContent="space-between"
                 minHeightContainer={900}
 
             >
@@ -111,25 +111,27 @@ function LoginPage(props: any): React.ReactElement{
                                 })
                             }}
                         />
-                        <InputDefault 
-                            placeholder='Senha'
-                            type="password"
-                            icon={<Fontisto name="locked"/>}
-                            onChangeText={(text: string) => {
-                                
-                                setUserAuthPayload({
-                                    ...userAuthPayload,
-                                    password: text
-                                })
-                            }}
-                        />
-                        <Text
-                            color="primary"
-                            textAlign="right"
-                            fontWeight={700}
-                        >
-                            Esqueci minha senha
-                        </Text>
+                        <Stack direction="column" space={2}>
+                            <InputDefault 
+                                placeholder='Senha'
+                                type="password"
+                                icon={<Fontisto name="locked"/>}
+                                onChangeText={(text: string) => {
+                                    
+                                    setUserAuthPayload({
+                                        ...userAuthPayload,
+                                        password: text
+                                    })
+                                }}
+                            />
+                            <Text
+                                color="primary"
+                                textAlign="right"
+                                fontWeight={700}
+                            >
+                                Esqueci minha senha
+                            </Text>
+                        </Stack>
                     </Stack>
                 </Box>
                 <ButtonDefault text="SIGN IN" onTouchStart={authenticate}/>

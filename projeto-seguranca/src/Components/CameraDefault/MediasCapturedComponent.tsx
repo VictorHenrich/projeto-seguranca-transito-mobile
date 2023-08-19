@@ -116,17 +116,19 @@ function MediasCapturedComponent(props: any): ReactElement{
                     )
                 }
             </Box>
-            <ContainerDefault minHeight={500}>
+            <ContainerDefault
+                height="80%"
+            >
                 <Stack
                     direction="row"
                     flexWrap="wrap"
                     width="full"
                     height="full"
-                    space={1}
                 >
                     <Center
-                        width="48%"
+                        width="45%"
                         height="30%"
+                        margin={1}
                         backgroundColor="#000000"
                         onTouchStart={()=> {
                             navigation.navigate("AccessCamera");
@@ -148,8 +150,9 @@ function MediasCapturedComponent(props: any): ReactElement{
                             <Center
                                 position="relative"
                                 key={index}
-                                width="48%"
+                                width="45%"
                                 height="30%"
+                                margin={1}
                                 onTouchEnd={()=> handleClickMedia(attachment, selected, index)}
                             >
                                 {

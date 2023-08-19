@@ -2,7 +2,7 @@ import {useState, useContext, memo, useCallback} from "react";
 import { useNavigation, NavigationProp, useFocusEffect, useRoute, RouteProp } from '@react-navigation/native';
 
 import { Center, IconButton, Icon, Stack, Image } from 'native-base';
-import { Camera, CameraType, CameraCapturedPicture, FlashMode } from 'expo-camera';
+import { Camera, CameraType, CameraCapturedPicture, FlashMode, CameraPictureOptions } from 'expo-camera';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -80,6 +80,7 @@ function AccessCameraComponent(props: any){
                     : null
             }
             <Camera
+                pictureSize={""}
                 type={cameraState.cameraType}
                 style={{
                     height: "100%",

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import { Stack, Icon } from "native-base";
+import { Stack, Icon, Box } from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -59,18 +59,19 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                 >
                     <Icon 
                         as={<FontAwesome5 name="user-lock"/>}
-                        size="xl"
+                        size="4xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="left">
-                        Finalizando agora com seus {` `}
-                        <HeadingDefault color="primary">
-                            Dados de Acesso
+                    <Box maxWidth="70%">
+                        <HeadingDefault textAlign="left">
+                            Finalizando agora com seus {` `}
+                            <HeadingDefault color="primary">
+                                Dados de Acesso
+                            </HeadingDefault>
                         </HeadingDefault>
-                    </HeadingDefault>
+                    </Box>
                 </Stack>
             )}
-            navigation={props.navigation}
             AlertProps={{
                 ...alertState,
                 stateOpen: (open: boolean) => {

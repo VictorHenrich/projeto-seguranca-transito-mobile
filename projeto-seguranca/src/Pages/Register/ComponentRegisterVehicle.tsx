@@ -2,6 +2,7 @@ import {useContext} from "react";
 import {
     Stack,
     Icon,
+    Box
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -63,15 +64,17 @@ export default function ComponentRegisterVehicle(props: any){
                 >
                     <Icon 
                         as={<FontAwesome5 name="car"/>}
-                        size="xl"
+                        size="4xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="left">
-                        Vamos registrar seu {` `}
-                        <HeadingDefault color="primary">
-                            primeiro veículo
+                    <Box maxWidth="70%">
+                        <HeadingDefault textAlign="left">
+                            Vamos registrar seu {` `}
+                            <HeadingDefault color="primary">
+                                primeiro veículo
+                            </HeadingDefault>
                         </HeadingDefault>
-                    </HeadingDefault>
+                    </Box>
                 </Stack>
             )}
             minHeightContainer={1200}

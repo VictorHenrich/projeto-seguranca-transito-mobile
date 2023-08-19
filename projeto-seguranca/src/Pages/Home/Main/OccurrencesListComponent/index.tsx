@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { FlatList } from "native-base";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
 import OccurrenceItemComponent from "./OccurrenceItemComponent";
@@ -16,26 +15,24 @@ function OccurrenceListComponent(props: any): React.ReactElement{
     return (
         <ContainerDefault
             backgroundColor="secondary"
+            display="flex"
+            justifyContent="flex-start"
+            alignItems="center"
         >
-            <FlatList
-                width="full"
-                padding={5}
-                data={occurrences}
-                renderItem={(itemData) => {
-                    return (
-                        <OccurrenceItemComponent
-                            description={itemData.item.description}
-                            lat={itemData.item.lat}
-                            lon={itemData.item.lon}
-                            address={itemData.item.address}
-                            created={itemData.item.created}
-                            status={itemData.item.status}
-                            vehicle={itemData.item.vehicle}
-                            key={itemData.index}
+            {
+                occurrences.map((occurrence, index) => (
+                    <OccurrenceItemComponent
+                            description={occurrence.description}
+                            lat={occurrence.lat}
+                            lon={occurrence.lon}
+                            address={occurrence.address}
+                            created={occurrence.created}
+                            status={occurrence.status}
+                            vehicle={occurrence.vehicle}
+                            key={index}
                         />
-                    );
-                }}
-            />
+                ))
+            }
         </ContainerDefault>
     )
 }

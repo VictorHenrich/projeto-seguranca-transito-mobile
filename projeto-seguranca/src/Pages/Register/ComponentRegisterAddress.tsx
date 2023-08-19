@@ -1,7 +1,8 @@
 import React, {useContext} from "react";
 import {
     Stack,
-    Icon
+    Icon,
+    Box
 } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,10 +11,10 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
-import SelectDefault,  { SelectDefaultItensProps } from "../../Components/SelectDefault";
+import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
-import { UserAddressPayload } from "../../Services/CreateUserService";
+import IUserAddressPayload from "../../Patterns/IUserAddressPayload";
 import HeadingDefault from "../../Components/HeadingDefault";
 
 
@@ -33,7 +34,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
     } = useContext<IContextRegister>(ContextRegister);
 
 
-    function changeAddress(addressProps: Partial<UserAddressPayload>){
+    function changeAddress(addressProps: Partial<IUserAddressPayload>){
         setUserPayload({
             ...userPayload,
             address: {
@@ -55,16 +56,17 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                 >
                     <Icon 
                         as={<FontAwesome5 name="map-marked-alt"/>}
-                        size="xl"
+                        size="4xl"
                         color="primary"
                     />
-                    <HeadingDefault textAlign="left">
-                        Agora precisamos dos dados de seu {` `}
-                        <HeadingDefault color="primary">Endereço Atual</HeadingDefault>
-                    </HeadingDefault>
+                    <Box maxWidth="70%">
+                        <HeadingDefault textAlign="left">
+                            Agora precisamos dos dados de seu {` `}
+                            <HeadingDefault color="primary">Endereço Atual</HeadingDefault>
+                        </HeadingDefault>
+                    </Box>
                 </Stack>
             )}
-            navigation={props.navigation}
             minHeightContainer={1200}
         >
             <Stack 

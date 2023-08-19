@@ -14,7 +14,7 @@ export default class ApiFactory{
         }
 
         return Axios.create({
-            baseURL: API_BASE_URL,
+            baseURL: "https://0870-2804-7c0-10b0-e036-2d24-9628-3105-b058.ngrok-free.app",
             headers: headers
         });
     }

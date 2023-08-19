@@ -28,7 +28,7 @@ export default function OccurrenceItemComponent({
             borderColor="#595959"
             borderRadius={10}
             padding={2}
-            onTouchStart={() => setOpenCard(!openCard)}
+            onTouchEndCapture={() => setOpenCard(!openCard)}
         >
             <Stack
                 width="full"

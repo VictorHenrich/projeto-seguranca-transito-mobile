@@ -17,7 +17,17 @@ export default function ContainerDefault({
 
     return (
         <ScrollView>
-            <Center {...props} minHeight={minHeightContainer} boxSize="full"/>
+            <Center
+                backgroundColor="secondary"
+                {...props}
+                width="full"
+                height="full"
+                paddingTop={20}
+                paddingBottom={10}
+                paddingLeft={5}
+                paddingRight={5}
+                minHeight={minHeightContainer}
+            />
         </ScrollView>
     )
 }

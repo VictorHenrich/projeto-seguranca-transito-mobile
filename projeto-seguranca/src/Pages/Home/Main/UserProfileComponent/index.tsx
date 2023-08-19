@@ -1,5 +1,5 @@
 import React, {useContext, Context} from "react";
-import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-base";
+import { Stack, Avatar, Heading, Text, Divider, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -208,14 +208,11 @@ function UserProfileComponent(props: any): React.ReactElement{
                             borderRadius={5}
                         />
                     </Stack>
-                    <FlatList 
-                        data={user.vehicles}
-                        renderItem={(itemData) => {
-                            return (
-                                <VehicleItemComponent {...itemData.item} key={itemData.index}/>
-                            )
-                        }}
-                    />
+                    {
+                        user.vehicles.map((vehicle, index) => (
+                            <VehicleItemComponent {...vehicle} key={index}/>
+                        ))
+                    }
                 </Stack>
 
                 <Stack 
