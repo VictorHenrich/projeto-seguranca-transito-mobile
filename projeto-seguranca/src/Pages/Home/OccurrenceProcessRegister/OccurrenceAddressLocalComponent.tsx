@@ -2,8 +2,8 @@ import React from "react";
 import {Image, Stack, Icon} from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import ButtonDefault from "../../../../Components/ButtonDefault";
-import HeadingDefault from "../../../../Components/HeadingDefault";
+import ButtonDefault from "../../../Components/ButtonDefault";
+import HeadingDefault from "../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 
 
@@ -26,7 +26,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
                 </HeadingDefault>
 
                 <Image 
-                    source={require("../../../../../assets/map.png")}
+                    source={require("../../../../assets/map.png")}
                     width={500}
                     height={200}
                     alt="map"

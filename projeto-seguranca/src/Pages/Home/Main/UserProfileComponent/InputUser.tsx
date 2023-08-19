@@ -1,7 +1,7 @@
 import { FormControl, ITextProps, IFormControlProps, Text } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import InputDefault, {InputDefaultProps} from "../../../Components/InputDefault";
+import InputDefault, {InputDefaultProps} from "../../../../Components/InputDefault";
 
 
 

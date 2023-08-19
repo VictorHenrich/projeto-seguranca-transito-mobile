@@ -2,8 +2,8 @@ import {useState} from "react";
 import { Text, PresenceTransition, Stack, Icon} from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
-import ButtonDefault from "../../../Components/ButtonDefault";
-import IUserVehiclePayload from "../../../Patterns/IUserVehiclePayload";
+import ButtonDefault from "../../../../Components/ButtonDefault";
+import IUserVehiclePayload from "../../../../Patterns/IUserVehiclePayload";
 
 
 
@@ -33,7 +33,7 @@ export default function VehicleItemComponent({
             borderColor="#595959"
             borderRadius={10}
             padding={5}
-            onTouchStart={() => setOpenCard(!openCard)}
+            onTouchEndCapture={() => setOpenCard(!openCard)}
         >
             <Stack
                 width="full"

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, Stack } from "native-base";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
-import HeadingDefault from "../../../../Components/HeadingDefault";
+import HeadingDefault from "../../../Components/HeadingDefault";
 
 
 function OccurrenceVehicleComponent(props: any): React.ReactElement{
@@ -23,7 +23,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                 </HeadingDefault>
 
                 <Image 
-                    source={require("../../../../../assets/car.png")}
+                    source={require("../../../../assets/car.png")}
                     width={500}
                     height={300}
                     alt="map"

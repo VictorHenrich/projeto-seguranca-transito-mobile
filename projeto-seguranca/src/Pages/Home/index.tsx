@@ -1,46 +1,30 @@
 import React from "react";
-
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-
-import HomeNavigation, { ScreenNavigationProps } from "./HomeNavigation";
-import OccurrenceListComponent from "./OccurrencesListComponent";
-import OccurrenceRegisterComponent from "./OccurrenceRegisterComponent";
-import UserProfileComponent from "./UserProfileComponent";
-import HomeProvider from "./HomeProvider";
+import StackNavigation, { IStackScreen } from "../../Components/StackNavigation";
+import MainPage from "./Main";
+import OccurrenceProcessRegisterPage from "./OccurrenceProcessRegister";
 
 
+function HomePage(props: any): React.ReactElement{
+    const screens: IStackScreen[] = [
+        {
+            component: MainPage,
+            name: "Main"
+        },
+        {
+            component: OccurrenceProcessRegisterPage,
+            name: "OccurrenceProcessRegister"
+        },
+    ]
 
-
-const screens: ScreenNavigationProps[] = [
-    {
-        component: OccurrenceListComponent,
-        icon: <FontAwesome5 name="clipboard-list"/>,
-        name: "OccurrencesList",
-        title: "Ocorrências"
-    },
-    {
-        component: OccurrenceRegisterComponent,
-        icon: <MaterialIcons name="add-circle"/>,
-        name: "OccurrenceRegister",
-        title: "Criar Ocorrência"
-    },
-    {
-        component: UserProfileComponent,
-        icon: <FontAwesome5 name="address-card"/>,
-        name: "UserProfile",
-        title: "Conta"
-    }
-]
-
-
-function HomePage(props: any){
     return (
-        <HomeProvider>
-            <HomeNavigation screens={screens}/>
-        </HomeProvider>
-    )
+        <StackNavigation 
+            screens={screens}
+            initialRouteName="Main"
+            navigationContainerProps={{
+                independent: true
+            }}
+        />
+    );
 }
-
 
 export default React.memo(HomePage);

@@ -3,9 +3,9 @@ import { Icon, Image, Stack } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from 'expo-image-picker';
 
-import HeadingDefault from "../../../../Components/HeadingDefault";
+import HeadingDefault from "../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
-import ButtonDefault from "../../../../Components/ButtonDefault";
+import ButtonDefault from "../../../Components/ButtonDefault";
 
 
 
@@ -37,7 +37,7 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
                     {" "} para ilustrar e informar melhor.
                 </HeadingDefault>
                 <Image 
-                    source={require("../../../../../assets/photo.png")}
+                    source={require("../../../../assets/photo.png")}
                     alt="photo"
                     width={200}
                     height={200}

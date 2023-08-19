@@ -1,13 +1,13 @@
 import { createContext, Context, useState, useEffect } from "react";
-import IUserPayload from "../../Patterns/IUserPayload";
-import GetOccurrencesService, { OccurrenceItemType } from "../../Services/GetOccurrencesService";
-import GetUserService, { UserGetPayload } from "../../Services/GetUserService";
-import IUserVehiclePayload from "../../Patterns/IUserVehiclePayload";
-import GetVehiclesService from "../../Services/GetVehiclesService";
+import IUserPayload from "../../../Patterns/IUserPayload";
+import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/GetOccurrencesService";
+import GetUserService, { UserGetPayload } from "../../../Services/GetUserService";
+import IUserVehiclePayload from "../../../Patterns/IUserVehiclePayload";
+import GetVehiclesService from "../../../Services/GetVehiclesService";
 
 
 
-export interface IContextHome{
+export interface IContextMain{
     user: IUserPayload;
     occurrences: OccurrenceItemType[];
     setUser: (user: IUserPayload) => void;
@@ -17,7 +17,7 @@ export interface IContextHome{
 }
 
 
-const initialValues: IContextHome = {
+const initialValues: IContextMain = {
     user: {
         name: "",
         email: "",
@@ -43,9 +43,9 @@ const initialValues: IContextHome = {
 }
 
 
-const ContextHome: Context<IContextHome> = createContext(initialValues);
+const ContextHome: Context<IContextMain> = createContext(initialValues);
 
-export default function HomeProvider(props: any){
+export default function MainProvider(props: any){
     const [userPayload, setUserPayload] = useState<IUserPayload>(initialValues.user);
 
     const [occurrencesPayload, setOccurrencesPayload] = useState<OccurrenceItemType[]>(initialValues.occurrences);

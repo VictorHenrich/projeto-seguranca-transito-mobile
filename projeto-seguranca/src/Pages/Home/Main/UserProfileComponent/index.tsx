@@ -3,18 +3,18 @@ import { Stack, Avatar, Heading, Text, Divider, Icon, FlatList } from "native-ba
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import ContainerDefault from "../../../Components/ContainerDefault";
+import ContainerDefault from "../../../../Components/ContainerDefault";
 import InputUser from "./InputUser";
 import VehicleItemComponent from "./VehicleItemComponent";
-import ButtonDefault from "../../../Components/ButtonDefault";
-import { ContextHome, IContextHome } from "../HomeProvider";
+import ButtonDefault from "../../../../Components/ButtonDefault";
+import { ContextHome, IContextMain } from "../MainProvider";
 
 
 
 function UserProfileComponent(props: any): React.ReactElement{
     const {
         user
-    } =  useContext<IContextHome>(ContextHome);
+    } =  useContext<IContextMain>(ContextHome);
 
     return (
         <ContainerDefault 

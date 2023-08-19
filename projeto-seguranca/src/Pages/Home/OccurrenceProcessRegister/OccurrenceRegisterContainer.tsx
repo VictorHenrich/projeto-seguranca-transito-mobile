@@ -2,15 +2,15 @@ import React from "react";
 import { Stack, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import BackgroundApp from "../../../../Components/BackgroundApp";
-import ContainerDefault, {ContainerDefaultProps} from "../../../../Components/ContainerDefault";
-import ButtonDefault from "../../../../Components/ButtonDefault";
+import BackgroundApp from "../../../Components/BackgroundApp";
+import ContainerDefault, {ContainerDefaultProps} from "../../../Components/ContainerDefault";
+import ButtonDefault from "../../../Components/ButtonDefault";
 
 
 function OccurrenceRegisterContainer(props: ContainerDefaultProps): React.ReactElement{
     return (
         <>
-            <BackgroundApp source={require("../../../../../assets/background_occurrence.png")}/>
+            <BackgroundApp source={require("../../../../assets/background_occurrence.png")}/>
             <ContainerDefault 
                 {...props}
                 justifyContent="space-between"

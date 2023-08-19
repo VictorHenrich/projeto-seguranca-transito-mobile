@@ -5,7 +5,6 @@ import globalTheme from './src/Themes/GlobalTheme';
 import LoginPage from './src/Pages/Login';
 import RegisterPage from './src/Pages/Register';
 import StackNavigation, {IStackScreen} from './src/Components/StackNavigation';
-import StartProcessRegisterOccurrenceComponent from './src/Pages/Home/OccurrenceRegisterComponent/Start';
 import AuthRefreshService from "./src/Services/AuthRefreshService";
 
 
@@ -22,10 +21,6 @@ const screens: IStackScreen[] = [
     component: HomePage,
     name: "HomePage"
   },
-  {
-    component: StartProcessRegisterOccurrenceComponent,
-    name: "OccurrenceRegister"
-  }
 ];
 
 export default function App() {

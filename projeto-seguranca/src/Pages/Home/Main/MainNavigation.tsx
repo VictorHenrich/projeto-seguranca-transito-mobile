@@ -10,18 +10,12 @@ export interface ScreenNavigationProps{
 }
 
 
-export interface HomeNavigationProps{
+export interface MainNavigationProps{
     screens: ScreenNavigationProps[]
 }
 
-export interface HomeNavigationStyle{
-    colorPrimary: string,
-    colorSecondary: string
-}
 
-
-
-export default function HomeNavigation({ screens, ...props }: HomeNavigationProps){
+export default function MainNavigation({ screens, ...props }: MainNavigationProps){
     const { colors }: ITheme = useTheme();
 
     const Tab = createBottomTabNavigator();

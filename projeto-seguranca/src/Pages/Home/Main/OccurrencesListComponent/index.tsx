@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { FlatList } from "native-base";
 
-import ContainerDefault from "../../../Components/ContainerDefault"
+import ContainerDefault from "../../../../Components/ContainerDefault";
 import OccurrenceItemComponent from "./OccurrenceItemComponent";
-import { ContextHome, IContextHome } from "../HomeProvider";
+import { ContextHome, IContextMain } from "../MainProvider";
 
 
 
@@ -11,7 +11,7 @@ function OccurrenceListComponent(props: any): React.ReactElement{
 
     const {
         occurrences
-    } = useContext<IContextHome>(ContextHome);
+    } = useContext<IContextMain>(ContextHome);
 
     return (
         <ContainerDefault
