@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, Stack, Text, Icon, FlatList } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import IUserVehiclePayload, { VehicleTypes } from "../../../Patterns/IUserVehiclePayload";
@@ -10,7 +11,10 @@ import ButtonDefault from "../../../Components/ButtonDefault";
 
 function OccurrenceVehicleComponent(props: any): React.ReactElement{
 
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
     const [vehicles, setVehicles] = useState<IUserVehiclePayload[]>([]);
+
     const [vehicleSelected, setVehicleSelected] = useState<IUserVehiclePayload | null>(null);
 
 
@@ -128,6 +132,9 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                                     as={<FontAwesome5 name="arrow-right" />}
                                 />
                             }
+                            onTouchStart={()=>{
+                                navigation.navigate("OccurrenceAccessCamera");
+                            }}
                         />
                     )
                     : null
