@@ -1,8 +1,7 @@
-import {useState, useContext, memo, useCallback} from "react";
-import { useNavigation, NavigationProp, useFocusEffect, useRoute, RouteProp } from '@react-navigation/native';
-
+import {useState, useContext, memo, useCallback} from "react"
+import { useNavigation, NavigationProp, useFocusEffect} from '@react-navigation/native';
 import { Center, IconButton, Icon, Stack, Image } from 'native-base';
-import { Camera, CameraType, CameraCapturedPicture, FlashMode, CameraPictureOptions } from 'expo-camera';
+import { Camera, CameraType, CameraCapturedPicture, FlashMode } from 'expo-camera';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -67,20 +66,11 @@ function AccessCameraComponent(props: any){
 
 
     return (
-        <Stack width="full" height="full" space={10} direction="column">
-            {
-                medias.length
-                    ? (
-                        <Center width="full">
-                            <ButtonDefault 
-                                text="Próximo"
-                            />
-                        </Center>
-                    )
-                    : null
-            }
+        <Center 
+            width="full" 
+            height="full"
+        >
             <Camera
-                pictureSize={""}
                 type={cameraState.cameraType}
                 style={{
                     height: "100%",
@@ -93,18 +83,43 @@ function AccessCameraComponent(props: any){
                 }}
                 flashMode={cameraState.flashActivated ? FlashMode.on : FlashMode.off}
             >
+                {
+                    medias.length > 0
+                        ? (
+                            <Center 
+                                width="full"
+                                position="absolute"
+                                top={10}
+                                padding={10}
+                            >
+                                <ButtonDefault 
+                                    text="Continuar"
+                                    rightIcon={
+                                        <Icon 
+                                            as={<FontAwesome5 name="arrow-right" />}
+                                        />
+                                    }
+                                    onPress={()=> {
+                                        navigation.navigate("OccurrenceVehicle");
+                                    }}
+                                />
+                            </Center>
+                        )
+                        : null
+                }
                 <Stack 
                     width="full"
-                    height="full"
                     justifyContent="flex-end"
-                    paddingBottom={10}
-                    space={20}
+                    position="absolute"
+                    bottom={10}
+                    space={10}
                     padding={5}
                 >
                     <Stack
                         width="full"
                         direction="row"
                         justifyContent="space-between"
+                        alignItems="center"
                     >
                         {medias.length ? (
                             <Center
@@ -211,7 +226,7 @@ function AccessCameraComponent(props: any){
                     </Stack>
                 </Stack>
             </Camera>
-        </Stack>
+        </Center>
     )
 }
 

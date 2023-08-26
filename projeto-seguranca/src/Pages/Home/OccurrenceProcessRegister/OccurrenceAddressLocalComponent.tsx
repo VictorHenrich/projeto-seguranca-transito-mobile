@@ -1,6 +1,7 @@
 import React from "react";
 import {Image, Stack, Icon} from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import ButtonDefault from "../../../Components/ButtonDefault";
 import HeadingDefault from "../../../Components/HeadingDefault";
@@ -8,6 +9,8 @@ import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 
 
 function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
+
+    const navigation: NavigationProp<any> = useNavigation<any>();
 
     return (
         <OccurrenceRegisterContainer>
@@ -54,7 +57,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
                         fontSize: 18
                     }}
                     onPress={() =>{
-                        props.navigation.navigate("OccurrenceAccessCamera");
+                        navigation.navigate("OccurrenceVehicle");
                     }}
                 />
                 <ButtonDefault 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Icon } from "native-base";
+import { Center, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import BackgroundApp from "../../../Components/BackgroundApp";
@@ -11,7 +11,7 @@ function OccurrenceRegisterContainer(props: ContainerDefaultProps): React.ReactE
     return (
         <>
             <BackgroundApp source={require("../../../../assets/background_occurrence.png")}/>
-            <ContainerDefault 
+            <Center 
                 {...props}
                 justifyContent="space-between"
                 paddingTop={20}
@@ -37,7 +37,7 @@ function OccurrenceRegisterContainer(props: ContainerDefaultProps): React.ReactE
                         }
                     />
                 
-            </ContainerDefault>
+            </Center>
         </>
     )
 }
