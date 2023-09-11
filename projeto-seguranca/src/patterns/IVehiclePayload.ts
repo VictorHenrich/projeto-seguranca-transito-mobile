@@ -6,7 +6,7 @@ export enum VehicleTypes{
 }
 
 
-export default interface IUserVehiclePayload{
+export default interface IVehiclePayload{
     plate: string,
     renavam: string,
     vehicleType: VehicleTypes,

@@ -45,7 +45,7 @@ export interface CreateUserProps{
 
 
 export default class CreateUserService extends AbstractService<CreateUserProps>{
-    private static readonly urlUserCreation: string = "/user/register";
+    private readonly urlUserCreation: string = "/user/register";
 
     private getData(): any {
         return {
@@ -88,7 +88,7 @@ export default class CreateUserService extends AbstractService<CreateUserProps>{
             const data: any = this.getData()
 
             const { data: { data: token } }: AxiosResponse = await api.post(
-                CreateUserService.urlUserCreation,
+                this.urlUserCreation,
                 data
             );
 

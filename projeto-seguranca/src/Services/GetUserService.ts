@@ -8,7 +8,7 @@ export type UserGetPayload = Omit<IUserPayload, "vehicles">;
 
 
 export default class GetUserService extends AbstractService<void, UserGetPayload>{
-    static readonly URL: string = "/user/query";
+    private readonly URL: string = "/user/query";
 
     handleUserData(userData: any): UserGetPayload{
         return {
@@ -24,7 +24,8 @@ export default class GetUserService extends AbstractService<void, UserGetPayload
                 city: userData.address_city,
                 district: userData.address_district,
                 street: userData.address_street,
-                number: userData.address_number
+                number: userData.address_number,
+                zipcode: userData.address_zipcode
             }
         }
     }
@@ -34,7 +35,7 @@ export default class GetUserService extends AbstractService<void, UserGetPayload
 
         const api: AxiosInstance = await apiFactory.create();
 
-        const { data: { result: userData }}: AxiosResponse = await api.get(GetUserService.URL);
+        const { data: { result: userData }}: AxiosResponse = await api.get(this.URL);
 
         return this.handleUserData(userData);
     }

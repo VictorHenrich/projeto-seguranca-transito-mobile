@@ -1,5 +1,5 @@
 import { ReactElement, useContext, useState, useEffect, memo } from "react";
-import { Center, Icon, Stack, Box} from "native-base";
+import { Center, Icon, Stack, Box, FlatList} from "native-base";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -116,31 +116,34 @@ function MediasCapturedComponent(props: any): ReactElement{
                     )
                 }
             </Box>
-            <ContainerDefault
+            <Center
                 height="80%"
+                width="full"
+                padding={5}
             >
-                <Stack
-                    direction="row"
-                    flexWrap="wrap"
+                <Center
                     width="full"
-                    height="full"
+                    height={200}
+                    margin={1}
+                    backgroundColor="#000000"
+                    onTouchStart={()=> {
+                        navigation.navigate("AccessCamera");
+                    }}
                 >
-                    <Center
-                        width="45%"
-                        height="30%"
-                        margin={1}
-                        backgroundColor="#000000"
-                        onTouchStart={()=> {
-                            navigation.navigate("AccessCamera");
-                        }}
-                    >
-                        <Icon 
-                            as={<FontAwesome5 name="camera"/>}
-                            size="xl"
-                            color="primary"
-                        />
-                    </Center>
-                    {medias.map((attachment, index) => {
+                    <Icon 
+                        as={<FontAwesome5 name="camera"/>}
+                        size="xl"
+                        color="primary"
+                    />
+                </Center>
+                <FlatList
+                    width="full"
+                    data={medias}
+                    renderItem={(media) => {
+                        const attachment: MediaItem = media.item;
+
+                        const index: number = media.index;
+
                         let selected: boolean = false;
 
                         if(indexMediasSelected.length)
@@ -150,8 +153,8 @@ function MediasCapturedComponent(props: any): ReactElement{
                             <Center
                                 position="relative"
                                 key={index}
-                                width="45%"
-                                height="30%"
+                                width="100%"
+                                height={200}
                                 margin={1}
                                 onTouchEnd={()=> handleClickMedia(attachment, selected, index)}
                             >
@@ -182,9 +185,9 @@ function MediasCapturedComponent(props: any): ReactElement{
                                 />
                             </Center>
                         );
-                    })}
-                </Stack>
-            </ContainerDefault>
+                    }}
+                />
+            </Center>
         </Stack>
     );
 }

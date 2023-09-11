@@ -1,11 +1,13 @@
 import { memo } from "react";
 import StackNavigation, { IStackScreen } from "../StackNavigation";
 import AccessCameraComponent from "./AccessCameraComponent";
-import CameraProvider from "./CameraProvider";
+import CameraProvider, { CameraProviderProps } from "./CameraProvider";
 import MediaViewComponent from "./MediaViewComponent";
 import MediasCapturedComponent from "./MediasCapturedComponent";
 
-function CameraDefault(props: any){
+
+
+function CameraDefault(props: CameraProviderProps){
 
     const componentes: IStackScreen[] = [
         {
@@ -23,7 +25,7 @@ function CameraDefault(props: any){
     ]
 
     return (
-        <CameraProvider>
+        <CameraProvider {...props}>
             <StackNavigation
                 initialRouteName="AccessCamera" 
                 screens={componentes}

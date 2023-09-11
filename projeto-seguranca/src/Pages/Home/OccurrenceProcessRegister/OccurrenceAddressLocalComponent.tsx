@@ -38,7 +38,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
 
             <Stack
                 width="full"
-                space={10}
+                space={5}
                 direction="column"
                 alignItems="center"
             >

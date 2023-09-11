@@ -17,7 +17,7 @@ export interface AuthorizationProps{
 
 
 export default class AuthorizationService extends AbstractService<AuthorizationProps>{
-    private static urlAuthentication: string = "/user/authentication";
+    private urlAuthentication: string = "/user/authentication";
 
     async execute(): Promise<void>{
         const apiFactory = new ApiFactory();
@@ -31,7 +31,7 @@ export default class AuthorizationService extends AbstractService<AuthorizationP
 
         try{
             const { data: { result: token }}: AxiosResponse = await api.post(
-                AuthorizationService.urlAuthentication,
+                this.urlAuthentication,
                 data
             );
 

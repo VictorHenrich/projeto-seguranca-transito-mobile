@@ -18,7 +18,6 @@ export default function ContainerDefault({
     return (
         <ScrollView>
             <Center
-                backgroundColor="secondary"
                 {...props}
                 width="full"
                 height="full"

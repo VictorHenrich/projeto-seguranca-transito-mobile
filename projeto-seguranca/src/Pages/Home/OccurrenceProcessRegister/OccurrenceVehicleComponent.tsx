@@ -4,7 +4,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import HeadingDefault from "../../../Components/HeadingDefault";
-import IUserVehiclePayload, { VehicleTypes } from "../../../Patterns/IUserVehiclePayload";
+import IVehiclePayload, { VehicleTypes } from "../../../Patterns/IVehiclePayload";
 import GetVehiclesService from "../../../Services/GetVehiclesService";
 import ButtonDefault from "../../../Components/ButtonDefault";
 
@@ -13,13 +13,13 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
 
     const navigation: NavigationProp<any> = useNavigation<any>();
 
-    const [vehicles, setVehicles] = useState<IUserVehiclePayload[]>([]);
+    const [vehicles, setVehicles] = useState<IVehiclePayload[]>([]);
 
-    const [vehicleSelected, setVehicleSelected] = useState<IUserVehiclePayload | null>(null);
+    const [vehicleSelected, setVehicleSelected] = useState<IVehiclePayload | null>(null);
 
 
     async function getVehicles(): Promise<void>{
-        const vehicles: IUserVehiclePayload[] = await new GetVehiclesService().execute();
+        const vehicles: IVehiclePayload[] = await new GetVehiclesService().execute();
 
         setVehicles(vehicles);
     }

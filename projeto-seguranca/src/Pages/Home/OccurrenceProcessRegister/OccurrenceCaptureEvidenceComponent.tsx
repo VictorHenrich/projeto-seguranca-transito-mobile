@@ -62,7 +62,7 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
                         fontSize: 18
                     }}
                     onPress={() => {
-                        props.navigation.navigate("Camera")
+                        props.navigation.navigate("OccurrenceCamera")
                     }}
                 />
                 <ButtonDefault 

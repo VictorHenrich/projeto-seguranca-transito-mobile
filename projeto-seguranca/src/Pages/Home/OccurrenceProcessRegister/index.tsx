@@ -1,11 +1,12 @@
 import React from "react";
 
-import CameraDefault from "../../../Components/CameraDefault";
 import StackNavigation, { IStackScreen } from "../../../Components/StackNavigation";
+import OccurrenceCameraComponent from "./OccurrenceCameraComponent";
 import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
 import OccurrenceAddressLocalComponent from "./OccurrenceAddressLocalComponent";
 import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
 import OccurrenceVehicleComponent from "./OccurrenceVehicleComponent";
+import OccurrenceRegisterFinishComponent from "./OccurrenceRegisterFinishComponent";
 
 
 
@@ -21,12 +22,16 @@ function OccurrenceProcessRegisterPage(props: any): React.ReactElement{
             name: "OccurrenceAddressLocal"
         },
         {
-            component: CameraDefault,
-            name: "Camera"
+            component: OccurrenceCameraComponent,
+            name: "OccurrenceCamera"
         },
         {
             name: "OccurrenceVehicle",
             component: OccurrenceVehicleComponent
+        },
+        {
+            name: "OccurrenceFinish",
+            component: OccurrenceRegisterFinishComponent
         }
     ]
 

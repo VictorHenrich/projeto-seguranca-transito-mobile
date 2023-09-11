@@ -18,6 +18,7 @@ export interface IContextCamera{
     setMediaSelected: (media: MediaItem) => void,
     addMedia: (media: MediaItem) => void,
     removeMedias: (...indexes: number[]) => void
+    onNext: (medias: MediaItem[]) => void
 }
 
 
@@ -26,12 +27,18 @@ const initialValues: IContextCamera = {
     mediaSelected: null,
     setMediaSelected: (media: MediaItem)=> null,
     addMedia: ()=> null,
-    removeMedias: (...indexes: number[])=> null
+    removeMedias: (...indexes: number[])=> null,
+    onNext: (medias: MediaItem[]) => null
+}
+
+
+export interface CameraProviderProps extends PropsWithChildren{
+    onNext: (media: MediaItem[]) => void
 }
 
 export const ContextCamera: Context<IContextCamera> = createContext(initialValues);
 
-function CameraProvider({ children }: PropsWithChildren){
+function CameraProvider({ children,  onNext }: CameraProviderProps){
 
     const [medias, setMedias] = useState<MediaItem[]>(initialValues.medias);
     const [mediaSelected, setMediaSelected] = useState<MediaItem | null>(null);
@@ -52,7 +59,8 @@ function CameraProvider({ children }: PropsWithChildren){
             addMedia,
             removeMedias,
             setMediaSelected,
-            mediaSelected
+            mediaSelected,
+            onNext
         }}>
             {children}
         </ContextCamera.Provider>

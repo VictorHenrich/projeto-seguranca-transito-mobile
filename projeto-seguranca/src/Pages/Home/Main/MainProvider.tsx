@@ -2,7 +2,7 @@ import { createContext, Context, useState, useEffect } from "react";
 import IUserPayload from "../../../Patterns/IUserPayload";
 import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/GetOccurrencesService";
 import GetUserService, { UserGetPayload } from "../../../Services/GetUserService";
-import IUserVehiclePayload from "../../../Patterns/IUserVehiclePayload";
+import IVehiclePayload from "../../../Patterns/IVehiclePayload";
 import GetVehiclesService from "../../../Services/GetVehiclesService";
 
 
@@ -54,11 +54,11 @@ export default function MainProvider(props: any){
     async function loadOccurrencesPayload(): Promise<void>{
         const occurrences: OccurrenceItemType[] = await new GetOccurrencesService().execute();
 
-        setOccurrencesPayload(occurrences);
+        setOccurrencesPayload([...occurrences, ...occurrences]);
     }
 
     async function loadUserPayload(): Promise<void>{
-        const [ user, vehicles]: [UserGetPayload, IUserVehiclePayload[]] = await Promise.all([
+        const [ user, vehicles]: [UserGetPayload, IVehiclePayload[]] = await Promise.all([
             new GetUserService().execute(),
             new GetVehiclesService().execute()
         ])

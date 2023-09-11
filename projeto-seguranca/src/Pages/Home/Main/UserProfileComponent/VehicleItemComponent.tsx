@@ -3,7 +3,7 @@ import { Text, PresenceTransition, Stack, Icon} from "native-base";
 import Fontisto from "react-native-vector-icons/Fontisto";
 
 import ButtonDefault from "../../../../Components/ButtonDefault";
-import IUserVehiclePayload from "../../../../Patterns/IUserVehiclePayload";
+import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
 
 
 
@@ -20,7 +20,7 @@ export default function VehicleItemComponent({
     color = valueDefault,
     haveSafe = false,
     year = valueDefault
-}: IUserVehiclePayload){
+}: IVehiclePayload){
 
     const [openCard, setOpenCard] = useState<boolean>(false);
 

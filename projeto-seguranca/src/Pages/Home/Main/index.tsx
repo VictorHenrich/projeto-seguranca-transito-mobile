@@ -1,6 +1,7 @@
 import React from "react";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import MainNavigation, { ScreenNavigationProps } from "./MainNavigation";
@@ -27,7 +28,7 @@ const screens: ScreenNavigationProps[] = [
     },
     {
         component: UserProfileComponent,
-        icon: <FontAwesome5 name="address-card"/>,
+        icon: <FontAwesome name="address-card"/>,
         name: "UserProfile",
         title: "Conta"
     }

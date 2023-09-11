@@ -9,7 +9,7 @@ import ApiFactory from './Factories/ApiFactory';
 
 
 export default class AuthRefreshService extends AbstractService<void, boolean>{
-    private static readonly urlRefreshToken: string = "/user/authentication/refresh";
+    private readonly urlRefreshToken: string = "/user/authentication/refresh";
     
     async execute(): Promise<boolean> {
         try{
@@ -21,7 +21,7 @@ export default class AuthRefreshService extends AbstractService<void, boolean>{
 
             const data: any = { token };
 
-            const { data: { result }}: AxiosResponse = await api.post(AuthRefreshService.urlRefreshToken, data);
+            const { data: { result }}: AxiosResponse = await api.post(this.urlRefreshToken, data);
 
             await AsyncStorage.setItem(AUTH_KEY, result);
 

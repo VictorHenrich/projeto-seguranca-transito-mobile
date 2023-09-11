@@ -16,7 +16,8 @@ function AccessCameraComponent(props: any){
 
     const {
         addMedia,
-        medias
+        medias,
+        onNext
     }: IContextCamera = useContext(ContextCamera);
 
     const [cameraState, setCameraState] = useState<CameraStateProps>({
@@ -99,9 +100,7 @@ function AccessCameraComponent(props: any){
                                             as={<FontAwesome5 name="arrow-right" />}
                                         />
                                     }
-                                    onPress={()=> {
-                                        navigation.navigate("OccurrenceVehicle");
-                                    }}
+                                    onPress={()=> onNext(medias)}
                                 />
                             </Center>
                         )

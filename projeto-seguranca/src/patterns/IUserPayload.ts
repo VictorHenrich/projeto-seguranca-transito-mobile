@@ -1,5 +1,5 @@
-import IUserAddressPayload from "./IUserAddressPayload";
-import IUserVehiclePayload from "./IUserVehiclePayload";
+import IAddressPayload from "./IAddressPayload";
+import IVehiclePayload from "./IVehiclePayload";
 
 
 
@@ -11,6 +11,6 @@ export default interface IUserPayload{
     issuerState: string;
     telephone: string;
     birthday: Date;
-    address: IUserAddressPayload;
-    vehicles: IUserVehiclePayload[]
+    address: IAddressPayload;
+    vehicles: IVehiclePayload[]
 }

@@ -1,5 +1,5 @@
 import IUserPayload from "./IUserPayload";
-import IUserVehiclePayload from "./IUserVehiclePayload";
+import IVehiclePayload from "./IVehiclePayload";
 
 
 export enum OccurrenceStatus{
@@ -12,7 +12,7 @@ export enum OccurrenceStatus{
 
 export default interface IOccurrencePayload{
     user: Omit<IUserPayload, "vehicles">;
-    vehicle: IUserVehiclePayload;
+    vehicle: IVehiclePayload;
     address: {
         state: string;
         city: string;

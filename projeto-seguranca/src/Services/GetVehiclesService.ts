@@ -1,12 +1,12 @@
 import AbstractService from "../Patterns/AbstractService";
-import IUserVehiclePayload, { VehicleTypes } from "../Patterns/IUserVehiclePayload";
+import IVehiclePayload, { VehicleTypes } from "../Patterns/IVehiclePayload";
 import ApiFactory from "./Factories/ApiFactory";
 
 
-export default class GetVehiclesService extends AbstractService<void, IUserVehiclePayload[]>{
-    static readonly URL: string = "/user/vehicle/query";
+export default class GetVehiclesService extends AbstractService<void, IVehiclePayload[]>{
+    private readonly URL: string = "/user/vehicle/query";
 
-    handleVehicles(vehicles: any[]): IUserVehiclePayload[]{
+    handleVehicles(vehicles: any[]): IVehiclePayload[]{
         return vehicles.map(({  
             plate,
             renavam,
@@ -37,12 +37,12 @@ export default class GetVehiclesService extends AbstractService<void, IUserVehic
         })
     }
 
-    async execute(): Promise<IUserVehiclePayload[]> {
+    async execute(): Promise<IVehiclePayload[]> {
         const apiFactory: ApiFactory = new ApiFactory();
 
         const api = await apiFactory.create();
 
-        const { data: { result: vehicles } } = await api.get(GetVehiclesService.URL);
+        const { data: { result: vehicles } } = await api.get(this.URL);
 
         return this.handleVehicles(vehicles);
     }

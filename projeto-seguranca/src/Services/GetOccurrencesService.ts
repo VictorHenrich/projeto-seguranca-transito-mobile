@@ -9,7 +9,7 @@ export type OccurrenceItemType = Omit<IOccurrencePayload, "attachments" | "user"
 
 
 export default class GetOccurrencesService extends AbstractService<void, OccurrenceItemType[]>{
-    private static readonly URL: string = "/user/occurrence/query";
+    private readonly URL: string = "/user/occurrence/query";
 
     getData(occurrencesPayload: any[]): OccurrenceItemType[]{
         return occurrencesPayload.map(item => {
@@ -41,7 +41,7 @@ export default class GetOccurrencesService extends AbstractService<void, Occurre
         const api: AxiosInstance = await apiFactory.create();
         
         try{
-            const { data: { result: occurrences }}: AxiosResponse = await api.get(GetOccurrencesService.URL);
+            const { data: { result: occurrences }}: AxiosResponse = await api.get(this.URL);
 
             return this.getData(occurrences);
 

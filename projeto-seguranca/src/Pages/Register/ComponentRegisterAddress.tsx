@@ -14,7 +14,7 @@ import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ComponentContainerRegister from "./ComponentContainerRegister";
-import IUserAddressPayload from "../../Patterns/IUserAddressPayload";
+import IAddressPayload from "../../Patterns/IAddressPayload";
 import HeadingDefault from "../../Components/HeadingDefault";
 
 
@@ -34,7 +34,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
     } = useContext<IContextRegister>(ContextRegister);
 
 
-    function changeAddress(addressProps: Partial<IUserAddressPayload>){
+    function changeAddress(addressProps: Partial<IAddressPayload>){
         setUserPayload({
             ...userPayload,
             address: {
