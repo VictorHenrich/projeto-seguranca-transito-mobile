@@ -14,6 +14,7 @@ function OccurrenceListComponent(props: any): React.ReactElement{
 
     return (
         <ContainerDefault
+            haveScrool={false}
             backgroundColor="secondary"
             display="flex"
             justifyContent="flex-start"

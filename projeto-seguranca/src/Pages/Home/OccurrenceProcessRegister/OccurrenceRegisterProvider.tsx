@@ -11,8 +11,8 @@ export interface IOccurrenceRegisterContext{
 
 const initialValues: IOccurrenceRegisterContext = {
     occurrence: {
-        lon: "",
-        lat: "",
+        location: undefined,
+        address: undefined,
         vehicleUuid: "",
         attachments: [],
         description: ""

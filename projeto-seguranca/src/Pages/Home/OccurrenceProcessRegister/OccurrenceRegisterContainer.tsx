@@ -1,43 +1,88 @@
 import React from "react";
-import { Center, Icon } from "native-base";
+import { Stack, Icon, IStackProps } from "native-base";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import BackgroundApp from "../../../Components/BackgroundApp";
-import ContainerDefault, {ContainerDefaultProps} from "../../../Components/ContainerDefault";
 import ButtonDefault from "../../../Components/ButtonDefault";
 
 
-function OccurrenceRegisterContainer(props: ContainerDefaultProps): React.ReactElement{
+export interface OccurrenceRegisterContainerProps extends IStackProps{
+    ComponentTop: React.ReactElement,
+    ComponentCenter: React.ReactElement,
+    ComponentBottom?: React.ReactElement[],
+    showBackButton?: boolean
+}
+
+
+function OccurrenceRegisterContainer({
+    ComponentCenter,
+    ComponentTop,
+    ComponentBottom,
+    showBackButton = true,
+    ...props
+}: OccurrenceRegisterContainerProps): React.ReactElement{
+
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
     return (
         <>
             <BackgroundApp source={require("../../../../assets/background_occurrence.png")}/>
-            <Center 
+            <Stack 
                 {...props}
-                justifyContent="space-between"
-                paddingTop={20}
-                paddingBottom={10}
-                paddingLeft={5}
-                paddingRight={5}
                 width="full"
                 height="full"
+                justifyContent="space-between"
+                alignItems="center"
+                padding={5}
+                paddingTop={10}
+                space={10}
             >
-                {props.children}
-                    <ButtonDefault 
-                        text="Sair da ocorrência"
-                        backgroundColor="red"
-                        color="secondary"
-                        TextProps={{
-                            fontSize: 18
-                        }}
-                        rightIcon={
-                            <Icon 
-                                as={<FontAwesome5 name="sign-out-alt"/>}
-                                size="xl"
-                            />
+                    {ComponentTop}
+                    
+                    {ComponentCenter}
+
+                    <Stack 
+                        width="full" 
+                        space={5}
+                        alignItems="center"
+                    >
+                        {ComponentBottom}
+
+                        {
+                            showBackButton && (
+                                <ButtonDefault 
+                                    text="Voltar"
+                                    backgroundColor="gray"
+                                    TextProps={{
+                                        fontSize: 18
+                                    }}
+                                    rightIcon={
+                                        <Icon 
+                                            as={<FontAwesome5 name="arrow-left"/>}
+                                            size="xl"
+                                        />
+                                    }
+                                    onPress={() => navigation.goBack()}
+                                />
+                            )
                         }
-                    />
-                
-            </Center>
+
+                        <ButtonDefault 
+                            text="Sair da ocorrência"
+                            backgroundColor="red"
+                            TextProps={{
+                                fontSize: 18
+                            }}
+                            rightIcon={
+                                <Icon 
+                                    as={<FontAwesome5 name="sign-out-alt"/>}
+                                    size="xl"
+                                />
+                            }
+                        />
+                    </Stack>
+            </Stack>
         </>
     )
 }

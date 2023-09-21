@@ -3,16 +3,21 @@ import React from "react";
 import StackNavigation, { IStackScreen } from "../../../Components/StackNavigation";
 import OccurrenceCameraComponent from "./OccurrenceCameraComponent";
 import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
-import OccurrenceAddressLocalComponent from "./OccurrenceAddressLocalComponent";
+import OccurrenceAddressLocalComponent from "./OccurrenceAddressComponent";
 import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
 import OccurrenceVehicleComponent from "./OccurrenceVehicleComponent";
 import OccurrenceRegisterFinishComponent from "./OccurrenceRegisterFinishComponent";
+import OccurrenceInfoAddressComponent from "./OccurrenceInfoAddressComponent";
 
 
 
 
 function OccurrenceProcessRegisterPage(props: any): React.ReactElement{
     const screens: IStackScreen[] = [
+        {
+            component: OccurrenceInfoAddressComponent,
+            name: "OccurrenceInfoAddress"
+        },
         {
             component: OccurrenceCaptureEvidenceComponent,
             name: "OccurrenceAccessCamera"

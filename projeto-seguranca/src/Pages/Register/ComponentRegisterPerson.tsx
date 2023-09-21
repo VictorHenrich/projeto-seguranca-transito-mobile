@@ -49,9 +49,9 @@ export default function ComponentRegisterPerson(props: any){
                         color="primary"
                     />
                     <Box maxWidth="70%">
-                        <HeadingDefault textAlign="left">
+                        <HeadingDefault textAlign="left" fontSize={25}>
                             Vamos começar com as informações da sua {` `}
-                            <HeadingDefault color="primary">Carteira Pessoal</HeadingDefault>
+                            <HeadingDefault color="primary" fontSize={25}>Carteira Pessoal</HeadingDefault>
                         </HeadingDefault>
                     </Box>
                 </Stack>

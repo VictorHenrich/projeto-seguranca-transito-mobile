@@ -63,9 +63,9 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                         color="primary"
                     />
                     <Box maxWidth="70%">
-                        <HeadingDefault textAlign="left">
+                        <HeadingDefault textAlign="left" fontSize={25}>
                             Finalizando agora com seus {` `}
-                            <HeadingDefault color="primary">
+                            <HeadingDefault color="primary" fontSize={25}>
                                 Dados de Acesso
                             </HeadingDefault>
                         </HeadingDefault>

@@ -6,27 +6,42 @@ import {
 
 
 export interface ContainerDefaultProps extends ICenterProps{
-    minHeightContainer?: number | string
+    haveScrool?: boolean
 }
 
 
 export default function ContainerDefault({
-    minHeightContainer = 900,
+    haveScrool = true,
     ...props
 }: ContainerDefaultProps){
 
     return (
-        <ScrollView>
-            <Center
-                {...props}
+        haveScrool ? (
+            <ScrollView
                 width="full"
                 height="full"
-                paddingTop={20}
-                paddingBottom={10}
-                paddingLeft={5}
-                paddingRight={5}
-                minHeight={minHeightContainer}
-            />
-        </ScrollView>
+            >
+                <Center
+                    width="full"
+                    height="full"
+                    paddingTop={20}
+                    paddingBottom={10}
+                    paddingLeft={5}
+                    paddingRight={5}
+                    {...props}
+                />
+            </ScrollView>
+        ) :
+        
+        <Center
+            width="full"
+            height="full"
+            paddingTop={20}
+            paddingBottom={10}
+            paddingLeft={5}
+            paddingRight={5}
+            {...props}
+        />
+
     )
 }

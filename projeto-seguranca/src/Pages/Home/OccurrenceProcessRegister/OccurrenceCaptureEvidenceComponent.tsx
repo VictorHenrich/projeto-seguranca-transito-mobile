@@ -20,67 +20,76 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
     }
 
     return (
-        <OccurrenceRegisterContainer>
-            <Stack
-                width="full"
-                direction="column"
-                space={10}
-                alignItems="center"
-            >
-                <HeadingDefault fontSize={28} textAlign="left">
-                    Capture algumas {" "}
+        <OccurrenceRegisterContainer 
+        
+            ComponentTop={(
+                <Stack
+                    width="full"
+                    direction="column"
+                    space={5}
+                    alignItems="center"
+                >
+                    <HeadingDefault fontSize={30} textAlign="left">
+                        Tire ou escolha algumas{" "}
 
-                    <HeadingDefault color="primary" fontSize={28} textAlign="left"> 
-                        fotos e vídeos do local 
+                        <HeadingDefault color="primary" fontSize={30} textAlign="left"> 
+                            fotos e vídeos do local {" "}
+                        </HeadingDefault>
+
+                        para uma melhor ilustração e informação.
                     </HeadingDefault>
+                    <Image 
+                        source={require("../../../../assets/photo.png")}
+                        alt="photo"
+                        width={200}
+                        height={200}
+                    />
+                </Stack>
+            )}
 
-                    {" "} para ilustrar e informar melhor.
-                </HeadingDefault>
-                <Image 
-                    source={require("../../../../assets/photo.png")}
-                    alt="photo"
-                    width={200}
-                    height={200}
-                />
-            </Stack>
-            <Stack
-                width="full"
-                space={5}
-                direction="column"
-                alignItems="center"
-            >
-                <ButtonDefault 
-                    text="Tirar foto | vídeo"
-                    rightIcon={
-                        <Icon 
-                            as={<FontAwesome5 name="camera" />}
-                            color="#FFFFFF"
-                            size="xl"
-                        />
-                    }
-                    TextProps={{
-                        fontSize: 18
-                    }}
-                    onPress={() => {
-                        props.navigation.navigate("OccurrenceCamera")
-                    }}
-                />
-                <ButtonDefault 
-                    text="Selecionar foto | vídeo"
-                    rightIcon={
-                        <Icon 
-                            as={<FontAwesome5 name="file-video" />}
-                            color="#FFFFFF"
-                            size="xl"
-                        />
-                    }
-                    TextProps={{
-                        fontSize: 18
-                    }}
-                    onPress={() => accessGallery()}
-                />
-            </Stack>
-        </OccurrenceRegisterContainer>
+            ComponentCenter={(
+                <Stack
+                    width="full"
+                    space={5}
+                    direction="column"
+                    alignItems="center"
+                >
+                    <ButtonDefault
+                        padding={5} 
+                        text="Tirar foto | vídeo"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="camera" />}
+                                color="#FFFFFF"
+                                size="xl"
+                            />
+                        }
+                        TextProps={{
+                            fontSize: 20
+                        }}
+                        onPress={() => {
+                            props.navigation.navigate("OccurrenceCamera")
+                        }}
+                    />
+                    <ButtonDefault 
+                        padding={5}
+                        text="Selecionar foto | vídeo"
+                        rightIcon={
+                            <Icon 
+                                as={<FontAwesome5 name="file-video" />}
+                                color="#FFFFFF"
+                                size="xl"
+                            />
+                        }
+                        TextProps={{
+                            fontSize: 20
+                        }}
+                        onPress={() => accessGallery()}
+                    />
+                </Stack>
+            )}
+        
+        />
     );
 }
 

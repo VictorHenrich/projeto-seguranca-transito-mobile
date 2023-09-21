@@ -1,3 +1,6 @@
+import IAddressPayload from "./IAddressPayload";
+import IAttachmentPayload from "./IAttachmentPayload";
+import ILocationPayload from "./ILocationPayload";
 import IUserPayload from "./IUserPayload";
 import IVehiclePayload from "./IVehiclePayload";
 
@@ -13,19 +16,12 @@ export enum OccurrenceStatus{
 export default interface IOccurrencePayload{
     user: Omit<IUserPayload, "vehicles">;
     vehicle: IVehiclePayload;
-    address: {
-        state: string;
-        city: string;
-        district: string;
-        street: string;
-    };
+    address?: IAddressPayload;
+    location?: ILocationPayload,
     created: Date;
     lat: string;
     lon: string;
     description: string;
-    attachments: [{
-        content: string;
-        type: string
-    }];
+    attachments: IAttachmentPayload[];
     status: OccurrenceStatus
 }

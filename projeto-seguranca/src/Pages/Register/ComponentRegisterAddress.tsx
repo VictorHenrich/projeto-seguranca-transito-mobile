@@ -60,14 +60,14 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                         color="primary"
                     />
                     <Box maxWidth="70%">
-                        <HeadingDefault textAlign="left">
+                        <HeadingDefault textAlign="left" fontSize={25}>
                             Agora precisamos dos dados de seu {` `}
-                            <HeadingDefault color="primary">Endereço Atual</HeadingDefault>
+                            <HeadingDefault color="primary" fontSize={25}>Endereço Atual</HeadingDefault>
                         </HeadingDefault>
                     </Box>
                 </Stack>
             )}
-            minHeightContainer={1200}
+            minHeight={1200}
         >
             <Stack 
                 direction="column" 

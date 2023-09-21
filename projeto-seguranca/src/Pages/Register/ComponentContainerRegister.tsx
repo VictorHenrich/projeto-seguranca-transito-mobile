@@ -22,7 +22,7 @@ export default function ComponentContainerRegister({
         status: "info",
         text: "",
     },
-    minHeightContainer = 1000,
+    minHeight = 1000,
     ...props
 }: ComponentContainerRegisterProps){
     const navigation: NavigationProp<any> = useNavigation<any>();
@@ -35,7 +35,7 @@ export default function ComponentContainerRegister({
                 justifyContent="space-between"
                 padding={10}
                 overflowY="auto"
-                minHeightContainer={minHeightContainer}
+                minHeight={minHeight}
             >
                 {heading}
                 <ComponentPositionStep />

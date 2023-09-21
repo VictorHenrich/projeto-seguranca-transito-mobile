@@ -6,6 +6,7 @@ export default extendTheme({
         primary: "#93c5fd",
         secondary: "#2d2d2d",
         red: "#ff6666",
-        white: "#cccccc"
+        white: "#cccccc",
+        gray: "#a6a6a6"
     }
 })

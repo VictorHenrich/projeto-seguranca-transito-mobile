@@ -54,7 +54,7 @@ export default function MainProvider(props: any){
     async function loadOccurrencesPayload(): Promise<void>{
         const occurrences: OccurrenceItemType[] = await new GetOccurrencesService().execute();
 
-        setOccurrencesPayload([...occurrences, ...occurrences]);
+        setOccurrencesPayload([...occurrences]);
     }
 
     async function loadUserPayload(): Promise<void>{

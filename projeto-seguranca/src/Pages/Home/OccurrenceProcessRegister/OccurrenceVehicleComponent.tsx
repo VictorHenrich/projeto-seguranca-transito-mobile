@@ -33,112 +33,124 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
     }, []);
 
     return (
-        <OccurrenceRegisterContainer justifyContent="space-between">
-            <Stack
-                width="full"
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-                space={5}
-                marginBottom={5}
-            >
-                <HeadingDefault fontSize={28} textAlign="left">
-                    Agora selecione {" "}
-                    <HeadingDefault color="primary" fontSize={28}>
-                        o veículo {" "}
+        <OccurrenceRegisterContainer
+            ComponentTop={(
+                <Stack
+                    width="full"
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    space={5}
+                >
+                    <HeadingDefault fontSize={30} textAlign="left">
+                        Agora, escolha {" "}
+                        <HeadingDefault color="primary" fontSize={30}>
+                            o veículo {" "}
+                        </HeadingDefault>
+                        que {" "}
+                        <HeadingDefault color="primary" fontSize={30}>
+                            sofreu o acidente.
+                        </HeadingDefault>
                     </HeadingDefault>
-                    que acabou sofrendo o acidente
-                </HeadingDefault>
 
-                <Image 
-                    source={require("../../../../assets/car.png")}
-                    width={200}
-                    height={150}
-                    alt="map"
-                />
-            </Stack>
-            <FlatList
-                width="full"
-                height={200}
-                marginBottom={10}
-                data={vehicles}
-                renderItem={(vehicle) => {
-                    let background: string = "transparent";
+                    <Image 
+                        source={require("../../../../assets/car.png")}
+                        width={200}
+                        height={150}
+                        alt="map"
+                    />
+                </Stack>
+            )}
 
-                    let color: string = "white";
+            ComponentCenter={(
+                    <FlatList
+                        width="full"
+                        height={200}
+                        marginBottom={10}
+                        data={vehicles}
+                        renderItem={(vehicle) => {
+                            let background: string = "transparent";
 
-                    let selected = false;
+                            let color: string = "white";
 
-                    if(vehicleSelected && vehicleSelected.plate === vehicle.item.plate){
-                        selected = true;
+                            let selected = false;
 
-                        background = "primary";
+                            if(vehicleSelected && vehicleSelected.plate === vehicle.item.plate){
+                                selected = true;
 
-                        color = "secondary";
-                    }
-                    
-                    return (
-                        <Stack
-                            width="full"
-                            direction="row"
-                            justifyContent="space-between"
-                            padding={5}
-                            marginBottom={5}
-                            borderWidth={2}
-                            borderColor="primary"
-                            borderRadius={10}
-                            backgroundColor={background}
-                            onTouchEndCapture={()=> {
-                                setVehicleSelected(
-                                    selected ? null : vehicle.item
-                                );
-                            }}
-                        >
-                            {
-                                selected ? (
-                                    <Icon 
-                                        as={<FontAwesome5 name="check"/>}
-                                        size="md"
-                                    />
-                                ) : null
+                                background = "primary";
+
+                                color = "secondary";
                             }
-                            <Text color={color} fontWeight={700}>
-                                Placa: {` `}
-                                <Text fontWeight="normal">
-                                    {vehicle.item.plate}
-                                </Text>
-                            </Text>
-                            <Text color={color} fontWeight={700}>
-                                Tipo Veículo: {` `}
-                                <Text fontWeight="normal">
-                                    {getVehicleType(vehicle.item.vehicleType)}
-                                </Text>
-                            </Text>
-                        </Stack>
-                    );
-                }}
-            />
-            {
+                            
+                            return (
+                                <Stack
+                                    width="full"
+                                    direction="row"
+                                    justifyContent="space-between"
+                                    padding={5}
+                                    marginBottom={5}
+                                    borderWidth={2}
+                                    borderColor="primary"
+                                    borderRadius={10}
+                                    backgroundColor={background}
+                                    onTouchEndCapture={()=> {
+                                        setVehicleSelected(
+                                            selected ? null : vehicle.item
+                                        );
+                                    }}
+                                >
+                                    {
+                                        selected ? (
+                                            <Icon 
+                                                as={<FontAwesome5 name="check"/>}
+                                                size="md"
+                                            />
+                                        ) : null
+                                    }
+                                    <Text color={color} fontWeight={700}>
+                                        Placa: {` `}
+                                        <Text fontWeight="normal">
+                                            {vehicle.item.plate}
+                                        </Text>
+                                    </Text>
+                                    <Text color={color} fontWeight={700}>
+                                        Tipo Veículo: {` `}
+                                        <Text fontWeight="normal">
+                                            {getVehicleType(vehicle.item.vehicleType)}
+                                        </Text>
+                                    </Text>
+                                </Stack>
+                            );
+                        }}
+                    />
+            )}
+
+            ComponentBottom={
                 vehicleSelected
-                    ? (
+                    ? [(
                         <ButtonDefault 
                             text="Continuar"
-                            marginBottom={5}
                             TextProps={{
                                 fontSize: 18
                             }}
                             rightIcon={
                                 <Icon 
                                     as={<FontAwesome5 name="arrow-right" />}
+                                    size="xl"
                                 />
                             }
                             onTouchStart={()=>{
                                 navigation.navigate("OccurrenceAccessCamera");
                             }}
                         />
-                    )
-                    : null
+                    )]
+                            
+                    : undefined
             }
+        >
+            
+            
         </OccurrenceRegisterContainer>
     );
 }

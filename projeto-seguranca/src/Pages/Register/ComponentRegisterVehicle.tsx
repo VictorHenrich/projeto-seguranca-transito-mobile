@@ -68,17 +68,16 @@ export default function ComponentRegisterVehicle(props: any){
                         color="primary"
                     />
                     <Box maxWidth="70%">
-                        <HeadingDefault textAlign="left">
+                        <HeadingDefault textAlign="left" fontSize={25}>
                             Vamos registrar seu {` `}
-                            <HeadingDefault color="primary">
+                            <HeadingDefault color="primary" fontSize={25}>
                                 primeiro veículo
                             </HeadingDefault>
                         </HeadingDefault>
                     </Box>
                 </Stack>
             )}
-            minHeightContainer={1200}
-            navigation={props.navigation}
+            minHeight={1200}
         >
             <Stack 
                 direction="column" 

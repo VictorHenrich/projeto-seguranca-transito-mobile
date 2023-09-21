@@ -22,7 +22,8 @@ export default class CreateOccurrencesService extends AbstractService<CreateOccu
         const data: any = {
             veiculo_uuid: this.payload.vehicleUuid,
             description: this.payload.description,
-            attachments: this.payload.attachments
+            attachments: this.payload.attachments,
+            created: new Date()
         }
 
         if(this.payload.address)

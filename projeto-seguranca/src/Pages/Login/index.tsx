@@ -57,14 +57,11 @@ function LoginPage(props: any): React.ReactElement{
         <>
             <BackgroundApp />
             <ContainerDefault
-                width="full" 
-                height="full"
                 display="flex"
                 padding={5}
                 flexDirection="column"
                 justifyContent="space-between"
-                minHeightContainer={900}
-
+                haveScrool={false}
             >
                 <Stack
                     width="full"

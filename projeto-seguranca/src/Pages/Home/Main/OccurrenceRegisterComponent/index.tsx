@@ -9,7 +9,10 @@ function OccurrenceRegisterComponent(props: any): React.ReactElement{
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     return (
-        <ContainerDefault backgroundColor="secondary">
+        <ContainerDefault 
+            backgroundColor="secondary"
+            haveScrool={false}
+        >
             <Stack
                 width="full"
                 alignItems="center"
@@ -21,9 +24,13 @@ function OccurrenceRegisterComponent(props: any): React.ReactElement{
                     height={300}
                     alt="car"
                 />
-                <ButtonDefault 
-                    text="Começar processo de registro de ocorrência"
+                <ButtonDefault
+                    padding={5}
+                    text="Iniciar"
                     shadow="5"
+                    TextProps={{
+                        fontSize: 30
+                    }}
                     onPress={()=> navigation.navigate("OccurrenceProcessRegister")}
                 />
             </Stack>
