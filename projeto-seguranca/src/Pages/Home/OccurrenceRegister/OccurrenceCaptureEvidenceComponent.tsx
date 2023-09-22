@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Icon, Image, Stack } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from 'expo-image-picker';
@@ -6,17 +6,46 @@ import * as ImagePicker from 'expo-image-picker';
 import HeadingDefault from "../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import ButtonDefault from "../../../Components/ButtonDefault";
+import IAttachmentPayload from "../../../Patterns/IAttachmentPayload";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
 
 function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    const {
+        setOccurrence,
+        occurrence
+    } = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
+
     async function accessGallery(): Promise<void>{
         const { status }: ImagePicker.MediaLibraryPermissionResponse = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
         if(status === ImagePicker.PermissionStatus.DENIED)
             throw new Error("Permissão de acesso a galeria rejeitado!");
 
-        const result: ImagePicker.ImagePickerResult = await ImagePicker.launchImageLibraryAsync();
+        const result: ImagePicker.ImagePickerResult = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            quality: 1,
+            allowsMultipleSelection: true,
+            base64: true
+        });
+
+        if(result.canceled) return;
+
+        const attachments: IAttachmentPayload[] = result.assets.map(asset => {
+            return {
+                content: asset.base64 || "",
+                type: asset.type || ""
+            }
+        });
+
+        setOccurrence({
+            ...occurrence,
+            attachments
+        });
     }
 
     return (
@@ -68,7 +97,7 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
                             fontSize: 20
                         }}
                         onPress={() => {
-                            props.navigation.navigate("OccurrenceCamera")
+                            navigation.navigate("OccurrenceAccessCamera");
                         }}
                     />
                     <ButtonDefault 
@@ -88,7 +117,32 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
                     />
                 </Stack>
             )}
-        
+
+            ComponentBottom={
+                occurrence.attachments.length
+                    ?
+                    [(
+                        <ButtonDefault
+                            key="button-capture-evidence"
+                            text="Próximo"
+                            rightIcon={
+                                <Icon 
+                                    as={<FontAwesome5 name="arrow-right" />}
+                                    color="#FFFFFF"
+                                    size="xl"
+                                />
+                            }
+                            TextProps={{
+                                fontSize: 20
+                            }}
+                            onPress={() => {
+                                navigation.navigate("OccurrenceFinish");
+                            }}
+                        />
+                    )]
+
+                    : undefined
+            }
         />
     );
 }

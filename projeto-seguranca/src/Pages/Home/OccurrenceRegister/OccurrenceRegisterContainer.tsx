@@ -11,7 +11,7 @@ import ContainerDefault, { ContainerDefaultProps } from "../../../Components/Con
 export interface OccurrenceRegisterContainerProps extends ContainerDefaultProps{
     ComponentTop: React.ReactElement,
     ComponentCenter: React.ReactElement,
-    ComponentBottom?: React.ReactElement[],
+    ComponentBottom?: React.ReactNode[],
     showBackButton?: boolean
 }
 

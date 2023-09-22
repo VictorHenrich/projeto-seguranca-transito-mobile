@@ -8,7 +8,7 @@ export enum MediaTypes{
     IMAGE = "image"
 }
 
-export interface MediaItem extends Pick<CameraCapturedPicture, "uri">{
+export interface MediaItem extends Pick<CameraCapturedPicture, "uri" | "base64">{
     type: MediaTypes
 }
 

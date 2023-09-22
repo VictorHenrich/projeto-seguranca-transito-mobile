@@ -1,7 +1,7 @@
 import React from "react";
 import StackNavigation, { IStackScreen } from "../../Components/StackNavigation";
 import MainPage from "./Main";
-import OccurrenceProcessRegisterPage from "./OccurrenceProcessRegister";
+import OccurrenceRegisterPage from "./OccurrenceRegister";
 
 
 function HomePage(props: any): React.ReactElement{
@@ -11,7 +11,7 @@ function HomePage(props: any): React.ReactElement{
             name: "Main"
         },
         {
-            component: OccurrenceProcessRegisterPage,
+            component: OccurrenceRegisterPage,
             name: "OccurrenceProcessRegister"
         },
     ]

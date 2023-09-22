@@ -3,10 +3,12 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import CameraDefault from "../../../Components/CameraDefault";
 import { MediaItem } from '../../../Components/CameraDefault/CameraProvider';
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from './OccurrenceRegisterProvider';
+import IAttachmentPayload from '../../../Patterns/IAttachmentPayload';
+import FetchFileContentService from '../../../Services/FetchFileContentService';
 
 
 
-function OccurrenceCameraComponent(props: any){
+function OccurrenceAccessCameraComponent(props: any){
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const {
@@ -14,16 +16,19 @@ function OccurrenceCameraComponent(props: any){
         occurrence
     } = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
 
-    function handleOnNext(medias: MediaItem[]): void{
+
+    async function handleOnNext(medias: MediaItem[]): Promise<void>{
+        const uris: string[] = medias.map(media => media.uri);
+
+        const attachments: IAttachmentPayload[] = 
+            await new FetchFileContentService({ uris }).execute();
+
         setOccurrence({
             ...occurrence,
-            attachments: medias.map(media => ({
-                content: media.uri,
-                type: media.type
-            }))
+            attachments
         });
 
-        navigation.navigate("OccurrenceFinish");
+        navigation.navigate("OccurrenceCaptureEvidence");
     }
 
     return (
@@ -33,4 +38,4 @@ function OccurrenceCameraComponent(props: any){
 
 
 
-export default React.memo(OccurrenceCameraComponent);
+export default React.memo(OccurrenceAccessCameraComponent);

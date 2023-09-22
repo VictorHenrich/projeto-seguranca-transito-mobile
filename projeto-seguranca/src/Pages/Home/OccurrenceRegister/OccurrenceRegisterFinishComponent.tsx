@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import {Image, Stack, Icon} from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import HeadingDefault from "../../../Components/HeadingDefault";
+import CreateOccurrenceService from "../../../Services/CreateOccurrenceService";
+import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
 
 function OccurrenceRegisterFinishComponent(props: any){
+
+    const {
+        occurrence
+    }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
+
+    async function registerOccurrence(): Promise<void>{
+        console.log(occurrence);
+
+        await new CreateOccurrenceService(occurrence).execute();
+    }
+
 
     return (
         <OccurrenceRegisterContainer
@@ -57,6 +70,8 @@ function OccurrenceRegisterFinishComponent(props: any){
                                 size="lg"
                             />
                         }
+
+                        onPress={() => registerOccurrence()}
                     /> 
                 </Stack>
             )}

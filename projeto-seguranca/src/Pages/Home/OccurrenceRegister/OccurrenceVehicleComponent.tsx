@@ -67,7 +67,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
             ComponentCenter={(
                     <Stack width="full" space={10}>
                         {
-                            vehicles.map((vehicle) => {
+                            vehicles.map((vehicle, index) => {
 
                                 let background: string = "transparent";
         
@@ -92,6 +92,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                                             borderWidth={2}
                                             borderColor="primary"
                                             borderRadius={10}
+                                            key={index}
                                             backgroundColor={background}
                                             onTouchEndCapture={()=> {
                                                 setVehicleSelected(
@@ -129,7 +130,8 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
             ComponentBottom={
                 vehicleSelected
                     ? [(
-                        <ButtonDefault 
+                        <ButtonDefault
+                            key="button-continue"
                             text="Continuar"
                             TextProps={{
                                 fontSize: 18
@@ -141,7 +143,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                                 />
                             }
                             onTouchStart={()=>{
-                                navigation.navigate("OccurrenceAccessCamera");
+                                navigation.navigate("OccurrenceCaptureEvidence");
                             }}
                         />
                     )]

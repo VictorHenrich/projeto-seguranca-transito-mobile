@@ -15,7 +15,7 @@ export interface CreateOccurrenceProps{
 
 
 
-export default class CreateOccurrencesService extends AbstractService<CreateOccurrenceProps>{
+export default class CreateOccurrenceService extends AbstractService<CreateOccurrenceProps>{
     private readonly occurrenceCreateURL: string = "/user/occurrence/register";
 
     getOccurrenceData(): any{
