@@ -15,6 +15,7 @@ export default function ButtonDefault({ text, TextProps = {}, ...props}: ButtonD
             minHeight={50}
             borderRadius={20}
             fontWeight={700}
+            shadow="5"
             {...props}
         >
             <Text

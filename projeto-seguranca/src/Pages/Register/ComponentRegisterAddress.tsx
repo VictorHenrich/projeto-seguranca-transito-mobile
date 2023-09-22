@@ -73,7 +73,17 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                 direction="column" 
                 space={10} 
                 width="full"
-            >
+            >   
+                <InputDefault 
+                    placeholder='CEP'
+                    icon={<MaterialCommunityIcons name="format-text"/>}
+                    value={`${userPayload.address.zipcode}`}
+                    onChangeText={(value) => {
+                        changeAddress({
+                            zipcode: value
+                        });
+                    }}
+                />
                 <SelectDefault 
                     placeholder='UF'
                     selectedValue={userPayload.address.state}
@@ -89,7 +99,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                 <InputDefault 
                     placeholder='Cidade'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.address.city}
+                    value={`${userPayload.address.city}`}
                     onChangeText={(value) => {
                         changeAddress({
                             city: value
@@ -99,7 +109,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                 <InputDefault 
                     placeholder='Bairro'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.address.district}
+                    value={`${userPayload.address.district}`}
                     onChangeText={(value) => {
                         changeAddress({
                             district: value
@@ -119,7 +129,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                 <InputDefault 
                     placeholder='Numero'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.address.number || ''}
+                    value={`${userPayload.address.number}`}
                     onChangeText={(value) => {
                         changeAddress({
                             number: value

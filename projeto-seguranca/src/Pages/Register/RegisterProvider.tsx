@@ -1,10 +1,11 @@
 import { createContext, useState, Context, PropsWithChildren } from "react";
-import { CreateUserProps } from "../../Services/CreateUserService";
+import { CreateUserServiceProps } from "../../Services/CreateUserService";
+import { VehicleTypes } from "../../Patterns/IVehiclePayload";
 
 
 export interface IContextRegister{
-    userPayload: CreateUserProps,
-    setUserPayload: (user: CreateUserProps) => void
+    userPayload: CreateUserServiceProps,
+    setUserPayload: (user: CreateUserServiceProps) => void
     pageIndex: number,
     setPageIndex: (index: number) => void
 }
@@ -13,23 +14,24 @@ const initValues: IContextRegister = {
     userPayload: {
         name: "",
         email: "",
-        document: "",
+        documentCpf: "",
         documentRg: "",
         telephone: "",
         password: "",
-        stateIssue: "SANTA CATARINA",
+        issuerState: "SANTA CATARINA",
         birthday: new Date(),
         vehicles: [{
             plate: "",
             renavam: "",
-            vehicleType: "CARRO"
+            vehicleType: VehicleTypes.CAR
         }],
         address: {
             city: "",
             district: "",
             number: "",
-            state: "",
-            street: ""
+            state: "SC",
+            street: "",
+            zipcode: ""
         }
     },
     setUserPayload: () => null,
@@ -41,7 +43,7 @@ const ContextRegister: Context<IContextRegister> = createContext<IContextRegiste
 
 
 export default function RegisterProvider({ children }: PropsWithChildren): React.ReactElement{
-    const [userPayload, setUserPayload] = useState<CreateUserProps>(initValues.userPayload);
+    const [userPayload, setUserPayload] = useState<CreateUserServiceProps>(initValues.userPayload);
     const [pageIndex, setPageIndex] = useState<number>(initValues.pageIndex);
 
     return (

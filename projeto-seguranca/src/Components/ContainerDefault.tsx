@@ -1,17 +1,20 @@
 import {
     Center,
     ScrollView,
-    ICenterProps
+    ICenterProps,
+    IScrollViewProps
 } from "native-base";
 
 
 export interface ContainerDefaultProps extends ICenterProps{
-    haveScrool?: boolean
+    haveScrool?: boolean,
+    ScroolProps?: IScrollViewProps
 }
 
 
 export default function ContainerDefault({
     haveScrool = true,
+    ScroolProps = {},
     ...props
 }: ContainerDefaultProps){
 
@@ -20,6 +23,7 @@ export default function ContainerDefault({
             <ScrollView
                 width="full"
                 height="full"
+                {...ScroolProps}
             >
                 <Center
                     width="full"

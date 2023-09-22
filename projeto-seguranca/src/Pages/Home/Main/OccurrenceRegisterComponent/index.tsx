@@ -27,7 +27,7 @@ function OccurrenceRegisterComponent(props: any): React.ReactElement{
                 <ButtonDefault
                     padding={5}
                     text="Iniciar"
-                    shadow="5"
+                    shadow="9"
                     TextProps={{
                         fontSize: 30
                     }}

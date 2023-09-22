@@ -34,6 +34,8 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
 
     return (
         <OccurrenceRegisterContainer
+            minHeight={900}
+            haveScrool={true}
             ComponentTop={(
                 <Stack
                     width="full"
@@ -63,67 +65,65 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
             )}
 
             ComponentCenter={(
-                    <FlatList
-                        width="full"
-                        height={200}
-                        marginBottom={10}
-                        data={vehicles}
-                        renderItem={(vehicle) => {
-                            let background: string = "transparent";
+                    <Stack width="full" space={10}>
+                        {
+                            vehicles.map((vehicle) => {
 
-                            let color: string = "white";
-
-                            let selected = false;
-
-                            if(vehicleSelected && vehicleSelected.plate === vehicle.item.plate){
-                                selected = true;
-
-                                background = "primary";
-
-                                color = "secondary";
-                            }
-                            
-                            return (
-                                <Stack
-                                    width="full"
-                                    direction="row"
-                                    justifyContent="space-between"
-                                    padding={5}
-                                    marginBottom={5}
-                                    borderWidth={2}
-                                    borderColor="primary"
-                                    borderRadius={10}
-                                    backgroundColor={background}
-                                    onTouchEndCapture={()=> {
-                                        setVehicleSelected(
-                                            selected ? null : vehicle.item
-                                        );
-                                    }}
-                                >
-                                    {
-                                        selected ? (
-                                            <Icon 
-                                                as={<FontAwesome5 name="check"/>}
-                                                size="md"
-                                            />
-                                        ) : null
-                                    }
-                                    <Text color={color} fontWeight={700}>
-                                        Placa: {` `}
-                                        <Text fontWeight="normal">
-                                            {vehicle.item.plate}
-                                        </Text>
-                                    </Text>
-                                    <Text color={color} fontWeight={700}>
-                                        Tipo Veículo: {` `}
-                                        <Text fontWeight="normal">
-                                            {getVehicleType(vehicle.item.vehicleType)}
-                                        </Text>
-                                    </Text>
-                                </Stack>
-                            );
-                        }}
-                    />
+                                let background: string = "transparent";
+        
+                                let color: string = "white";
+        
+                                let selected = false;
+        
+                                if(vehicleSelected && vehicleSelected.plate === vehicle.plate){
+                                    selected = true;
+        
+                                    background = "primary";
+        
+                                    color = "secondary";
+                                }
+        
+                                    return (
+                                        <Stack
+                                            width="full"
+                                            direction="row"
+                                            justifyContent="space-between"
+                                            padding={5}
+                                            borderWidth={2}
+                                            borderColor="primary"
+                                            borderRadius={10}
+                                            backgroundColor={background}
+                                            onTouchEndCapture={()=> {
+                                                setVehicleSelected(
+                                                    selected ? null : vehicle
+                                                );
+                                            }}
+                                        >
+                                            {
+                                                selected ? (
+                                                    <Icon 
+                                                        as={<FontAwesome5 name="check"/>}
+                                                        size="md"
+                                                    />
+                                                ) : null
+                                            }
+                                            <Text color={color} fontWeight={700}>
+                                                Placa: {` `}
+                                                <Text fontWeight="normal">
+                                                    {vehicle.plate}
+                                                </Text>
+                                            </Text>
+                                            <Text color={color} fontWeight={700}>
+                                                Tipo Veículo: {` `}
+                                                <Text fontWeight="normal">
+                                                    {getVehicleType(vehicle.vehicleType)}
+                                                </Text>
+                                            </Text>
+                                        </Stack>
+                                    );
+                                })
+                        }
+                    </Stack>
             )}
 
             ComponentBottom={

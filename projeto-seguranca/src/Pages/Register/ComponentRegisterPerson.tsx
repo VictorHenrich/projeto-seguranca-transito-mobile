@@ -76,11 +76,11 @@ export default function ComponentRegisterPerson(props: any){
                 <InputDefault 
                     placeholder='CPF'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.document}
+                    value={userPayload.documentCpf}
                     onChangeText={(value) => {
                         setUserPayload({
                             ...userPayload,
-                            document: value
+                            documentCpf: value
                         })
                     }}
                 />
@@ -97,14 +97,14 @@ export default function ComponentRegisterPerson(props: any){
                 />
                 <SelectDefault 
                     placeholder='Estado Emissor'
-                    selectedValue={userPayload.stateIssue}
+                    selectedValue={userPayload.issuerState}
                     selectItem={{
                         itens: stateIssue
                     }}
                     onValueChange={(itemValue) => {
                         setUserPayload({
                             ...userPayload,
-                            stateIssue: itemValue
+                            issuerState: itemValue
                         })
                     }}
                 />

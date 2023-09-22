@@ -13,7 +13,7 @@ import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import ComponentContainerRegister from "./ComponentContainerRegister";
 import CheckboxDefault from "../../Components/CheckboxDefault";
-import { UserVehiclePayload } from "../../Services/CreateUserService";
+import IVehiclePayload from "../../Patterns/IVehiclePayload";
 import SelectDefault from "../../Components/SelectDefault";
 import HeadingDefault from "../../Components/HeadingDefault";
 
@@ -40,7 +40,7 @@ export default function ComponentRegisterVehicle(props: any){
     } = useContext<IContextRegister>(ContextRegister);
 
 
-    function changeVehicle(vehicleProps: Partial<UserVehiclePayload>){
+    function changeVehicle(vehicleProps: Partial<IVehiclePayload>){
         setUserPayload({
             ...userPayload,
             vehicles: [
@@ -87,7 +87,7 @@ export default function ComponentRegisterVehicle(props: any){
                 <InputDefault
                     placeholder='Placa'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.vehicles[0].plate}
+                    value={`${userPayload.vehicles[0].plate}`}
                     onChangeText={(value) => {
                         changeVehicle({
                             plate: value
@@ -107,7 +107,7 @@ export default function ComponentRegisterVehicle(props: any){
                 <InputDefault 
                     placeholder='Modelo (Opcional)'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.vehicles[0].model}
+                    value={`${userPayload.vehicles[0].model}`}
                     onChangeText={(value) => {
                         changeVehicle({
                             model: value
@@ -117,7 +117,7 @@ export default function ComponentRegisterVehicle(props: any){
                 <InputDefault 
                     placeholder='Ano (Opcional)'
                     icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={userPayload.vehicles[0].year || ''}
+                    value={`${userPayload.vehicles[0].year}`}
                     onChangeText={(value) => {
                         changeVehicle({
                             year: value

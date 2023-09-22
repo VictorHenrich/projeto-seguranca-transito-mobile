@@ -31,7 +31,9 @@ function OccurrenceInfoAddressComponent(props: any){
     }   
 
     return (
-        <OccurrenceRegisterContainer 
+        <OccurrenceRegisterContainer
+            minHeight={900}
+            haveScrool={true}
             ComponentTop={(
                 <Stack
                     width="full"
@@ -58,59 +60,55 @@ function OccurrenceInfoAddressComponent(props: any){
             )}
 
             ComponentCenter={(
-                <ScrollView
+                <Stack
                     width="full"
-                    height="30%"
+                    space={5}
+                    marginTop={20}
+                    marginBottom={20}
                 >
-                    <Stack
-                        width="full"
-                        height="full"
-                        space={5}
-                    >
-                        <InputDefault 
-                                placeholder="CEP" 
-                                value={occurrence?.address?.zipcode}
-                                onBlur={(item) => {
-                                    setAddress({zipcode: item.nativeEvent.text})
-                                }}
-                        />
-                        <InputDefault 
-                            placeholder="UF" 
-                            value={occurrence?.address?.state}
+                    <InputDefault 
+                            placeholder="CEP" 
+                            value={occurrence?.address?.zipcode}
                             onBlur={(item) => {
-                                setAddress({state: item.nativeEvent.text})
+                                setAddress({zipcode: item.nativeEvent.text})
                             }}
-                        />
-                        <InputDefault 
-                            placeholder="Cidade" 
-                            value={occurrence?.address?.city}
-                            onBlur={(item) => {
-                                setAddress({city: item.nativeEvent.text})
-                            }}
-                        />
-                        <InputDefault 
-                            placeholder="Bairro" 
-                            value={occurrence?.address?.district}
-                            onBlur={(item) => {
-                                setAddress({district: item.nativeEvent.text})
-                            }}
-                        />
-                        <InputDefault 
-                            placeholder="Logradouro" 
-                            value={occurrence?.address?.street}
-                            onBlur={(item) => {
-                                setAddress({street: item.nativeEvent.text})
-                            }}
-                        />
-                        <InputDefault 
-                            placeholder="numero" 
-                            value={`${occurrence?.address?.number}`}
-                            onBlur={(item) => {
-                                setAddress({number: item.nativeEvent.text})
-                            }}
-                        />
-                    </Stack>
-                </ScrollView>
+                    />
+                    <InputDefault 
+                        placeholder="UF" 
+                        value={occurrence?.address?.state}
+                        onBlur={(item) => {
+                            setAddress({state: item.nativeEvent.text})
+                        }}
+                    />
+                    <InputDefault 
+                        placeholder="Cidade" 
+                        value={occurrence?.address?.city}
+                        onBlur={(item) => {
+                            setAddress({city: item.nativeEvent.text})
+                        }}
+                    />
+                    <InputDefault 
+                        placeholder="Bairro" 
+                        value={occurrence?.address?.district}
+                        onBlur={(item) => {
+                            setAddress({district: item.nativeEvent.text})
+                        }}
+                    />
+                    <InputDefault 
+                        placeholder="Logradouro" 
+                        value={occurrence?.address?.street}
+                        onBlur={(item) => {
+                            setAddress({street: item.nativeEvent.text})
+                        }}
+                    />
+                    <InputDefault 
+                        placeholder="numero" 
+                        value={`${occurrence?.address?.number}`}
+                        onBlur={(item) => {
+                            setAddress({number: item.nativeEvent.text})
+                        }}
+                    />
+                </Stack>
             )}
             ComponentBottom={[
                 (
