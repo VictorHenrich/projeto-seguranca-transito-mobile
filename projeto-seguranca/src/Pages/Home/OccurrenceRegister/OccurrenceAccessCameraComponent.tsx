@@ -4,7 +4,6 @@ import CameraDefault from "../../../Components/CameraDefault";
 import { MediaItem } from '../../../Components/CameraDefault/CameraProvider';
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from './OccurrenceRegisterProvider';
 import IAttachmentPayload from '../../../Patterns/IAttachmentPayload';
-import FetchFileContentService from '../../../Services/App/FetchFileContentService';
 
 
 
@@ -18,10 +17,10 @@ function OccurrenceAccessCameraComponent(props: any){
 
 
     async function handleOnNext(medias: MediaItem[]): Promise<void>{
-        const uris: string[] = medias.map(media => media.uri);
-
-        const attachments: IAttachmentPayload[] = 
-            await new FetchFileContentService({ uris }).execute();
+        const attachments: IAttachmentPayload[] = medias.map(media => ({
+            content: media.base64 || "",
+            type: media.type
+        }));
 
         setOccurrence({
             ...occurrence,
@@ -32,7 +31,7 @@ function OccurrenceAccessCameraComponent(props: any){
     }
 
     return (
-        <CameraDefault onNext={handleOnNext}/>
+        <CameraDefault onNext={(medias) => handleOnNext(medias)}/>
     );
 }
 

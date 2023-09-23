@@ -1,4 +1,4 @@
-import { createContext, Context, useState, useCallback } from "react";
+import { createContext, Context, useState, useEffect } from "react";
 import IUserPayload from "../../../Patterns/IUserPayload";
 import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/App/GetOccurrencesService";
 import GetUserService, { UserGetPayload } from "../../../Services/App/GetUserService";
@@ -77,7 +77,7 @@ export default function MainProvider(props: any){
         ]);
     }
 
-    useCallback(() => {
+    useEffect(() => {
         
         loadFull();
     }, []);

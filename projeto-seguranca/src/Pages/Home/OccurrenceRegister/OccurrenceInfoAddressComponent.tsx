@@ -103,7 +103,7 @@ function OccurrenceInfoAddressComponent(props: any){
                     />
                     <InputDefault 
                         placeholder="numero" 
-                        value={`${occurrence?.address?.number}`}
+                        value={`${occurrence?.address?.number || ''}`}
                         onBlur={(item) => {
                             setAddress({number: item.nativeEvent.text})
                         }}

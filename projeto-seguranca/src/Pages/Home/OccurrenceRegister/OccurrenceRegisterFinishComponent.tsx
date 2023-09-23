@@ -27,31 +27,24 @@ function OccurrenceRegisterFinishComponent(props: any){
         <OccurrenceRegisterContainer
         
             ComponentTop={(
-                <HeadingDefault fontSize={30} textAlign="left">
-                    Estamos na {" "}
-                    <HeadingDefault color="primary" fontSize={30}>
-                        fase final {" "}
-                    </HeadingDefault>
-                    e gostaríamos de confirmar se você {" "}
-                    <HeadingDefault color="primary" fontSize={30}>
-                        concorda{" "}
-                    </HeadingDefault>
-                    em prosseguir com o {" "}
-                    <HeadingDefault color="primary" fontSize={30}>
-                        cadastro desta ocorrência.
-                    </HeadingDefault>
-                </HeadingDefault>
-            )}
-
-            ComponentCenter={(
                 <Stack
                     width="full"
-                    direction="column"
-                    justifyContent="center"
-                    alignItems="center"
-                    space={20}
+                    space={10}
                 >
-                    
+                    <HeadingDefault fontSize={30} textAlign="left">
+                        Estamos na {" "}
+                        <HeadingDefault color="primary" fontSize={30}>
+                            fase final {" "}
+                        </HeadingDefault>
+                            e gostaríamos de confirmar se você {" "}
+                        <HeadingDefault color="primary" fontSize={30}>
+                            concorda {" "}
+                        </HeadingDefault>
+                        em prosseguir com o {" "}
+                        <HeadingDefault color="primary" fontSize={30}>
+                            cadastro.
+                        </HeadingDefault>
+                    </HeadingDefault>
 
                     <Image 
                         source={require("../../../../assets/success.png")}
@@ -59,22 +52,25 @@ function OccurrenceRegisterFinishComponent(props: any){
                         height={200}
                         alt="map"
                     />
-
-                    <ButtonDefault 
-                        text="Cadastrar"
-                        TextProps={{
-                            fontSize: 18
-                        }}
-                        endIcon={
-                            <Icon 
-                                as={<Ionicons name="add-circle"/>}   
-                                size="lg"
-                            />
-                        }
-
-                        onPress={() => registerOccurrence()}
-                    /> 
                 </Stack>
+            )}
+
+            ComponentCenter={(
+                <ButtonDefault
+                    padding={5}
+                    text="Cadastrar"
+                    TextProps={{
+                        fontSize: 18
+                    }}
+                    endIcon={
+                        <Icon 
+                            as={<Ionicons name="add-circle"/>}   
+                            size="lg"
+                        />
+                    }
+
+                    onPress={() => registerOccurrence()}
+                /> 
             )}
         />
     );

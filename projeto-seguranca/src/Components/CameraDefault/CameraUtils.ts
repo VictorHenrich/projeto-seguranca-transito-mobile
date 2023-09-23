@@ -28,14 +28,19 @@ export default class CameraUtils{
     static async capturePhoto(cameraRef: Camera | null): Promise<CameraCapturedPicture | void>{
         if(!cameraRef) return;
     
-        return await cameraRef.takePictureAsync({ scale: 1 });
+        return await cameraRef.takePictureAsync({ 
+            scale: 1,
+            base64: true
+        });
     }
 
 
     static async startingVideo(cameraRef: Camera | null): Promise<Pick<CameraCapturedPicture, "uri"> | void>{
         if(!cameraRef) return;
     
-        return await cameraRef.recordAsync({ quality: 720 });
+        return await cameraRef.recordAsync({ 
+            quality: 720
+        });
     }
 
 

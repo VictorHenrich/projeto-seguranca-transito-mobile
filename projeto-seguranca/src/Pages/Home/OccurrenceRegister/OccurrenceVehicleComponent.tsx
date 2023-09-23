@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Image, Stack, Text, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
@@ -39,7 +39,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
         });
     }
 
-    useCallback(()=>{
+    useEffect(()=>{
         getVehicles()
     }, []);
 

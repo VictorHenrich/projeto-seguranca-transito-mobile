@@ -32,7 +32,8 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
 
     return (
         <OccurrenceRegisterContainer 
-        
+            haveScrool={true}
+            minHeight={500}
             ComponentTop={(
                 <Stack
                     width="full"
