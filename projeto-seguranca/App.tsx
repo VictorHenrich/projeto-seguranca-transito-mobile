@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { NativeBaseProvider } from 'native-base';
 import HomePage from './src/Pages/Home';
 import globalTheme from './src/Themes/GlobalTheme';
 import LoginPage from './src/Pages/Login';
 import RegisterPage from './src/Pages/Register';
 import StackNavigation, {IStackScreen} from './src/Components/StackNavigation';
-import AuthRefreshService from "./src/Services/AuthRefreshService";
+import AuthRefreshService from "./src/Services/App/AuthRefreshService";
 
 
 const screens: IStackScreen[] = [
@@ -26,7 +26,7 @@ const screens: IStackScreen[] = [
 export default function App() {
   const [userLogged, setUserLogged] = useState<boolean>(false);
 
-  useEffect(() => {
+  useCallback(() => {
     verifyAuthToken();
   }, []);
 

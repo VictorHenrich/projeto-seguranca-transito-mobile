@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import HeadingDefault from "../../../Components/HeadingDefault";
-import CreateOccurrenceService from "../../../Services/CreateOccurrenceService";
+import CreateOccurrenceService from "../../../Services/App/CreateOccurrenceService";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
@@ -16,7 +16,8 @@ function OccurrenceRegisterFinishComponent(props: any){
     }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
 
     async function registerOccurrence(): Promise<void>{
-        console.log(occurrence);
+        if(!occurrence.vehicle)
+            throw new Error("Nenhum veículo foi selecionado!");
 
         await new CreateOccurrenceService(occurrence).execute();
     }

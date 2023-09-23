@@ -1,9 +1,9 @@
 import { AxiosInstance, AxiosResponse } from "axios";
 
-import ApiFactory from "./Factories/ApiFactory";
-import AbstractService from "../Patterns/AbstractService";
-import UserCreateError from "../Exceptions/UserCreateError";
-import IUserPayload from "../Patterns/IUserPayload";
+import ApiFactory from "../Factories/ApiFactory";
+import AbstractService from "../../Patterns/AbstractService";
+import UserCreateError from "../../Exceptions/UserCreateError";
+import IUserPayload from "../../Patterns/IUserPayload";
 
 
 

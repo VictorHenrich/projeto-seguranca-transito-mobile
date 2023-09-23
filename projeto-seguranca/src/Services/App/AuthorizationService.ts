@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AUTH_KEY, API_BASE_URL } from "@env";
+import { AUTH_KEY } from "@env";
 import { AxiosInstance, AxiosResponse } from 'axios';
 
-import ApiFactory from "./Factories/ApiFactory";
-import AbstractService from "../Patterns/AbstractService";
-import AuthenticationError from "../Exceptions/AuthenticationError";
+import ApiFactory from "../Factories/ApiFactory";
+import AbstractService from "../../Patterns/AbstractService";
+import AuthenticationError from "../../Exceptions/AuthenticationError";
 
 
 

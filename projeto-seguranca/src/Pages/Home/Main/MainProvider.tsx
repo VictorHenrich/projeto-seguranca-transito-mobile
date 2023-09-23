@@ -1,9 +1,9 @@
-import { createContext, Context, useState, useEffect } from "react";
+import { createContext, Context, useState, useCallback } from "react";
 import IUserPayload from "../../../Patterns/IUserPayload";
-import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/GetOccurrencesService";
-import GetUserService, { UserGetPayload } from "../../../Services/GetUserService";
+import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/App/GetOccurrencesService";
+import GetUserService, { UserGetPayload } from "../../../Services/App/GetUserService";
 import IVehiclePayload from "../../../Patterns/IVehiclePayload";
-import GetVehiclesService from "../../../Services/GetVehiclesService";
+import GetVehiclesService from "../../../Services/App/GetVehiclesService";
 
 
 
@@ -32,7 +32,8 @@ const initialValues: IContextMain = {
             district: "",
             number: "",
             state: "",
-            street: ""
+            street: "",
+            zipcode: ""
         }
     },
     occurrences: [],
@@ -76,7 +77,7 @@ export default function MainProvider(props: any){
         ]);
     }
 
-    useEffect(() => {
+    useCallback(() => {
         
         loadFull();
     }, []);

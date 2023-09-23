@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 
 import { Alert, Heading, Slide } from "native-base";
 
@@ -22,7 +22,7 @@ export default function AlertDefault({
     timeout = 3000
 }: AlertDefaultProps){
 
-    useEffect(() =>{
+    useCallback(() =>{
         if(!open) return;
 
         setTimeout(() =>{

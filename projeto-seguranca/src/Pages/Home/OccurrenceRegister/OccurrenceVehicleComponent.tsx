@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Image, Stack, Text, Icon, FlatList } from "native-base";
+import React, { useState, useCallback, useContext } from "react";
+import { Image, Stack, Text, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import IVehiclePayload, { VehicleTypes } from "../../../Patterns/IVehiclePayload";
-import GetVehiclesService from "../../../Services/GetVehiclesService";
+import GetVehiclesService from "../../../Services/App/GetVehiclesService";
 import ButtonDefault from "../../../Components/ButtonDefault";
+import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
 function OccurrenceVehicleComponent(props: any): React.ReactElement{
@@ -15,7 +16,10 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
 
     const [vehicles, setVehicles] = useState<IVehiclePayload[]>([]);
 
-    const [vehicleSelected, setVehicleSelected] = useState<IVehiclePayload | null>(null);
+    const {
+        setOccurrence,
+        occurrence
+    }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
 
 
     async function getVehicles(): Promise<void>{
@@ -28,7 +32,14 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
         return vehicleType === VehicleTypes.CAR ? "Carro" : "Moto"
     }
 
-    useEffect(()=>{
+    function setVehicleSelected(vehicle?: IVehiclePayload): void{
+        setOccurrence({
+            ...occurrence,
+            vehicle
+        });
+    }
+
+    useCallback(()=>{
         getVehicles()
     }, []);
 
@@ -75,7 +86,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
         
                                 let selected = false;
         
-                                if(vehicleSelected && vehicleSelected.plate === vehicle.plate){
+                                if(occurrence.vehicle && occurrence.vehicle.plate === vehicle.plate){
                                     selected = true;
         
                                     background = "primary";
@@ -96,7 +107,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                                             backgroundColor={background}
                                             onTouchEndCapture={()=> {
                                                 setVehicleSelected(
-                                                    selected ? null : vehicle
+                                                    selected ? undefined : vehicle
                                                 );
                                             }}
                                         >
@@ -128,7 +139,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
             )}
 
             ComponentBottom={
-                vehicleSelected
+                occurrence.vehicle
                     ? [(
                         <ButtonDefault
                             key="button-continue"

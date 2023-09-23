@@ -9,18 +9,16 @@ export enum OccurrenceStatus{
     SUCCESS = "SUCESSO",
     ERROR = "ERRO",
     PROGRESS = "ANDAMENTO",
-    PROCESSING = "PROCESSAMENTO"
+    PROCESSING = "PROCESSAMENTO",
+    UNSET = "NAO_ENVIADO"
 }
 
 
 export default interface IOccurrencePayload{
-    user: Omit<IUserPayload, "vehicles">;
     vehicle: IVehiclePayload;
     address?: IAddressPayload;
     location?: ILocationPayload,
     created: Date;
-    lat: string;
-    lon: string;
     description: string;
     attachments: IAttachmentPayload[];
     status: OccurrenceStatus

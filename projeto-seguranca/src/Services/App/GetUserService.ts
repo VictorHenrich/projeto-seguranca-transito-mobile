@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import AbstractService from "../Patterns/AbstractService";
-import IUserPayload from "../Patterns/IUserPayload";
-import ApiFactory from "./Factories/ApiFactory";
+import AbstractService from "../../Patterns/AbstractService";
+import IUserPayload from "../../Patterns/IUserPayload";
+import ApiFactory from "../Factories/ApiFactory";
 
 
 export type UserGetPayload = Omit<IUserPayload, "vehicles">;

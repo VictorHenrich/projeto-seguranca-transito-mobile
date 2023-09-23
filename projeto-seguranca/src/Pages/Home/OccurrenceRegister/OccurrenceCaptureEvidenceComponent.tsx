@@ -9,6 +9,7 @@ import ButtonDefault from "../../../Components/ButtonDefault";
 import IAttachmentPayload from "../../../Patterns/IAttachmentPayload";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
+import AccessGalleryService from "../../../Services/Expo/AccessGalleryService";
 
 
 
@@ -18,29 +19,10 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
     const {
         setOccurrence,
         occurrence
-    } = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
+    }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
 
     async function accessGallery(): Promise<void>{
-        const { status }: ImagePicker.MediaLibraryPermissionResponse = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-        if(status === ImagePicker.PermissionStatus.DENIED)
-            throw new Error("Permissão de acesso a galeria rejeitado!");
-
-        const result: ImagePicker.ImagePickerResult = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            quality: 1,
-            allowsMultipleSelection: true,
-            base64: true
-        });
-
-        if(result.canceled) return;
-
-        const attachments: IAttachmentPayload[] = result.assets.map(asset => {
-            return {
-                content: asset.base64 || "",
-                type: asset.type || ""
-            }
-        });
+        const attachments: IAttachmentPayload[] = await new AccessGalleryService().execute();
 
         setOccurrence({
             ...occurrence,

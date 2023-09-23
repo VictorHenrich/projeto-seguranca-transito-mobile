@@ -1,5 +1,5 @@
 import { createContext, useState, Context, PropsWithChildren } from "react";
-import { CreateUserServiceProps } from "../../Services/CreateUserService";
+import { CreateUserServiceProps } from "../../Services/App/CreateUserService";
 import { VehicleTypes } from "../../Patterns/IVehiclePayload";
 
 
@@ -21,6 +21,7 @@ const initValues: IContextRegister = {
         issuerState: "SANTA CATARINA",
         birthday: new Date(),
         vehicles: [{
+            uuid: "",
             plate: "",
             renavam: "",
             vehicleType: VehicleTypes.CAR

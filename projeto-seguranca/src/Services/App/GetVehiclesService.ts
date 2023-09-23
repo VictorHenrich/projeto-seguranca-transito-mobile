@@ -1,13 +1,14 @@
-import AbstractService from "../Patterns/AbstractService";
-import IVehiclePayload, { VehicleTypes } from "../Patterns/IVehiclePayload";
-import ApiFactory from "./Factories/ApiFactory";
+import AbstractService from "../../Patterns/AbstractService";
+import IVehiclePayload, { VehicleTypes } from "../../Patterns/IVehiclePayload";
+import ApiFactory from "../Factories/ApiFactory";
 
 
 export default class GetVehiclesService extends AbstractService<void, IVehiclePayload[]>{
     private readonly URL: string = "/user/vehicle/query";
 
     handleVehicles(vehicles: any[]): IVehiclePayload[]{
-        return vehicles.map(({  
+        return vehicles.map(({
+            uuid, 
             plate,
             renavam,
             brand,
@@ -32,7 +33,8 @@ export default class GetVehiclesService extends AbstractService<void, IVehiclePa
                 model,
                 year,
                 vehicleType,
-                haveSafe
+                haveSafe,
+                uuid
             }
         })
     }

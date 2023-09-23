@@ -1,11 +1,17 @@
 import React, { createContext, Context, useState, PropsWithChildren } from "react";
-import { CreateOccurrenceProps } from "../../../Services/CreateOccurrenceService"; 
+import IVehiclePayload from "../../../Patterns/IVehiclePayload";
+import IOccurrencePayload, { OccurrenceStatus } from "../../../Patterns/IOccurrencePayload";
 
+
+
+export interface IOccurrenceRegisterPayload extends Omit<IOccurrencePayload, "vehicle">{
+    vehicle?: IVehiclePayload
+}
 
 
 export interface IOccurrenceRegisterContext{
-    occurrence: CreateOccurrenceProps,
-    setOccurrence: (occurrence: CreateOccurrenceProps) => void
+    occurrence: IOccurrenceRegisterPayload,
+    setOccurrence: (occurrence: IOccurrenceRegisterPayload) => void
 }
 
 
@@ -13,17 +19,19 @@ const initialValues: IOccurrenceRegisterContext = {
     occurrence: {
         location: undefined,
         address: undefined,
-        vehicleUuid: "",
+        vehicle: undefined,
         attachments: [],
-        description: ""
+        description: "",
+        created: new Date(),
+        status: OccurrenceStatus.PROGRESS
     },
-    setOccurrence: (occurrence: CreateOccurrenceProps) => null,
+    setOccurrence: (occurrence: IOccurrenceRegisterPayload) => null,
 }
 
 const OccurrenceRegisterContext: Context<IOccurrenceRegisterContext> = createContext<IOccurrenceRegisterContext>(initialValues);
 
-export default function OccurrenceRegisterProvider({ children }: PropsWithChildren): React.ReactElement{
-    const [occurrence, setOccurrence] = useState<CreateOccurrenceProps>(initialValues.occurrence);
+function OccurrenceRegisterProvider({ children }: PropsWithChildren): React.ReactElement{
+    const [occurrence, setOccurrence] = useState<IOccurrenceRegisterPayload>(initialValues.occurrence);
 
     return (
         <OccurrenceRegisterContext.Provider
@@ -36,5 +44,7 @@ export default function OccurrenceRegisterProvider({ children }: PropsWithChildr
         </OccurrenceRegisterContext.Provider>
     )
 }
+
+export default React.memo(OccurrenceRegisterProvider);
 
 export { OccurrenceRegisterContext };

@@ -4,7 +4,7 @@ import CameraDefault from "../../../Components/CameraDefault";
 import { MediaItem } from '../../../Components/CameraDefault/CameraProvider';
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from './OccurrenceRegisterProvider';
 import IAttachmentPayload from '../../../Patterns/IAttachmentPayload';
-import FetchFileContentService from '../../../Services/FetchFileContentService';
+import FetchFileContentService from '../../../Services/App/FetchFileContentService';
 
 
 

@@ -3,7 +3,7 @@ import { Badge, Text, PresenceTransition, Stack, Icon} from "native-base";
 import Fontisto from "react-native-vector-icons/FontAwesome5";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ButtonDefault from "../../../../Components/ButtonDefault";
-import { OccurrenceItemType } from "../../../../Services/GetOccurrencesService";
+import { OccurrenceItemType } from "../../../../Services/App/GetOccurrencesService";
 import { OccurrenceStatus } from "../../../../Patterns/IOccurrencePayload";
 
 

@@ -1,8 +1,8 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import AbstractService from "../Patterns/AbstractService";
-import ApiFactory from "./Factories/ApiFactory";
-import GetOccurrencesError from "../Exceptions/GetOccurrencesError";
-import IOccurrencePayload from "../Patterns/IOccurrencePayload";
+import AbstractService from "../../Patterns/AbstractService";
+import ApiFactory from "../Factories/ApiFactory";
+import GetOccurrencesError from "../../Exceptions/GetOccurrencesError";
+import IOccurrencePayload from "../../Patterns/IOccurrencePayload";
 
 
 export type OccurrenceItemType = Omit<IOccurrencePayload, "attachments" | "user">

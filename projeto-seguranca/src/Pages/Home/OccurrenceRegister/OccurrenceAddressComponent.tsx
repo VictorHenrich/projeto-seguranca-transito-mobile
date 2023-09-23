@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {Image, Stack, Icon} from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
@@ -6,11 +6,30 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
+import ILocationPayload from "../../../Patterns/ILocationPayload";
+import AccessLocationService from "../../../Services/Expo/AccessLocationService";
+import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
 function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
-
     const navigation: NavigationProp<any> = useNavigation<any>();
+
+    const {
+        occurrence,
+        setOccurrence
+    }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
+
+
+    async function getLocation(): Promise<void>{
+        const location: ILocationPayload = await new AccessLocationService().execute();
+
+        setOccurrence({
+            ...occurrence,
+            location
+        });
+
+        navigation.navigate("OccurrenceVehicle");
+    }
 
     return (
         <OccurrenceRegisterContainer
@@ -61,7 +80,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
                             color: "#FFFFFF",
                             fontSize: 20
                         }}
-                        onPress={() => navigation.navigate("OccurrenceVehicle")}
+                        onPress={() => getLocation()}
                     />
                     <ButtonDefault 
                         padding={5}

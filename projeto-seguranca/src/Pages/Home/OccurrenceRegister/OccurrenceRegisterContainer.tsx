@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Icon, IStackProps } from "native-base";
+import { Stack, Icon } from "native-base";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 

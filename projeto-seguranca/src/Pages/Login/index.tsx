@@ -18,7 +18,7 @@ import HeadingDefault from '../../Components/HeadingDefault';
 import BackgroundApp from '../../Components/BackgroundApp';
 import ButtonDefault from '../../Components/ButtonDefault';
 import ContainerDefault from '../../Components/ContainerDefault';
-import AuthorizationService, {AuthorizationProps} from '../../Services/AuthorizationService';
+import AuthorizationService, {AuthorizationProps} from '../../Services/App/AuthorizationService';
 import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 
 
