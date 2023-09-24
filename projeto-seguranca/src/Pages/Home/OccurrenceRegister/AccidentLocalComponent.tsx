@@ -11,7 +11,7 @@ import AccessLocationService from "../../../Services/Expo/AccessLocationService"
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
-function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
+function AccidentLocalComponent(props: any): React.ReactElement{
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const {
@@ -28,7 +28,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
             location
         });
 
-        navigation.navigate("OccurrenceVehicle");
+        navigation.navigate("SelectVehicle");
     }
 
     return (
@@ -97,7 +97,7 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
                             color: "#FFFFFF",
                             fontSize: 20
                         }}
-                        onPress={() => navigation.navigate("OccurrenceInfoAddress")}
+                        onPress={() => navigation.navigate("InfoAddress")}
                     />
                 </Stack>
             )}
@@ -106,4 +106,4 @@ function OccurrenceAddressLocalComponent(props: any): React.ReactElement{
 }
 
 
-export default React.memo(OccurrenceAddressLocalComponent);
+export default React.memo(AccidentLocalComponent);

@@ -3,7 +3,7 @@ import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import BackgroundApp from "../../Components/BackgroundApp";
 import ContainerDefault, {ContainerDefaultProps} from "../../Components/ContainerDefault";
-import ComponentPositionStep from "./ComponentPositionStep";
+import PositionStepComponent from "./PositionStepComponent";
 import AlertDefault, { AlertDefaultProps } from "../../Components/AlertDefault";
 
 
@@ -14,7 +14,7 @@ export interface ComponentContainerRegisterProps extends Partial<ContainerDefaul
 
 
 
-export default function ComponentContainerRegister({
+export default function ContainerRegisterComponent({
     heading,
     AlertProps = {
         open: false,
@@ -38,7 +38,7 @@ export default function ComponentContainerRegister({
                 minHeight={minHeight}
             >
                 {heading}
-                <ComponentPositionStep />
+                <PositionStepComponent />
 
                 {props.children}
 

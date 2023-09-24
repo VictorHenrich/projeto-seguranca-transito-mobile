@@ -3,7 +3,7 @@ import {Stack, Circle} from "native-base";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import { useContext } from "react";
 
-function ComponentPositionStep(props: any): React.ReactElement{
+function PositionStepComponent(props: any): React.ReactElement{
 
     const {
         pageIndex
@@ -28,4 +28,4 @@ function ComponentPositionStep(props: any): React.ReactElement{
 }
 
 
-export default React.memo(ComponentPositionStep);
+export default React.memo(PositionStepComponent);

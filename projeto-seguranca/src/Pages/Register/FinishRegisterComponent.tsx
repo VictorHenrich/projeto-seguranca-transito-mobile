@@ -1,16 +1,16 @@
 import React from "react";
 import { Image, Icon, Center } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import ComponentContainerRegister from "./ComponentContainerRegister";
+import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import ButtonDefault from "../../Components/ButtonDefault";
 
 
 
 
 
-function ComponentRegisterFinish(props: any): React.ReactElement{
+function FinishRegisterComponent(props: any): React.ReactElement{
     return (
-        <ComponentContainerRegister 
+        <ContainerRegisterComponent 
             heading="Cadastro Concluido!"
         >
             <Center
@@ -30,9 +30,9 @@ function ComponentRegisterFinish(props: any): React.ReactElement{
                     <Icon as={<FontAwesome name="check"/>}/>
                 }
             />
-        </ComponentContainerRegister>
+        </ContainerRegisterComponent>
     )
 }
 
 
-export default React.memo(ComponentRegisterFinish);
+export default React.memo(FinishRegisterComponent);

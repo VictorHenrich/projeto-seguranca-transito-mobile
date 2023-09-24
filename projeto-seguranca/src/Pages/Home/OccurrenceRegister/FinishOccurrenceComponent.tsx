@@ -9,7 +9,7 @@ import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./Occurre
 
 
 
-function OccurrenceRegisterFinishComponent(props: any){
+function FinishOccurrenceComponent(props: any){
 
     const {
         occurrence
@@ -77,4 +77,4 @@ function OccurrenceRegisterFinishComponent(props: any){
 }
 
 
-export default React.memo(OccurrenceRegisterFinishComponent);
+export default React.memo(FinishOccurrenceComponent);

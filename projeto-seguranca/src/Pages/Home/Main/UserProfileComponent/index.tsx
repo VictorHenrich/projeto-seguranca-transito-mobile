@@ -4,7 +4,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
-import InputUser from "./InputUser";
+import InputUserComponent from "./InputUserComponent";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../../Components/ButtonDefault";
 import { ContextHome, IContextMain } from "../MainProvider";
@@ -80,25 +80,25 @@ function UserProfileComponent(props: any): React.ReactElement{
                         width="full"
                         space={10}
                     >
-                        <InputUser 
+                        <InputUserComponent 
                             label="EMAIL"
                             InputDefaultProps={{
                                 value: user.email
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="CPF"
                             InputDefaultProps={{
                                 value: user.documentCpf
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="RG"
                             InputDefaultProps={{
                                 value: user.documentRg
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="TELEFONE"
                             InputDefaultProps={{
                                 value: user.telephone
@@ -143,31 +143,31 @@ function UserProfileComponent(props: any): React.ReactElement{
                         width="full"
                         space={10}
                     >
-                        <InputUser 
+                        <InputUserComponent 
                             label="UF"
                             InputDefaultProps={{
                                 value: user.address.state
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="CIDADE"
                             InputDefaultProps={{
                                 value: user.address.city
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="BAIRRO"
                             InputDefaultProps={{
                                 value: user.address.district
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="LOGRADOURO"
                             InputDefaultProps={{
                                 value: user.address.street
                             }}
                         />
-                        <InputUser 
+                        <InputUserComponent 
                             label="NUMERO"
                             InputDefaultProps={{
                                 value: `${user.address.number}`

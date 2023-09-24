@@ -7,7 +7,7 @@ import IAttachmentPayload from '../../../Patterns/IAttachmentPayload';
 
 
 
-function OccurrenceAccessCameraComponent(props: any){
+function AccessCameraComponent(props: any){
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const {
@@ -27,7 +27,7 @@ function OccurrenceAccessCameraComponent(props: any){
             attachments
         });
 
-        navigation.navigate("OccurrenceCaptureEvidence");
+        navigation.navigate("CaptureEvidence");
     }
 
     return (
@@ -37,4 +37,4 @@ function OccurrenceAccessCameraComponent(props: any){
 
 
 
-export default React.memo(OccurrenceAccessCameraComponent);
+export default React.memo(AccessCameraComponent);

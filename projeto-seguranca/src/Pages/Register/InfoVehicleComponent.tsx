@@ -11,7 +11,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
-import ComponentContainerRegister from "./ComponentContainerRegister";
+import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import CheckboxDefault from "../../Components/CheckboxDefault";
 import IVehiclePayload from "../../Patterns/IVehiclePayload";
 import SelectDefault from "../../Components/SelectDefault";
@@ -20,7 +20,7 @@ import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
-export default function ComponentRegisterVehicle(props: any){
+export default function InfoVehicleComponent(props: any){
 
     const colors = [
         {text: "PRETO"},
@@ -53,7 +53,7 @@ export default function ComponentRegisterVehicle(props: any){
     }
 
     return (
-        <ComponentContainerRegister
+        <ContainerRegisterComponent
             heading={(
                 <Stack 
                     width="full"
@@ -162,7 +162,7 @@ export default function ComponentRegisterVehicle(props: any){
                         />
                     }
                     onTouchStart={()=>{
-                        props.navigation.navigate("RegisterAccess");
+                        props.navigation.navigate("InfoAccess");
                     }}
                 />
                 <ButtonDefault 
@@ -174,12 +174,12 @@ export default function ComponentRegisterVehicle(props: any){
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("RegisterAddress");
+                        props.navigation.navigate("InfoAddress");
                     }}
             />
             </Stack>
             
             
-        </ComponentContainerRegister>
+        </ContainerRegisterComponent>
     )
 }

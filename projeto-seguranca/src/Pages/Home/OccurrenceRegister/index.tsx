@@ -1,13 +1,13 @@
 import React from "react";
 
 import StackNavigation, { IStackScreen } from "../../../Components/StackNavigation";
-import OccurrenceAccessCameraComponent from "./OccurrenceAccessCameraComponent";
-import OccurrenceCaptureEvidenceComponent from "./OccurrenceCaptureEvidenceComponent";
-import OccurrenceAddressLocalComponent from "./OccurrenceAddressComponent";
+import AccessCameraComponent from "./AccessCameraComponent";
+import CaptureEvidenceComponent from "./CaptureEvidenceComponent";
+import AccidentLocalComponent from "./AccidentLocalComponent";
 import OccurrenceRegisterProvider from "./OccurrenceRegisterProvider";
-import OccurrenceVehicleComponent from "./OccurrenceVehicleComponent";
-import OccurrenceRegisterFinishComponent from "./OccurrenceRegisterFinishComponent";
-import OccurrenceInfoAddressComponent from "./OccurrenceInfoAddressComponent";
+import SelectVehicleComponent from "./SelectVehicleComponent";
+import FinishOccurrenceComponent from "./FinishOccurrenceComponent";
+import InfoAddressComponent from "./InfoAddressComponent";
 
 
 
@@ -15,28 +15,28 @@ import OccurrenceInfoAddressComponent from "./OccurrenceInfoAddressComponent";
 function OccurrenceProcessRegisterPage(props: any): React.ReactElement{
     const screens: IStackScreen[] = [
         {
-            component: OccurrenceInfoAddressComponent,
-            name: "OccurrenceInfoAddress"
+            component: InfoAddressComponent,
+            name: "InfoAddress"
         },
         {
-            component: OccurrenceCaptureEvidenceComponent,
-            name: "OccurrenceCaptureEvidence"
+            component: CaptureEvidenceComponent,
+            name: "CaptureEvidence"
         },
         {
-            component: OccurrenceAddressLocalComponent,
-            name: "OccurrenceAddressLocal"
+            component: AccidentLocalComponent,
+            name: "AccidentLocal"
         },
         {
-            component: OccurrenceAccessCameraComponent,
-            name: "OccurrenceAccessCamera"
+            component: AccessCameraComponent,
+            name: "AccessCamera"
         },
         {
-            name: "OccurrenceVehicle",
-            component: OccurrenceVehicleComponent
+            name: "SelectVehicle",
+            component: SelectVehicleComponent
         },
         {
-            name: "OccurrenceFinish",
-            component: OccurrenceRegisterFinishComponent
+            name: "FinishOccurrence",
+            component: FinishOccurrenceComponent
         }
     ]
 
@@ -44,7 +44,7 @@ function OccurrenceProcessRegisterPage(props: any): React.ReactElement{
         <OccurrenceRegisterProvider>
             <StackNavigation 
                 screens={screens}
-                initialRouteName="OccurrenceAddressLocal"
+                initialRouteName="AccidentLocal"
                 navigationContainerProps={{
                     independent: true
                 }}

@@ -12,7 +12,7 @@ import ButtonDefault from "../../../Components/ButtonDefault";
 
 
 
-function OccurrenceInfoAddressComponent(props: any){
+function InfoAddressComponent(props: any){
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const {
@@ -126,7 +126,7 @@ function OccurrenceInfoAddressComponent(props: any){
                             color: "#FFFFFF",
                             fontSize: 18
                         }}
-                        onPress={() => navigation.navigate("OccurrenceVehicle")}
+                        onPress={() => navigation.navigate("SelectVehicle")}
                     />
                 )
             ]}
@@ -136,4 +136,4 @@ function OccurrenceInfoAddressComponent(props: any){
 
 
 
-export default React.memo(OccurrenceInfoAddressComponent);
+export default React.memo(InfoAddressComponent);

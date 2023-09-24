@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Icon, Image, Stack } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import * as ImagePicker from 'expo-image-picker';
 
 import HeadingDefault from "../../../Components/HeadingDefault";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
@@ -13,7 +12,7 @@ import AccessGalleryService from "../../../Services/Expo/AccessGalleryService";
 
 
 
-function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
+function CaptureEvidenceComponent(props: any): React.ReactElement{
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const {
@@ -80,7 +79,7 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
                             fontSize: 20
                         }}
                         onPress={() => {
-                            navigation.navigate("OccurrenceAccessCamera");
+                            navigation.navigate("AccessCamera");
                         }}
                     />
                     <ButtonDefault 
@@ -131,4 +130,4 @@ function OccurrenceCaptureEvidenceComponent(props: any): React.ReactElement{
 }
 
 
-export default React.memo(OccurrenceCaptureEvidenceComponent);
+export default React.memo(CaptureEvidenceComponent);

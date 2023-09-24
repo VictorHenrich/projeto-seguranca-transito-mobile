@@ -13,7 +13,7 @@ import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
-import ComponentContainerRegister from "./ComponentContainerRegister";
+import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import HeadingDefault from "../../Components/HeadingDefault";
 
 
@@ -26,7 +26,7 @@ const stateIssue = [
 ]
 
 
-export default function ComponentRegisterPerson(props: any){
+export default function InfoPersonComponent(props: any){
 
     const {
         setUserPayload,
@@ -34,7 +34,7 @@ export default function ComponentRegisterPerson(props: any){
     } = useContext<IContextRegister>(ContextRegister);
 
     return (
-        <ComponentContainerRegister 
+        <ContainerRegisterComponent 
             heading={(
                 <Stack
                     width="full"
@@ -122,9 +122,9 @@ export default function ComponentRegisterPerson(props: any){
                     />
                 }
                 onTouchStart={() => {
-                    props.navigation.navigate("RegisterAddress");
+                    props.navigation.navigate("InfoAddress");
                 }}
             />
-        </ComponentContainerRegister>
+        </ContainerRegisterComponent>
     )
 }

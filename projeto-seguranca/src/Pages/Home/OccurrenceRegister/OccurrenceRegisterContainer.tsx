@@ -37,7 +37,7 @@ function OccurrenceRegisterContainer({
                         width="full"
                         height="full"
                         justifyContent="space-between"
-                        space={10}
+                        space={20}
                         alignItems="center"
                     >
                         {ComponentTop}

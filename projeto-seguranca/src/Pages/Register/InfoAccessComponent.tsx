@@ -9,7 +9,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ButtonDefault from "../../Components/ButtonDefault";
 import InputDefault from "../../Components/InputDefault";
-import ComponentContainerRegister from "./ComponentContainerRegister";
+import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import UserCreateService from "../../Services/App/CreateUserService";
 import { AlertDefaultProps } from "../../Components/AlertDefault";
 import HeadingDefault from "../../Components/HeadingDefault";
@@ -17,7 +17,7 @@ import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
-function ComponentRegisterAccess(props: any): React.ReactElement{
+function InfoAccessComponent(props: any): React.ReactElement{
     const {
         setUserPayload,
         userPayload
@@ -36,7 +36,7 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                 userPayload
             ).execute();
 
-            props.navigation.navigate("RegisterFinish")
+            props.navigation.navigate("FinishRegister");
 
         }catch(error){
             setAlertState({
@@ -48,7 +48,7 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
     }
 
     return (
-        <ComponentContainerRegister 
+        <ContainerRegisterComponent 
             heading={(
                 <Stack
                     width="full"
@@ -120,7 +120,7 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("RegisterVehicle");
+                        props.navigation.navigate("InfoVehicle");
                     }}
                 />
                 <ButtonDefault 
@@ -135,9 +135,9 @@ function ComponentRegisterAccess(props: any): React.ReactElement{
                     onTouchStart={()=> createUser()}
                 />
             </Stack>
-        </ComponentContainerRegister>
+        </ContainerRegisterComponent>
     )
 }
 
 
-export default React.memo(ComponentRegisterAccess);
+export default React.memo(InfoAccessComponent);

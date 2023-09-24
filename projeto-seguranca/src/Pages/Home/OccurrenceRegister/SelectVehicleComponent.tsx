@@ -10,7 +10,7 @@ import ButtonDefault from "../../../Components/ButtonDefault";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 
 
-function OccurrenceVehicleComponent(props: any): React.ReactElement{
+function SelectVehicleComponent(props: any): React.ReactElement{
 
     const navigation: NavigationProp<any> = useNavigation<any>();
 
@@ -154,7 +154,7 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
                                 />
                             }
                             onTouchStart={()=>{
-                                navigation.navigate("OccurrenceCaptureEvidence");
+                                navigation.navigate("CaptureEvidence");
                             }}
                         />
                     )]
@@ -169,4 +169,4 @@ function OccurrenceVehicleComponent(props: any): React.ReactElement{
 }
 
 
-export default React.memo(OccurrenceVehicleComponent);
+export default React.memo(SelectVehicleComponent);

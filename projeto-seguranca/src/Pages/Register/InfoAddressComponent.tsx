@@ -13,7 +13,7 @@ import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
-import ComponentContainerRegister from "./ComponentContainerRegister";
+import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import IAddressPayload from "../../Patterns/IAddressPayload";
 import HeadingDefault from "../../Components/HeadingDefault";
 
@@ -27,7 +27,7 @@ const states = [
 ]
 
 
-function ComponentRegisterAddress(props: any): React.ReactElement{
+function InfoAddressComponent(props: any): React.ReactElement{
     const {
         setUserPayload,
         userPayload
@@ -45,7 +45,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
     }
 
     return (
-        <ComponentContainerRegister 
+        <ContainerRegisterComponent 
             heading={(
                 <Stack 
                     width="full"
@@ -152,7 +152,7 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("RegisterVehicle");
+                        props.navigation.navigate("InfoVehicle");
                     }}
                 />
                 <ButtonDefault 
@@ -164,13 +164,13 @@ function ComponentRegisterAddress(props: any): React.ReactElement{
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("RegisterPerson");
+                        props.navigation.navigate("InfoPerson");
                     }}
                 />
             </Stack>
-        </ComponentContainerRegister>
+        </ContainerRegisterComponent>
     )
 }
 
 
-export default React.memo(ComponentRegisterAddress);
+export default React.memo(InfoAddressComponent);

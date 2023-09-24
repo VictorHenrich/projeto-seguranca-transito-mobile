@@ -12,7 +12,7 @@ export interface InputUserProps extends IFormControlProps{
 }
 
 
-export default function InputUser({
+export default function InputUserComponent({
     InputDefaultProps = {},
     LabelProps = {},
     label
