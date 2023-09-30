@@ -4,7 +4,7 @@ import Fontisto from "react-native-vector-icons/Fontisto";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Entypo from "react-native-vector-icons/Entypo";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ButtonDefault from "../../Components/ButtonDefault";
@@ -20,7 +20,8 @@ import HeadingDefault from "../../Components/HeadingDefault";
 function InfoAccessComponent(props: any): React.ReactElement{
     const {
         setUserPayload,
-        userPayload
+        userPayload,
+        setPageIndex
     } = useContext<IContextRegister>(ContextRegister);
 
     const [alertState, setAlertState] = useState<Omit<AlertDefaultProps, "stateOpen">>({
@@ -29,6 +30,9 @@ function InfoAccessComponent(props: any): React.ReactElement{
         status: "info"
     });
 
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    navigation.addListener("focus", ()=> setPageIndex(4));
 
     async function createUser(){
         try{

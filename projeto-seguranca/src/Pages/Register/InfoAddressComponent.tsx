@@ -7,7 +7,7 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
@@ -30,9 +30,13 @@ const states = [
 function InfoAddressComponent(props: any): React.ReactElement{
     const {
         setUserPayload,
-        userPayload
+        userPayload,
+        setPageIndex
     } = useContext<IContextRegister>(ContextRegister);
 
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    navigation.addListener("focus", ()=> setPageIndex(2));
 
     function changeAddress(addressProps: Partial<IAddressPayload>){
         setUserPayload({
@@ -152,7 +156,7 @@ function InfoAddressComponent(props: any): React.ReactElement{
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("InfoVehicle");
+                        navigation.navigate("InfoVehicle");
                     }}
                 />
                 <ButtonDefault 
@@ -164,7 +168,7 @@ function InfoAddressComponent(props: any): React.ReactElement{
                         />
                     }
                     onTouchStart={()=> {
-                        props.navigation.navigate("InfoPerson");
+                        navigation.navigate("InfoPerson");
                     }}
                 />
             </Stack>

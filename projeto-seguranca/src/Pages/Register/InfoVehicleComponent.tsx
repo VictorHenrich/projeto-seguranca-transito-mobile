@@ -7,6 +7,7 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import InputDefault from '../../Components/InputDefault';
@@ -22,6 +23,16 @@ import HeadingDefault from "../../Components/HeadingDefault";
 
 export default function InfoVehicleComponent(props: any){
 
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    const {
+        setUserPayload,
+        userPayload,
+        setPageIndex
+    } = useContext<IContextRegister>(ContextRegister);
+
+    navigation.addListener("focus", ()=> setPageIndex(3));
+
     const colors = [
         {text: "PRETO"},
         {text: "BRANCO"},
@@ -33,11 +44,6 @@ export default function InfoVehicleComponent(props: any){
         {text: "LARANJA"},
         {text: "BEGE"},
     ]
-
-    const {
-        setUserPayload,
-        userPayload
-    } = useContext<IContextRegister>(ContextRegister);
 
 
     function changeVehicle(vehicleProps: Partial<IVehiclePayload>){

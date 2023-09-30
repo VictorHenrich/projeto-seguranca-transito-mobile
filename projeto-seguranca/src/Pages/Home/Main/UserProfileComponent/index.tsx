@@ -1,7 +1,8 @@
-import React, {useContext, Context} from "react";
+import React, {useContext} from "react";
 import { Stack, Avatar, Heading, Text, Divider, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
 import InputUserComponent from "./InputUserComponent";
@@ -15,6 +16,12 @@ function UserProfileComponent(props: any): React.ReactElement{
     const {
         user
     } =  useContext<IContextMain>(ContextHome);
+
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    function logout(): void{
+        navigation.navigate("LoginPage");
+    }
 
     return (
         <ContainerDefault 
@@ -251,6 +258,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 color="#FFFFFF"
                             />
                         }
+                        onPress={logout}
                     />
                 </Stack>
             </Stack>

@@ -6,8 +6,7 @@ import RegisterProvider from "./RegisterProvider";
 import InfoVehicleComponent from "./InfoVehicleComponent";
 import InfoAccessComponent from "./InfoAccessComponent";
 import FinishRegisterComponent from "./FinishRegisterComponent";
-import RegisterNavigation from "./RegisterNavigation";
-import { IStackScreen } from "../../Components/StackNavigation";
+import StackNavigation, { IStackScreen } from "../../Components/StackNavigation";
 
 
 const screens: IStackScreen[] = [
@@ -38,7 +37,8 @@ function RegisterPage(props: any): React.ReactElement{
 
     return (
         <RegisterProvider>
-            <RegisterNavigation 
+            <StackNavigation
+                hasNavigationContainer={false} 
                 screens={screens}
                 initialRouteName="InfoPerson"
             />

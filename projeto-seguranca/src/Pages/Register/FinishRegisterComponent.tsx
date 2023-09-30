@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Image, Icon, Center } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+
 import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import ButtonDefault from "../../Components/ButtonDefault";
+import { ContextRegister, IContextRegister } from "./RegisterProvider";
 
 
 
 
 
 function FinishRegisterComponent(props: any): React.ReactElement{
+    const { setPageIndex } = useContext<IContextRegister>(ContextRegister);
+
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    navigation.addListener("focus", ()=> setPageIndex(5));
+
     return (
         <ContainerRegisterComponent 
             heading="Cadastro Concluido!"

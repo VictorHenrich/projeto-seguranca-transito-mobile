@@ -1,5 +1,5 @@
 import { Text, Link } from "native-base";
-import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { useNavigation, NavigationProp, StackActions } from "@react-navigation/native";
 
 import BackgroundApp from "../../Components/BackgroundApp";
 import ContainerDefault, {ContainerDefaultProps} from "../../Components/ContainerDefault";
@@ -44,15 +44,14 @@ export default function ContainerRegisterComponent({
 
                 <Link
                     onTouchStart={() =>{
-                        if(navigation.canGoBack())
-                            navigation.goBack();
+                        navigation.navigate("LoginPage");
                     }}
                 >
                     <Text
                         color="primary" 
                         fontWeight={700}
                     >
-                        Voltar ao início
+                        Voltar para o login
                     </Text>
                 </Link>
                 

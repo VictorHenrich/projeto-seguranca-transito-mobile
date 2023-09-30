@@ -82,6 +82,9 @@ function OccurrenceRegisterContainer({
                                         size="xl"
                                     />
                                 }
+                                onPress={()=> {
+                                    navigation.navigate("Main");
+                                }}
                             />
                         </Stack>
                     </Stack>

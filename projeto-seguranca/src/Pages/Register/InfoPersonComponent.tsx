@@ -9,6 +9,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import InputDefault from '../../Components/InputDefault';
 import ButtonDefault from "../../Components/ButtonDefault";
@@ -30,8 +31,13 @@ export default function InfoPersonComponent(props: any){
 
     const {
         setUserPayload,
-        userPayload
+        userPayload,
+        setPageIndex
     } = useContext<IContextRegister>(ContextRegister);
+
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    navigation.addListener("focus", ()=> setPageIndex(1));
 
     return (
         <ContainerRegisterComponent 
@@ -122,7 +128,7 @@ export default function InfoPersonComponent(props: any){
                     />
                 }
                 onTouchStart={() => {
-                    props.navigation.navigate("InfoAddress");
+                    navigation.navigate("InfoAddress");
                 }}
             />
         </ContainerRegisterComponent>

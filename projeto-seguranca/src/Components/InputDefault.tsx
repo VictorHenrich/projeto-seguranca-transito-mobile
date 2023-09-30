@@ -3,7 +3,6 @@ import {useState} from "react";
 import {  
     Input, 
     IInputProps,
-    InputGroup,
     Icon
 } from "native-base";
 
@@ -31,49 +30,55 @@ export default function InputDefault({
     ...props
 }: Partial<InputDefaultProps>){
 
-    const [styleInput, setSyleInput] = useState<IStyleInput>({
-        color: colorDefault,
-        opacity: 1,
-        backgroundColor: "transparent"
-    });
+    const [inputFocus, setInputFocus] = useState<boolean>();
+
+    function onFocus(event: any): void{
+        if(props.onFocus)
+            props.onFocus(event);
+
+        setInputFocus(true);
+    }
+
+
+    function onBlur(event: any): void{
+        if(props.onBlur)
+            props.onBlur(event);
+
+        setInputFocus(false);
+    }
 
     return (
         <Input
             variant="outline"
             borderWidth="3px"
-            backgroundColor={styleInput.backgroundColor}
-            color={styleInput.color}
-            borderColor={styleInput.color}
+            backgroundColor="transparent"
+            color={colorDefault}
+            borderColor={colorDefault}
             width="full"
             maxHeight={80}
             minHeight={70}
             fontWeight={700}
-            placeholderTextColor={styleInput.color}
-            opacity={styleInput.opacity}
-            onFocus={()=>{
-                setSyleInput({
-                    color: colorFocus,
-                    opacity: 1,
-                    backgroundColor
-                })
-            }}
-            onBlur={()=>{
-                setSyleInput({
-                    color: colorDefault,
-                    opacity: 0.3,
-                    backgroundColor: "transparent"
-                })
+            placeholderTextColor={colorDefault}
+            opacity={0.5}
+            _focus={{
+                color: colorFocus,
+                borderColor: colorFocus,
+                placeholderTextColor: colorFocus,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                opacity: 1
             }}
             InputRightElement={
                 icon && (
                     <Icon
-                        color={styleInput.color}
+                        color={inputFocus ? colorFocus : colorDefault}
                         margin={5}
                         size="xl"
                         as={icon}
                     />
                 )
             }
+            onFocus={onFocus}
+            onBlur={onBlur}
             {...props}
         />
     )

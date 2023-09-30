@@ -17,12 +17,10 @@ function HomePage(props: any): React.ReactElement{
     ]
 
     return (
-        <StackNavigation 
+        <StackNavigation
+            hasNavigationContainer={false}
             screens={screens}
             initialRouteName="Main"
-            navigationContainerProps={{
-                independent: true
-            }}
         />
     );
 }

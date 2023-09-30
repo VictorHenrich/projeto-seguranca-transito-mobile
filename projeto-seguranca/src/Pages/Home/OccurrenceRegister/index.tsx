@@ -42,12 +42,10 @@ function OccurrenceProcessRegisterPage(props: any): React.ReactElement{
 
     return (
         <OccurrenceRegisterProvider>
-            <StackNavigation 
+            <StackNavigation
+                hasNavigationContainer={false}
                 screens={screens}
                 initialRouteName="AccidentLocal"
-                navigationContainerProps={{
-                    independent: true
-                }}
             />
         </OccurrenceRegisterProvider>
     )

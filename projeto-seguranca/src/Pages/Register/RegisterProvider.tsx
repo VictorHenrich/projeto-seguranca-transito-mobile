@@ -1,6 +1,7 @@
 import { createContext, useState, Context, PropsWithChildren } from "react";
 import { CreateUserServiceProps } from "../../Services/App/CreateUserService";
 import { VehicleTypes } from "../../Patterns/IVehiclePayload";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 
 export interface IContextRegister{
