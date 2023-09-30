@@ -40,7 +40,10 @@ function UserProfileComponent(props: any): React.ReactElement{
                     alignItems="center"
                     width="full"
                 >
-                    <Avatar size="xl"/>
+                    <Avatar 
+                        size="xl"
+                        backgroundColor="black"
+                    />
                     <Heading
                         fontWeight={700}
                         color="primary"

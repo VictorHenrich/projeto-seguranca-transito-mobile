@@ -114,6 +114,7 @@ function InfoAddressComponent(props: any){
                 (
                     <ButtonDefault
                         text="Próximo"
+                        key="button-info-address"
                         rightIcon={
                             <Icon 
                                 as={<FontAwesome5 name="arrow-right"/>}

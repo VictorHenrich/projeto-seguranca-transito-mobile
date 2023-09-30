@@ -118,7 +118,7 @@ function CaptureEvidenceComponent(props: any): React.ReactElement{
                                 fontSize: 20
                             }}
                             onPress={() => {
-                                navigation.navigate("OccurrenceFinish");
+                                navigation.navigate("FinishOccurrence");
                             }}
                         />
                     )]
