@@ -9,6 +9,11 @@ import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
 
 const valueDefault = "NÃO INFORMADO"
 
+export interface VehicleItemComponentProps extends IVehiclePayload{
+    onChange?: () => void,
+    onDelete?: () => void,
+}
+
 
 export default function VehicleItemComponent({
     plate,
@@ -19,8 +24,10 @@ export default function VehicleItemComponent({
     chassi = valueDefault,
     color = valueDefault,
     haveSafe = false,
-    year = valueDefault
-}: IVehiclePayload){
+    year = valueDefault,
+    onChange = () => null,
+    onDelete = () => null
+}: VehicleItemComponentProps){
 
     const [openCard, setOpenCard] = useState<boolean>(false);
 
@@ -119,12 +126,14 @@ export default function VehicleItemComponent({
                             maxWidth={100}
                             borderRadius={2}
                             padding={0}
+                            onTouchStart={onChange}
                         />
                         <ButtonDefault 
                             text="Excluir" 
                             maxWidth={100}
                             borderRadius={2}
                             backgroundColor="red"
+                            onTouchStart={onDelete}
                         />
                     </Stack>
                 </Stack>

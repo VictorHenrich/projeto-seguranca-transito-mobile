@@ -1,19 +1,15 @@
 import {useState} from "react";
-import { Select, Text, ISelectProps, ISelectItemProps } from "native-base"
+import { Select, Icon, ISelectProps, ISelectItemProps } from "native-base"
 
 
 
-export interface SelectDefaultItensProps extends Omit<ISelectItemProps, "label" | "key" | "value">{
-    itens: [{
-        text: string,
-        value?: string,
-        icon?: any
-    }]
+export interface SelectDefaultItemProps extends ISelectItemProps{
+    //icon?: any
 }
 
 
 export interface SelectDefaultProps extends ISelectProps{
-    selectItem: SelectDefaultItensProps,
+    itens: SelectDefaultItemProps[],
     colorDefault?: string,
     colorFocus?: string,
     backgroundColor?: string
@@ -26,21 +22,12 @@ interface IStyleSelect{
 }
 
 export default function SelectDefault({
-    selectItem: {
-        itens,
-        ...selectItensProps
-    },
+    itens,
     colorDefault = "#97A6B4",
     colorFocus = "primary",
     backgroundColor = "rgba(0,0,0, 0.5)",
     ...selectProps
 }: SelectDefaultProps){
-    const [styleInput, setSyleInput] = useState<IStyleSelect>({
-        color: colorDefault,
-        opacity: 1,
-        backgroundColor: "transparent"
-    });
-
     return (
         <Select
                 maxHeight={80}
@@ -48,42 +35,31 @@ export default function SelectDefault({
                 {...selectProps}
                 variant="outline"
                 borderWidth="3px"
-                backgroundColor={styleInput.backgroundColor}
-                color={styleInput.color}
-                borderColor={styleInput.color}
+                backgroundColor="transparent"
+                color={colorDefault}
+                borderColor={colorDefault}
                 width="full"
                 fontWeight={700}
-                placeholderTextColor={styleInput.color}
-                opacity={styleInput.opacity}
-                onOpen={()=>{
-                    setSyleInput({
-                        color: colorFocus,
-                        opacity: 1,
-                        backgroundColor
-                    })
-                }}
-                onClose={()=>{
-                    setSyleInput({
-                        color: colorDefault,
-                        opacity: 0.3,
-                        backgroundColor: "transparent"
-                    })
+                placeholderTextColor={colorDefault}
+                opacity={0.5}
+                _selectedItem={{
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                    color: colorFocus,
+                    borderColor: colorFocus,
+                    opacity: 1
                 }}
         >
             {itens.map((item, index) => {
                 return (
                     <Select.Item
                         key={index}
-                        value={item.value || item.text}
-                        label={item.text}
                         textAlign="center"
-                        rightIcon={item.icon && item.icon}
                         padding={5}
                         margin={1}
                         borderRadius={20}
                         backgroundColor={colorFocus}
                         color={colorDefault}
-                        {...selectItensProps}
+                        {...item}
                     />
                 )
             })}

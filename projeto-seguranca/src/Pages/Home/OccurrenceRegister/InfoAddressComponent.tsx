@@ -32,7 +32,7 @@ function InfoAddressComponent(props: any){
 
     return (
         <OccurrenceRegisterContainer
-            minHeight={900}
+            minHeight={500}
             haveScrool={true}
             ComponentTop={(
                 <Stack
@@ -63,8 +63,6 @@ function InfoAddressComponent(props: any){
                 <Stack
                     width="full"
                     space={5}
-                    marginTop={20}
-                    marginBottom={20}
                 >
                     <InputDefault 
                             placeholder="CEP" 

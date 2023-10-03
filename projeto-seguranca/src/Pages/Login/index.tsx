@@ -133,7 +133,10 @@ function LoginPage(props: any): React.ReactElement{
                         </Stack>
                     </Stack>
                 </Box>
-                <ButtonDefault text="SIGN IN" onTouchStart={authenticate}/>
+                <ButtonDefault 
+                    text="SIGN IN" 
+                    onTouchStart={authenticate}
+                />
                 <Link
                     onTouchStart={() =>{
                         navigation.navigate("RegisterPage");

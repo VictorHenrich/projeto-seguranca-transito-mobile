@@ -16,15 +16,7 @@ import ButtonDefault from "../../Components/ButtonDefault";
 import SelectDefault from "../../Components/SelectDefault";
 import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import HeadingDefault from "../../Components/HeadingDefault";
-
-
-const stateIssue = [
-    {text: "SANTA CATARINA"},
-    {text: "RIO GRANDE DO SUL"},
-    {text: "PARANÁ"},
-    {text: "SÃO PAULO"},
-    {text: "RIO DE JANEIRO"},
-]
+import { issueStates } from "../../Utils/Constants";
 
 
 export default function InfoPersonComponent(props: any){
@@ -104,9 +96,7 @@ export default function InfoPersonComponent(props: any){
                 <SelectDefault 
                     placeholder='Estado Emissor'
                     selectedValue={userPayload.issuerState}
-                    selectItem={{
-                        itens: stateIssue
-                    }}
+                    itens={issueStates}
                     onValueChange={(itemValue) => {
                         setUserPayload({
                             ...userPayload,

@@ -16,15 +16,7 @@ import { ContextRegister, IContextRegister } from "./RegisterProvider";
 import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import IAddressPayload from "../../Patterns/IAddressPayload";
 import HeadingDefault from "../../Components/HeadingDefault";
-
-
-const states = [
-    {text: "SC"},
-    {text: "RS"},
-    {text: "PR"},
-    {text: "SP"},
-    {text: "RJ"},
-]
+import { states } from "../../Utils/Constants";
 
 
 function InfoAddressComponent(props: any): React.ReactElement{
@@ -50,6 +42,7 @@ function InfoAddressComponent(props: any): React.ReactElement{
 
     return (
         <ContainerRegisterComponent 
+            minHeight={1200}
             heading={(
                 <Stack 
                     width="full"
@@ -71,7 +64,6 @@ function InfoAddressComponent(props: any): React.ReactElement{
                     </Box>
                 </Stack>
             )}
-            minHeight={1200}
         >
             <Stack 
                 direction="column" 
@@ -91,9 +83,7 @@ function InfoAddressComponent(props: any): React.ReactElement{
                 <SelectDefault 
                     placeholder='UF'
                     selectedValue={userPayload.address.state}
-                    selectItem={{
-                        itens: states
-                    }}
+                    itens={states}
                     onValueChange={(value) => {
                         changeAddress({
                             state: value

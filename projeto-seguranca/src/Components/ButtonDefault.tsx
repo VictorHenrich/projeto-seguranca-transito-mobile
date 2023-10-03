@@ -9,13 +9,13 @@ export interface ButtonDefaultProps extends IButtonProps{
 export default function ButtonDefault({ text, TextProps = {}, ...props}: ButtonDefaultProps){
 
     return (
-        <Button 
+        <Button
             backgroundColor="primary"
-            width="80%"
             minHeight={50}
             borderRadius={20}
             fontWeight={700}
             shadow="5"
+            width="80%"
             {...props}
         >
             <Text

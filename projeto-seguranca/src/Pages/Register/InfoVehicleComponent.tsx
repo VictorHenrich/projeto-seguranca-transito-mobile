@@ -17,6 +17,7 @@ import CheckboxDefault from "../../Components/CheckboxDefault";
 import IVehiclePayload from "../../Patterns/IVehiclePayload";
 import SelectDefault from "../../Components/SelectDefault";
 import HeadingDefault from "../../Components/HeadingDefault";
+import { colors } from "../../Utils/Constants";
 
 
 
@@ -32,18 +33,6 @@ export default function InfoVehicleComponent(props: any){
     } = useContext<IContextRegister>(ContextRegister);
 
     navigation.addListener("focus", ()=> setPageIndex(3));
-
-    const colors = [
-        {text: "PRETO"},
-        {text: "BRANCO"},
-        {text: "LARANJA"},
-        {text: "AMARELO"},
-        {text: "VERMELHO"},
-        {text: "PRATA"},
-        {text: "DOURADO"},
-        {text: "LARANJA"},
-        {text: "BEGE"},
-    ]
 
 
     function changeVehicle(vehicleProps: Partial<IVehiclePayload>){
@@ -133,9 +122,7 @@ export default function InfoVehicleComponent(props: any){
                 <SelectDefault 
                     placeholder='Cor (Opcional)'
                     selectedValue={userPayload.vehicles[0].color}
-                    selectItem={{
-                        itens: colors
-                    }}
+                    itens={colors}
                     onValueChange={(value) => {
                         changeVehicle({
                             color: value
