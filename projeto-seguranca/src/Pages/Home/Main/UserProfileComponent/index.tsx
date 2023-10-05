@@ -13,6 +13,9 @@ import SelectDefault from "../../../../Components/SelectDefault";
 import { states } from "../../../../Utils/Constants";
 import InfoVehicleComponent from "./InfoVehicleComponent";
 import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
+import CreateVehicleService from "../../../../Services/App/CreateVehicleService";
+import UpdateVehicleService from "../../../../Services/App/UpdateVehicleService";
+import UpdateUserService from "../../../../Services/App/UpdateUserService";
 
 
 
@@ -42,6 +45,18 @@ function UserProfileComponent(props: any): React.ReactElement{
 
     async function createOrUpdateVehicle(vehicle: IVehiclePayload): Promise<void>{
         resetProps();
+
+        console.log("AQUIII")
+
+        if(!vehicle.uuid)
+            await new CreateVehicleService(vehicle).execute();
+
+        else
+            await new UpdateVehicleService(vehicle).execute();
+    }
+
+    async function updateUser(): Promise<void>{
+        await new UpdateUserService(user).execute();
     }
 
     return (
@@ -266,6 +281,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     color="#FFFFFF"
                                 />
                             }
+                            onPress={() => updateUser()}
                         />
                         <ButtonDefault 
                             text="Adicionar Veículo"
