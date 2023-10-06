@@ -14,18 +14,18 @@ function OccurrenceListComponent(props: any): React.ReactElement{
 
     return (
         <ContainerDefault
-            haveScrool={false}
             backgroundColor="secondary"
             display="flex"
             justifyContent="flex-start"
             alignItems="center"
+            haveScrool={true}
+            minHeight={900}
         >
             {
                 occurrences.map((occurrence, index) => (
                     <OccurrenceItemComponent
                             description={occurrence.description}
-                            lat={occurrence.lat}
-                            lon={occurrence.lon}
+                            location={occurrence.location}
                             address={occurrence.address}
                             created={occurrence.created}
                             status={occurrence.status}

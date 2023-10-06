@@ -25,7 +25,8 @@ function FinishOccurrenceComponent(props: any){
 
     return (
         <OccurrenceRegisterContainer
-        
+            minHeight={500}
+            haveScrool={true}
             ComponentTop={(
                 <Stack
                     width="full"

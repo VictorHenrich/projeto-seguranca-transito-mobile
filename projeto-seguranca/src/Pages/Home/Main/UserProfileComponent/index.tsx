@@ -167,7 +167,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                         />
                         <Heading
                             fontWeight={700}
-                            color="primary"
+                            color="white"
                             textAlign="center"
                             textTransform="capitalize"
                         >
