@@ -24,7 +24,6 @@ export default class UpdateVehicleService extends AbstractService<IVehiclePayloa
 
     async execute(): Promise<void> {
         try{
-            console.log("AQUIIIII")
             const url: string = `${this.urlUpdateVehicle}/${this.payload.uuid}`;
 
             const data: any = this.handleRequestData();

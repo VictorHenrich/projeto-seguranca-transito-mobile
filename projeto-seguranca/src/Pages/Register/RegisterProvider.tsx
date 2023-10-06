@@ -25,7 +25,11 @@ const initValues: IContextRegister = {
             uuid: "",
             plate: "",
             renavam: "",
-            vehicleType: VehicleTypes.CAR
+            vehicleType: VehicleTypes.CAR,
+            model: "",
+            brand: "",
+            year: "",
+            chassi: "",
         }],
         address: {
             city: "",

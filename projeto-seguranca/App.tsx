@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
 import { NativeBaseProvider } from 'native-base';
 import HomePage from './src/Pages/Home';
 import globalTheme from './src/Themes/GlobalTheme';
 import LoginPage from './src/Pages/Login';
 import RegisterPage from './src/Pages/Register';
 import StackNavigation, {IStackScreen} from './src/Components/StackNavigation';
-import AuthRefreshService from "./src/Services/App/AuthRefreshService";
 
 
 const screens: IStackScreen[] = [
@@ -24,22 +22,10 @@ const screens: IStackScreen[] = [
 ];
 
 export default function App() {
-  const [userLogged, setUserLogged] = useState<boolean>(false);
-
-  useEffect(() => {
-    verifyAuthToken();
-  }, []);
-
-  async function verifyAuthToken(): Promise<void>{
-    const userLogged: boolean = await new AuthRefreshService().execute();
-
-    setUserLogged(userLogged);
-  }
-
   return (
     <NativeBaseProvider theme={globalTheme}>
       <StackNavigation
-          initialRouteName={userLogged ? "HomePage" : "LoginPage"}
+          initialRouteName="LoginPage"
           screens={screens}
       />
     </NativeBaseProvider>

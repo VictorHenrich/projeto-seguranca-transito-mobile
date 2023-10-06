@@ -9,11 +9,11 @@ const colors: SelectDefaultItemProps[] = [
     },
     {
         label: "Branco",
-        value: "PRETO"
+        value: "BRANCO"
     },
     {
-        label: "Laranja",
-        value: "LARANJA"
+        label: "Azul",
+        value: "AZUL"
     },
     {
         label: "Laranja",
@@ -28,8 +28,8 @@ const colors: SelectDefaultItemProps[] = [
         value: "VERMELHO"
     },
     {
-        label: "PRATA",
-        value: "Prata"
+        label: "Prata",
+        value: "PRATA"
     },
     {
         label: "Dourado",
@@ -61,7 +61,7 @@ const states: SelectDefaultItemProps[] = [
     },
     {
         label: "São Paulo - SP",
-        value: "São Paulo",
+        value: "SP",
     },
     {
         label: "Bahia - BH",

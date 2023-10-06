@@ -16,12 +16,18 @@ import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
 import CreateVehicleService from "../../../../Services/App/CreateVehicleService";
 import UpdateVehicleService from "../../../../Services/App/UpdateVehicleService";
 import UpdateUserService from "../../../../Services/App/UpdateUserService";
+import LogoutService from "../../../../Services/App/LogoutService";
+import IUserPayload from "../../../../Patterns/IUserPayload";
+import IAddressPayload from "../../../../Patterns/IAddressPayload";
+import AlertDefault, { AlertDefaultProps } from "../../../../Components/AlertDefault";
 
 
 
 function UserProfileComponent(props: any): React.ReactElement{
     const {
-        user
+        user,
+        setUser,
+        loadUser
     } =  useContext<IContextMain>(ContextHome);
 
     const navigation: NavigationProp<any> = useNavigation<any>();
@@ -30,12 +36,27 @@ function UserProfileComponent(props: any): React.ReactElement{
 
     const [vehicleSelected, setVehicleSelected] = useState<IVehiclePayload | void>();
 
+    const [alertState, setAlertState] = useState<Omit<AlertDefaultProps, "stateOpen">>({
+        text: "",
+        open: false,
+        status: "info"
+    });
+
     useEffect(() => {
         setShowVehicleModal(Boolean(vehicleSelected));
     }, [vehicleSelected]);
 
-    function logout(): void{
-        navigation.navigate("LoginPage");
+    function changeUser(userData: Partial<IUserPayload>): void{
+        setUser({...user, ...userData});
+    }
+
+    function changeAddress(addressData: Partial<IAddressPayload>): void{
+        changeUser({
+            address: {
+                ...user.address,
+                ...addressData
+            }
+        })
     }
 
     function resetProps(): void{
@@ -43,20 +64,83 @@ function UserProfileComponent(props: any): React.ReactElement{
         setShowVehicleModal(false);
     }
 
-    async function createOrUpdateVehicle(vehicle: IVehiclePayload): Promise<void>{
-        resetProps();
+    async function logout(): Promise<void>{
+        await new LogoutService().execute();
 
-        console.log("AQUIII")
+        navigation.navigate("LoginPage");
+    }
 
-        if(!vehicle.uuid)
+    async function createVehicle(vehicle: IVehiclePayload): Promise<void>{
+        try{
             await new CreateVehicleService(vehicle).execute();
 
-        else
+            setAlertState({
+                open: true,
+                text: "Veículo criado com sucesso",
+                status: "success",
+            });
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                status: "error",
+                text: "Falha ao criar novo veículo",
+            });
+        }
+    }
+
+
+    async function updateVehicle(vehicle: IVehiclePayload): Promise<void>{
+        try{
             await new UpdateVehicleService(vehicle).execute();
+
+            setAlertState({
+                open: true,
+                text: "Veículo atualizado com sucesso",
+                status: "success"
+            });
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                text: "Falha ao atualizar novo veículo",
+                status: "success"
+            });
+        }
     }
 
     async function updateUser(): Promise<void>{
-        await new UpdateUserService(user).execute();
+        try{
+            await new UpdateUserService(user).execute();
+
+            await loadUser();
+
+            setAlertState({
+                open: true,
+                text: "Perfil atualizado com sucesso",
+                status: "success"
+            });
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                text: "Falha ao atualizar perfil",
+                status: "error"
+            });
+
+        }
+    }
+
+    async function createOrUpdateVehicle(vehicle: IVehiclePayload): Promise<void>{
+        resetProps();
+
+        if(!vehicle.uuid)
+            await createVehicle(vehicle);
+
+        else
+            await updateVehicle(vehicle);
+
+        await loadUser();
     }
 
     return (
@@ -130,25 +214,37 @@ function UserProfileComponent(props: any): React.ReactElement{
                             <InputUserComponent 
                                 label="EMAIL"
                                 InputDefaultProps={{
-                                    value: user.email
+                                    value: user.email,
+                                    onChangeText: (value) => {
+                                        changeUser({ email: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="CPF"
                                 InputDefaultProps={{
-                                    value: user.documentCpf
+                                    value: user.documentCpf,
+                                    onChangeText: (value) => {
+                                        changeUser({ documentCpf: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="RG"
                                 InputDefaultProps={{
-                                    value: user.documentRg
+                                    value: user.documentRg,
+                                    onChangeText: (value) => {
+                                        changeUser({ documentRg: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="TELEFONE"
                                 InputDefaultProps={{
-                                    value: user.telephone
+                                    value: user.telephone,
+                                    onChangeText: (value) => {
+                                        changeUser({ telephone: value });
+                                    }
                                 }}
                             />
                         </Stack>
@@ -193,29 +289,44 @@ function UserProfileComponent(props: any): React.ReactElement{
                             <SelectDefault 
                                 itens={states}
                                 selectedValue={user.address.state}
+                                onValueChange={(value) => {
+                                    changeAddress({state: value});
+                                }}
                             />
                             <InputUserComponent 
                                 label="CIDADE"
                                 InputDefaultProps={{
-                                    value: user.address.city
+                                    value: user.address.city,
+                                    onChangeText: (value) => {
+                                        changeAddress({ city: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="BAIRRO"
                                 InputDefaultProps={{
-                                    value: user.address.district
+                                    value: user.address.district,
+                                    onChangeText: (value) => {
+                                        changeAddress({ district: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="LOGRADOURO"
                                 InputDefaultProps={{
-                                    value: user.address.street
+                                    value: user.address.street,
+                                    onChangeText: (value) => {
+                                        changeAddress({ street: value });
+                                    }
                                 }}
                             />
                             <InputUserComponent 
                                 label="NUMERO"
                                 InputDefaultProps={{
-                                    value: `${user.address.number}`
+                                    value: `${user.address.number}`,
+                                    onChangeText: (value) => {
+                                        changeAddress({ number: value });
+                                    }
                                 }}
                             />
                         </Stack>
@@ -302,7 +413,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     color="#FFFFFF"
                                 />
                             }
-                            onPress={logout}
+                            onPress={() => logout()}
                         />
                     </Stack>
                 </Stack>
@@ -312,6 +423,12 @@ function UserProfileComponent(props: any): React.ReactElement{
                 vehicle={vehicleSelected ? vehicleSelected: undefined}
                 onClose={resetProps}
                 onChange={(vehicle) => createOrUpdateVehicle(vehicle)}
+            />
+            <AlertDefault
+                {...alertState}
+                stateOpen={(open) =>{
+                    setAlertState({ ...alertState, open })
+                }}
             />
         </>
     );

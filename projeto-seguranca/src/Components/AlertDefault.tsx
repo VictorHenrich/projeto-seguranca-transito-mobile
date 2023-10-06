@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Alert, Heading, Slide } from "native-base";
 
-type AlertStatus = "sucesss" | "error" | "warning" | "info"
+type AlertStatus = "successs" | "error" | "warning" | "info"
 
 
 export interface AlertDefaultProps{
@@ -33,7 +33,7 @@ export default function AlertDefault({
 
     return (
         <Slide in={open} placement="top" >
-            <Alert 
+            <Alert
                 status={status}
                 opacity={0.8}
             >

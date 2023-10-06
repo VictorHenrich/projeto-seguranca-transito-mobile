@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Image, Icon, Center } from "native-base";
+import { Image, Icon, Center, Stack, Box } from "native-base";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import ContainerRegisterComponent from "./ContainerRegisterComponent";
-import ButtonDefault from "../../Components/ButtonDefault";
 import { ContextRegister, IContextRegister } from "./RegisterProvider";
+import HeadingDefault from "../../Components/HeadingDefault";
 
 
 
@@ -20,7 +20,30 @@ function FinishRegisterComponent(props: any): React.ReactElement{
 
     return (
         <ContainerRegisterComponent 
-            heading="Cadastro Concluido!"
+            heading={
+                <Stack
+                    width="full"
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    space={10}
+                >
+                    <Icon 
+                        as={<FontAwesome name="check"/>}
+                        size="4xl"
+                        color="primary"
+                    />
+                    <Box maxWidth="70%">
+                        <HeadingDefault textAlign="left" fontSize={25}>
+                            Seu cadastro foi realizado com {` `}
+                            <HeadingDefault color="primary" fontSize={25}>
+                                sucesso {" "}
+                            </HeadingDefault>
+                            !
+                        </HeadingDefault>
+                    </Box>
+                </Stack>
+            }
         >
             <Center
                 width="full"
@@ -33,12 +56,6 @@ function FinishRegisterComponent(props: any): React.ReactElement{
                     alt="success"
                 />
             </Center>
-            <ButtonDefault 
-                text=""
-                rightIcon={
-                    <Icon as={<FontAwesome name="check"/>}/>
-                }
-            />
         </ContainerRegisterComponent>
     )
 }

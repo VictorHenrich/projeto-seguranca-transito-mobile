@@ -17,7 +17,7 @@ export default class GetUserService extends AbstractService<void, UserGetPayload
             birthday: userData.birthday,
             documentCpf: userData.document_cpf,
             documentRg: userData.document_rg,
-            issuerState: userData.issuerState,
+            issuerState: userData.issuer_state,
             telephone: userData.telephone,
             address: {
                 state: userData.address_state,

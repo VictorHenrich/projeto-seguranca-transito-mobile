@@ -90,6 +90,7 @@ function InfoAccessComponent(props: any): React.ReactElement{
             >
                 <InputDefault 
                     placeholder='Email'
+                    value={userPayload.email}
                     icon={<Entypo name="email"/>}
                     onChangeText={(value) => {
                         setUserPayload({
@@ -100,6 +101,7 @@ function InfoAccessComponent(props: any): React.ReactElement{
                 />
                 <InputDefault 
                     placeholder='Senha'
+                    value={userPayload.password}
                     icon={<Fontisto name="locked"/>}
                     onChangeText={(value) => {
                         setUserPayload({

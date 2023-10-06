@@ -80,9 +80,7 @@ export default function InfoVehicleComponent({
                     selectedValue={vehicleSelected.vehicleType}
                     itens={vehicleTypes}
                     onValueChange={(value) => {
-                        changeVehicle({
-                            vehicleType: value
-                        });
+                        changeVehicle({ vehicleType: value });
                     }}
                 />
                 <InputDefault 

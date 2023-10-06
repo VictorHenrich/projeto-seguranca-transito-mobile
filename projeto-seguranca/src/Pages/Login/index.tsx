@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { 
     Box, 
@@ -20,6 +20,7 @@ import ButtonDefault from '../../Components/ButtonDefault';
 import ContainerDefault from '../../Components/ContainerDefault';
 import AuthorizationService, {AuthorizationProps} from '../../Services/App/AuthorizationService';
 import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
+import AuthRefreshService from "../../Services/App/AuthRefreshService";
 
 
 
@@ -37,8 +38,12 @@ function LoginPage(props: any): React.ReactElement{
         status: "info"
     });
 
+    useEffect(() => {
+        verifyUserLogged();
+    }, []);
 
-    async function authenticate(){
+
+    async function authenticate(): Promise<void>{
         try{
             await new AuthorizationService(userAuthPayload).execute();
             
@@ -53,6 +58,13 @@ function LoginPage(props: any): React.ReactElement{
                 status: "error"
             });
         }
+    }
+
+    async function verifyUserLogged(): Promise<void>{
+        const userLogged: boolean = await new AuthRefreshService().execute();
+
+        if(userLogged)
+            navigation.navigate("HomePage");
     }
 
     return (
