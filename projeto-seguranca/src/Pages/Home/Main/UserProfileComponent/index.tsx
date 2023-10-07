@@ -1,4 +1,5 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { Stack, Avatar, Heading, Text, Divider, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -8,7 +9,6 @@ import ContainerDefault from "../../../../Components/ContainerDefault";
 import InputUserComponent from "./InputUserComponent";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../../Components/ButtonDefault";
-import { ContextHome, IContextMain } from "../MainProvider";
 import SelectDefault from "../../../../Components/SelectDefault";
 import { states } from "../../../../Utils/Constants";
 import InfoVehicleComponent from "./InfoVehicleComponent";
@@ -20,16 +20,15 @@ import LogoutService from "../../../../Services/App/LogoutService";
 import IUserPayload from "../../../../Patterns/IUserPayload";
 import IAddressPayload from "../../../../Patterns/IAddressPayload";
 import AlertDefault, { AlertDefaultProps } from "../../../../Components/AlertDefault";
-
+import { IGlobalState, changeUser, changeAddress } from "../../../../Redux/GlobalSlice";
+import { loadUserFull } from "../Functions";
 
 
 function UserProfileComponent(props: any): React.ReactElement{
-    const {
-        user,
-        setUser,
-        loadUser
-    } =  useContext<IContextMain>(ContextHome);
+    const dispatch = useDispatch();
 
+    const user: IUserPayload = useSelector<IGlobalState, IUserPayload>((state) => state.user);
+    
     const navigation: NavigationProp<any> = useNavigation<any>();
 
     const [showVehicleModal, setShowVehicleModal] = useState<boolean>(false);
@@ -46,17 +45,12 @@ function UserProfileComponent(props: any): React.ReactElement{
         setShowVehicleModal(Boolean(vehicleSelected));
     }, [vehicleSelected]);
 
-    function changeUser(userData: Partial<IUserPayload>): void{
-        setUser({...user, ...userData});
+    function handleChangeUser(userData: Partial<IUserPayload>): void{
+        dispatch(changeUser(userData));
     }
 
-    function changeAddress(addressData: Partial<IAddressPayload>): void{
-        changeUser({
-            address: {
-                ...user.address,
-                ...addressData
-            }
-        })
+    function handleChangeAddress(addressData: Partial<IAddressPayload>): void{
+        dispatch(changeAddress(addressData));
     }
 
     function resetProps(): void{
@@ -113,7 +107,7 @@ function UserProfileComponent(props: any): React.ReactElement{
         try{
             await new UpdateUserService(user).execute();
 
-            await loadUser();
+            await loadUserFull(dispatch);
 
             setAlertState({
                 open: true,
@@ -140,7 +134,7 @@ function UserProfileComponent(props: any): React.ReactElement{
         else
             await updateVehicle(vehicle);
 
-        await loadUser();
+        await loadUserFull(dispatch);
     }
 
     return (
@@ -216,7 +210,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.email,
                                     onChangeText: (value) => {
-                                        changeUser({ email: value });
+                                        handleChangeUser({ email: value });
                                     }
                                 }}
                             />
@@ -225,7 +219,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.documentCpf,
                                     onChangeText: (value) => {
-                                        changeUser({ documentCpf: value });
+                                        handleChangeUser({ documentCpf: value });
                                     }
                                 }}
                             />
@@ -234,7 +228,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.documentRg,
                                     onChangeText: (value) => {
-                                        changeUser({ documentRg: value });
+                                        handleChangeUser({ documentRg: value });
                                     }
                                 }}
                             />
@@ -243,7 +237,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.telephone,
                                     onChangeText: (value) => {
-                                        changeUser({ telephone: value });
+                                        handleChangeUser({ telephone: value });
                                     }
                                 }}
                             />
@@ -290,7 +284,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 itens={states}
                                 selectedValue={user.address.state}
                                 onValueChange={(value) => {
-                                    changeAddress({state: value});
+                                    handleChangeAddress({state: value});
                                 }}
                             />
                             <InputUserComponent 
@@ -298,7 +292,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.address.city,
                                     onChangeText: (value) => {
-                                        changeAddress({ city: value });
+                                        handleChangeAddress({ city: value });
                                     }
                                 }}
                             />
@@ -307,7 +301,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.address.district,
                                     onChangeText: (value) => {
-                                        changeAddress({ district: value });
+                                        handleChangeAddress({ district: value });
                                     }
                                 }}
                             />
@@ -316,7 +310,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: user.address.street,
                                     onChangeText: (value) => {
-                                        changeAddress({ street: value });
+                                        handleChangeAddress({ street: value });
                                     }
                                 }}
                             />
@@ -325,7 +319,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                 InputDefaultProps={{
                                     value: `${user.address.number}`,
                                     onChangeText: (value) => {
-                                        changeAddress({ number: value });
+                                        handleChangeAddress({ number: value });
                                     }
                                 }}
                             />

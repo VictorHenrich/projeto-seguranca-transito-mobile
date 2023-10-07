@@ -11,8 +11,7 @@ export default function OccurrenceItemComponent({
     address,
     created,
     description,
-    lat,
-    lon,
+    location,
     status,
     vehicle
 }: OccurrenceItemType){
@@ -113,19 +112,19 @@ export default function OccurrenceItemComponent({
                         >
                             <Text fontWeight={500} color="#999999">
                                 <Text color="#e6e6e6">UF: </Text> 
-                                {address.state}
+                                {address?.state}
                             </Text>
                             <Text fontWeight={500} color="#999999">
                                 <Text color="#e6e6e6">CIDADE: </Text> 
-                                {address.city}
+                                {address?.city}
                             </Text>
                             <Text fontWeight={500} color="#999999">
                                 <Text color="#e6e6e6">BAIRRO: </Text> 
-                                {address.district}
+                                {address?.district}
                             </Text>
                             <Text fontWeight={500} color="#999999">
                                 <Text color="#e6e6e6">LOGRADOURO: </Text> 
-                                {address.street}
+                                {address?.street}
                             </Text>
                         </Stack>
                     </Stack>

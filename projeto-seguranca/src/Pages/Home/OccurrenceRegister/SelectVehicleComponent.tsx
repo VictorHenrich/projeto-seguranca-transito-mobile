@@ -1,32 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import { Image, Stack, Text, Icon } from "native-base";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import IVehiclePayload, { VehicleTypes } from "../../../Patterns/IVehiclePayload";
-import GetVehiclesService from "../../../Services/App/GetVehiclesService";
 import ButtonDefault from "../../../Components/ButtonDefault";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
+import { IGlobalState } from "../../../Redux/GlobalSlice";
 
 
 function SelectVehicleComponent(props: any): React.ReactElement{
 
     const navigation: NavigationProp<any> = useNavigation<any>();
 
-    const [vehicles, setVehicles] = useState<IVehiclePayload[]>([]);
+    const vehicles: IVehiclePayload[] = useSelector<IGlobalState, IVehiclePayload[]>(state => state.user.vehicles);
 
     const {
         setOccurrence,
         occurrence
     }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
-
-
-    async function getVehicles(): Promise<void>{
-        const vehicles: IVehiclePayload[] = await new GetVehiclesService().execute();
-
-        setVehicles(vehicles);
-    }
 
     function getVehicleType(vehicleType: VehicleTypes): string{
         return vehicleType === VehicleTypes.CAR ? "Carro" : "Moto"
@@ -38,10 +32,6 @@ function SelectVehicleComponent(props: any): React.ReactElement{
             vehicle
         });
     }
-
-    useEffect(()=>{
-        getVehicles()
-    }, []);
 
     return (
         <OccurrenceRegisterContainer

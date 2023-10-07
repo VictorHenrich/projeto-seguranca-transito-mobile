@@ -5,7 +5,7 @@ import GetOccurrencesError from "../../Exceptions/GetOccurrencesError";
 import IOccurrencePayload from "../../Patterns/IOccurrencePayload";
 
 
-export type OccurrenceItemType = Omit<IOccurrencePayload, "attachments" | "user">
+export type OccurrenceItemType = Omit<IOccurrencePayload, "attachments">
 
 
 export default class GetOccurrencesService extends AbstractService<void, OccurrenceItemType[]>{
@@ -21,8 +21,10 @@ export default class GetOccurrencesService extends AbstractService<void, Occurre
                     street: item.address.street
                 },
                 description: item.description,
-                lat: item.lat,
-                lon: item.lon,
+                location: {
+                    lat: item.lat,
+                    lon: item.lon,
+                },
                 status: item.status,
                 created: item.created,
                 vehicle: {

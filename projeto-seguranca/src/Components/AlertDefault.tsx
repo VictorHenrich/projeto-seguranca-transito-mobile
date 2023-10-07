@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Alert, Heading, Slide } from "native-base";
 
-type AlertStatus = "successs" | "error" | "warning" | "info"
+type AlertStatus = "success" | "error" | "warning" | "info"
 
 
 export interface AlertDefaultProps{

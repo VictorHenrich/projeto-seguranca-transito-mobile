@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
 import OccurrenceItemComponent from "./OccurrenceItemComponent";
-import { ContextHome, IContextMain } from "../MainProvider";
+import { IGlobalState } from "../../../../Redux/GlobalSlice";
+import { OccurrenceItemType } from "../../../../Services/App/GetOccurrencesService";
 
 
 
 function OccurrenceListComponent(props: any): React.ReactElement{
-
-    const {
-        occurrences
-    } = useContext<IContextMain>(ContextHome);
+    const occurrences: OccurrenceItemType[] = useSelector<IGlobalState, OccurrenceItemType[]>(state => state.occurrences);
 
     return (
         <ContainerDefault

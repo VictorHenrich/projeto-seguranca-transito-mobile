@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from 'react-redux';
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -8,8 +9,7 @@ import MainNavigation, { ScreenNavigationProps } from "./MainNavigation";
 import OccurrenceListComponent from "./OccurrencesListComponent";
 import OccurrenceRegisterComponent from "./OccurrenceRegisterComponent";
 import UserProfileComponent from "./UserProfileComponent";
-import MainProvider from "./MainProvider";
-
+import { loadUserFull } from "./Functions";
 
 
 
@@ -36,10 +36,14 @@ const screens: ScreenNavigationProps[] = [
 
 
 function MainPage(props: any){
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        loadUserFull(dispatch);
+    }, []);
+
     return (
-        <MainProvider>
-            <MainNavigation screens={screens}/>
-        </MainProvider>
+        <MainNavigation screens={screens}/>
     )
 }
 
