@@ -17,7 +17,9 @@ export default class CreateOccurrenceService extends AbstractService<IOccurrence
             vehicle_uuid: this.payload.vehicle.uuid,
             description: this.payload.description,
             attachments: this.payload.attachments,
-            created: new Date()
+            created: new Date(),
+            address: null,
+            location: null
         }
 
         if(this.payload.address)
