@@ -23,7 +23,7 @@ import IUserPayload from "../../../../Patterns/IUserPayload";
 import IAddressPayload from "../../../../Patterns/IAddressPayload";
 import AlertDefault, { AlertDefaultProps } from "../../../../Components/AlertDefault";
 import { IGlobalState } from "../../../../Redux/GlobalSlice";
-import { loadUserFull } from "../Functions";
+import { loadUserFull } from "../../../../Redux/Functions";
 import ModalConfirm from "../../../../Components/ModalConfirm";
 
 

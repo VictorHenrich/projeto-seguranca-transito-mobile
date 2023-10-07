@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 
-import { changeUser, changeVehicles, changeOccurrences } from "../../../Redux/GlobalSlice";
-import GetUserService, { UserGetPayload } from "../../../Services/App/GetUserService";
-import GetVehiclesService from "../../../Services/App/GetVehiclesService";
-import GetOccurrencesService, { OccurrenceItemType } from "../../../Services/App/GetOccurrencesService";
-import IVehiclePayload from "../../../Patterns/IVehiclePayload";
+import { changeUser, changeVehicles, changeOccurrences } from "./GlobalSlice";
+import GetUserService, { UserGetPayload } from "../Services/App/GetUserService";
+import GetVehiclesService from "../Services/App/GetVehiclesService";
+import GetOccurrencesService, { OccurrenceItemType } from "../Services/App/GetOccurrencesService";
+import IVehiclePayload from "../Patterns/IVehiclePayload";
 
 
 export async function loadOccurrencesPayload(dispatch: Dispatch): Promise<void>{

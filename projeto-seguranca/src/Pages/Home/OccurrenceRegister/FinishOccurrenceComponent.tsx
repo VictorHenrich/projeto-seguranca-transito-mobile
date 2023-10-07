@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 import {Image, Stack, Icon} from "native-base";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
@@ -6,20 +8,50 @@ import ButtonDefault from "../../../Components/ButtonDefault";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import CreateOccurrenceService from "../../../Services/App/CreateOccurrenceService";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
-
+import AlertDefault, { AlertDefaultProps } from "../../../Components/AlertDefault";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
+import { loadUserFull } from "../../../Redux/Functions";
 
 
 function FinishOccurrenceComponent(props: any){
+    const navigation: NavigationProp<any> = useNavigation<any>();
+
+    const dispatch: Dispatch = useDispatch();
 
     const {
         occurrence
     }: IOccurrenceRegisterContext = useContext<IOccurrenceRegisterContext>(OccurrenceRegisterContext);
 
-    async function registerOccurrence(): Promise<void>{
-        if(!occurrence.vehicle)
-            throw new Error("Nenhum veículo foi selecionado!");
+    const [alertState, setAlertState] = useState<Omit<AlertDefaultProps, "stateOpen">>({
+        text: "",
+        open: false,
+        status: "info"
+    });
 
-        await new CreateOccurrenceService(occurrence).execute();
+    async function registerOccurrence(): Promise<void>{
+        try{
+            if(!occurrence.vehicle)
+                throw new Error("Nenhum veículo foi selecionado!");
+
+            await new CreateOccurrenceService(occurrence).execute();
+
+            setAlertState({
+                text: "Ocorrência cadastrada com sucesso",
+                open: true,
+                status: "success"
+            });
+
+            await loadUserFull(dispatch);
+
+            navigation.navigate("Main");
+
+        }catch(error){
+            setAlertState({
+                text: "Falha ao cadastrar ocorrência",
+                open: true,
+                status: "error"
+            });
+        }
     }
 
 
@@ -57,21 +89,30 @@ function FinishOccurrenceComponent(props: any){
             )}
 
             ComponentCenter={(
-                <ButtonDefault
-                    padding={5}
-                    text="Cadastrar"
-                    TextProps={{
-                        fontSize: 18
-                    }}
-                    endIcon={
-                        <Icon 
-                            as={<Ionicons name="add-circle"/>}   
-                            size="lg"
-                        />
-                    }
+                <>
+                    <ButtonDefault
+                        padding={5}
+                        text="Cadastrar"
+                        TextProps={{
+                            fontSize: 18
+                        }}
+                        endIcon={
+                            <Icon 
+                                as={<Ionicons name="add-circle"/>}   
+                                size="lg"
+                            />
+                        }
 
-                    onPress={() => registerOccurrence()}
-                /> 
+                        onPress={() => registerOccurrence()}
+                    /> 
+                    <AlertDefault
+                        {...alertState}
+                        stateOpen={(open) =>{
+                            setAlertState({ ...alertState, open })
+                        }}
+                    />
+                </>
+                
             )}
         />
     );

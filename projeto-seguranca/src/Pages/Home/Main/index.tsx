@@ -9,7 +9,7 @@ import MainNavigation, { ScreenNavigationProps } from "./MainNavigation";
 import OccurrenceListComponent from "./OccurrencesListComponent";
 import OccurrenceRegisterComponent from "./OccurrenceRegisterComponent";
 import UserProfileComponent from "./UserProfileComponent";
-import { loadUserFull } from "./Functions";
+import { loadUserFull } from "../../../Redux/Functions";
 
 
 
