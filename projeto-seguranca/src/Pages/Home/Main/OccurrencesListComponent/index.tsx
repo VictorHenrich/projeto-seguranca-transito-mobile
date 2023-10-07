@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
@@ -9,7 +9,13 @@ import { OccurrenceItemType } from "../../../../Services/App/GetOccurrencesServi
 
 
 function OccurrenceListComponent(props: any): React.ReactElement{
-    const occurrences: OccurrenceItemType[] = useSelector<IGlobalState, OccurrenceItemType[]>(state => state.occurrences);
+    const globalOccurrences: OccurrenceItemType[] = useSelector<IGlobalState, OccurrenceItemType[]>(state => state.occurrences);
+
+    const [occurrences, setOccurrences] = useState<OccurrenceItemType[]>(globalOccurrences);
+
+    useCallback(()=>{
+        setOccurrences(globalOccurrences);
+    }, [globalOccurrences]);
 
     return (
         <ContainerDefault

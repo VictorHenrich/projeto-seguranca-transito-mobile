@@ -6,7 +6,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
-import InputUserComponent from "./InputUserComponent";
+import InputComponent from "./InputComponent";
+import SelectComponent from "./SelectComponent";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../../Components/ButtonDefault";
 import SelectDefault from "../../../../Components/SelectDefault";
@@ -15,21 +16,25 @@ import InfoVehicleComponent from "./InfoVehicleComponent";
 import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
 import CreateVehicleService from "../../../../Services/App/CreateVehicleService";
 import UpdateVehicleService from "../../../../Services/App/UpdateVehicleService";
+import DeleteVehicleService from "../../../../Services/App/DeleteVehicleService";
 import UpdateUserService from "../../../../Services/App/UpdateUserService";
 import LogoutService from "../../../../Services/App/LogoutService";
 import IUserPayload from "../../../../Patterns/IUserPayload";
 import IAddressPayload from "../../../../Patterns/IAddressPayload";
 import AlertDefault, { AlertDefaultProps } from "../../../../Components/AlertDefault";
-import { IGlobalState, changeUser, changeAddress } from "../../../../Redux/GlobalSlice";
+import { IGlobalState } from "../../../../Redux/GlobalSlice";
 import { loadUserFull } from "../Functions";
+import ModalConfirm from "../../../../Components/ModalConfirm";
 
 
 function UserProfileComponent(props: any): React.ReactElement{
     const dispatch = useDispatch();
 
-    const user: IUserPayload = useSelector<IGlobalState, IUserPayload>((state) => state.user);
+    const globalUser: IUserPayload = useSelector<IGlobalState, IUserPayload>((state) => state.user);
     
     const navigation: NavigationProp<any> = useNavigation<any>();
+
+    const [user, setUser] = useState<IUserPayload>(globalUser);
 
     const [showVehicleModal, setShowVehicleModal] = useState<boolean>(false);
 
@@ -41,21 +46,30 @@ function UserProfileComponent(props: any): React.ReactElement{
         status: "info"
     });
 
+    const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
+
     useEffect(() => {
-        setShowVehicleModal(Boolean(vehicleSelected));
-    }, [vehicleSelected]);
+        setUser({...globalUser});
+    }, [globalUser]);
 
     function handleChangeUser(userData: Partial<IUserPayload>): void{
-        dispatch(changeUser(userData));
+        setUser({...user, ...userData});
     }
 
     function handleChangeAddress(addressData: Partial<IAddressPayload>): void{
-        dispatch(changeAddress(addressData));
+        setUser({
+            ...user, 
+            address: {
+                ...user.address,
+                ...addressData
+            }
+        });
     }
 
     function resetProps(): void{
         setVehicleSelected(undefined);
         setShowVehicleModal(false);
+        setShowModalConfirm(false);
     }
 
     async function logout(): Promise<void>{
@@ -123,11 +137,11 @@ function UserProfileComponent(props: any): React.ReactElement{
             });
 
         }
+
+        resetProps();
     }
 
     async function createOrUpdateVehicle(vehicle: IVehiclePayload): Promise<void>{
-        resetProps();
-
         if(!vehicle.uuid)
             await createVehicle(vehicle);
 
@@ -135,6 +149,34 @@ function UserProfileComponent(props: any): React.ReactElement{
             await updateVehicle(vehicle);
 
         await loadUserFull(dispatch);
+
+        resetProps();
+    }
+
+
+    async function deleteVehicle(): Promise<void>{
+        if(!vehicleSelected) return;
+
+        try{
+            await new DeleteVehicleService(vehicleSelected).execute();
+
+            await loadUserFull(dispatch);
+
+            setAlertState({
+                open: true,
+                text: "Veículo excluido com sucesso",
+                status: "success"
+            });
+
+        }catch(error){
+            setAlertState({
+                open: true,
+                text: "Falha ao excluir veículo",
+                status: "error"
+            });
+        }
+
+        resetProps();
     }
 
     return (
@@ -205,7 +247,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                             width="full"
                             space={10}
                         >
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="EMAIL"
                                 InputDefaultProps={{
                                     value: user.email,
@@ -214,7 +256,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="CPF"
                                 InputDefaultProps={{
                                     value: user.documentCpf,
@@ -223,7 +265,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="RG"
                                 InputDefaultProps={{
                                     value: user.documentRg,
@@ -232,7 +274,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="TELEFONE"
                                 InputDefaultProps={{
                                     value: user.telephone,
@@ -280,14 +322,19 @@ function UserProfileComponent(props: any): React.ReactElement{
                             width="full"
                             space={10}
                         >
-                            <SelectDefault 
-                                itens={states}
-                                selectedValue={user.address.state}
-                                onValueChange={(value) => {
-                                    handleChangeAddress({state: value});
+                            <SelectComponent
+                                label="UF"
+                                selectDefaultProps={{
+                                    itens: states,
+
+                                    selectedValue:user.address.state,
+
+                                    onValueChange: (value) => {
+                                        handleChangeAddress({state: value});
+                                    }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="CIDADE"
                                 InputDefaultProps={{
                                     value: user.address.city,
@@ -296,7 +343,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="BAIRRO"
                                 InputDefaultProps={{
                                     value: user.address.district,
@@ -305,7 +352,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="LOGRADOURO"
                                 InputDefaultProps={{
                                     value: user.address.street,
@@ -314,7 +361,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                                     }
                                 }}
                             />
-                            <InputUserComponent 
+                            <InputComponent 
                                 label="NUMERO"
                                 InputDefaultProps={{
                                     value: `${user.address.number}`,
@@ -362,7 +409,14 @@ function UserProfileComponent(props: any): React.ReactElement{
                             user.vehicles.map((vehicle, index) => (
                                 <VehicleItemComponent 
                                     {...vehicle}
-                                    onChange={() => setVehicleSelected(vehicle)}
+                                    onChange={() => {
+                                        setVehicleSelected(vehicle);
+                                        setShowVehicleModal(true);
+                                    }}
+                                    onDelete={() => {
+                                        setVehicleSelected(vehicle);
+                                        setShowModalConfirm(true);
+                                    }}
                                     key={index}
                                 />
                             ))
@@ -423,6 +477,12 @@ function UserProfileComponent(props: any): React.ReactElement{
                 stateOpen={(open) =>{
                     setAlertState({ ...alertState, open })
                 }}
+            />
+            <ModalConfirm 
+                open={showModalConfirm} 
+                text="Você deseja realizar a exclusão desse registro?"
+                onConfirm={() => deleteVehicle()}
+                onClose={resetProps}
             />
         </>
     );

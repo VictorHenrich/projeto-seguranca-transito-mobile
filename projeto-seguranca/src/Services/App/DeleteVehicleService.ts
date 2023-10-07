@@ -5,7 +5,7 @@ import ApiFactory from "../Factories/ApiFactory";
 
 
 
-export default class UpdateVehicleService extends AbstractService<Pick<IVehiclePayload, "uuid">, void>{
+export default class DeleteVehicleService extends AbstractService<Pick<IVehiclePayload, "uuid">, void>{
     private readonly urlDeleteVehicle: string = "/user/vehicle/register"
 
     async execute(): Promise<void> {
