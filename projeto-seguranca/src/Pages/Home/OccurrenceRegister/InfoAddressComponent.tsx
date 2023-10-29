@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
-import {Image, Stack, ScrollView, Icon} from "native-base";
+import {Image, Stack, Icon} from "native-base";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import OccurrenceRegisterContainer from "./OccurrenceRegisterContainer";
-import InputDefault from "../../../Components/InputDefault";
 import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./OccurrenceRegisterProvider";
 import IAddressPayload from "../../../Patterns/IAddressPayload";
 import HeadingDefault from "../../../Components/HeadingDefault";
 import ButtonDefault from "../../../Components/ButtonDefault";
+import InputFormDefault from "../../../Components/InputFormDefault";
+import SelectFormDefault from "../../../Components/SelectFormDefault";
+import { states } from "../../../Utils/Constants";
 
 
 
@@ -64,46 +66,60 @@ function InfoAddressComponent(props: any){
                     width="full"
                     space={5}
                 >
-                    <InputDefault 
-                            placeholder="CEP" 
-                            value={occurrence?.address?.zipcode}
-                            onBlur={(item) => {
+                    <InputFormDefault 
+                        label="CEP"
+                        InputDefaultProps={{
+                            value: occurrence?.address?.zipcode,
+                            onBlur(item){
                                 setAddress({zipcode: item.nativeEvent.text})
-                            }}
-                    />
-                    <InputDefault 
-                        placeholder="UF" 
-                        value={occurrence?.address?.state}
-                        onBlur={(item) => {
-                            setAddress({state: item.nativeEvent.text})
+                            }
                         }}
                     />
-                    <InputDefault 
-                        placeholder="Cidade" 
-                        value={occurrence?.address?.city}
-                        onBlur={(item) => {
-                            setAddress({city: item.nativeEvent.text})
+                    <SelectFormDefault 
+                        label="UF" 
+                        selectDefaultProps={{
+                            itens: states,
+                            selectedValue: occurrence?.address?.state,
+                            onValueChange(itemValue) {
+                                setAddress({state: itemValue})
+                            },
                         }}
                     />
-                    <InputDefault 
-                        placeholder="Bairro" 
-                        value={occurrence?.address?.district}
-                        onBlur={(item) => {
-                            setAddress({district: item.nativeEvent.text})
+                    <InputFormDefault 
+                        label="Cidade" 
+                        InputDefaultProps={{
+                            value: occurrence?.address?.city,
+                            onBlur: (item) => {
+                                setAddress({city: item.nativeEvent.text});
+                            }
                         }}
                     />
-                    <InputDefault 
-                        placeholder="Logradouro" 
-                        value={occurrence?.address?.street}
-                        onBlur={(item) => {
-                            setAddress({street: item.nativeEvent.text})
+                    <InputFormDefault 
+                        label="Bairro" 
+                        InputDefaultProps={{
+                            value: occurrence?.address?.district,
+                            onBlur(item){
+                                setAddress({district: item.nativeEvent.text})
+                            }
+                        }}
+                        
+                    />
+                    <InputFormDefault 
+                        label="Logradouro" 
+                        InputDefaultProps={{
+                            value: occurrence?.address?.street,
+                            onBlur(item){
+                                setAddress({street: item.nativeEvent.text})
+                            }
                         }}
                     />
-                    <InputDefault 
-                        placeholder="numero" 
-                        value={`${occurrence?.address?.number || ''}`}
-                        onBlur={(item) => {
-                            setAddress({number: item.nativeEvent.text})
+                    <InputFormDefault 
+                        label="numero" 
+                        InputDefaultProps={{
+                            value: `${occurrence?.address?.number || ''}`,
+                            onBlur(item){
+                                setAddress({number: item.nativeEvent.text})
+                            }
                         }}
                     />
                 </Stack>

@@ -6,11 +6,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 
 import ContainerDefault from "../../../../Components/ContainerDefault";
-import InputComponent from "./InputComponent";
-import SelectComponent from "./SelectComponent";
 import VehicleItemComponent from "./VehicleItemComponent";
 import ButtonDefault from "../../../../Components/ButtonDefault";
-import SelectDefault from "../../../../Components/SelectDefault";
 import { states } from "../../../../Utils/Constants";
 import InfoVehicleComponent from "./InfoVehicleComponent";
 import IVehiclePayload from "../../../../Patterns/IVehiclePayload";
@@ -25,6 +22,8 @@ import AlertDefault, { AlertDefaultProps } from "../../../../Components/AlertDef
 import { IGlobalState } from "../../../../Redux/GlobalSlice";
 import { loadUserFull } from "../../../../Redux/Functions";
 import ModalConfirm from "../../../../Components/ModalConfirm";
+import InputFormDefault from "../../../../Components/InputFormDefault";
+import SelectFormDefault from "../../../../Components/SelectFormDefault";
 
 
 function UserProfileComponent(props: any): React.ReactElement{
@@ -181,297 +180,304 @@ function UserProfileComponent(props: any): React.ReactElement{
 
     return (
         <>
-            <ContainerDefault 
-                background="secondary"
-                justifyContent="flex-start"
-                padding={5}
-            >
-                <Stack
-                    direction="column"
-                    space={20}
-                    width="full"
-                >
-                    <Stack 
-                        direction="column" 
-                        space={5}
-                        alignItems="center"
-                        width="full"
-                    >
-                        <Avatar 
-                            size="xl"
-                            backgroundColor="black"
+            {
+                showVehicleModal
+                    ? (
+                        <InfoVehicleComponent
+                            vehicle={vehicleSelected ? vehicleSelected: undefined}
+                            onCancel={resetProps}
+                            onChange={(vehicle) => createOrUpdateVehicle(vehicle)}
                         />
-                        <Heading
-                            fontWeight={700}
-                            color="white"
-                            textAlign="center"
-                            textTransform="capitalize"
-                        >
-                            {user.name}
-                        </Heading>
-                    </Stack>
-                    <Stack
-                        width="full"
-                        space={10}
-                    >
-                        <Stack
-                            width="full"
-                            space={2}
-                            direction="column"
-                        >
-                            <Stack 
-                                direction="row"
-                                alignItems="flex-end"
-                                space={5}
-                                paddingBottom={2}
-                            >
-                                <Text
-                                    fontWeight={700}
-                                    color="primary"
-                                >
-                                    DADOS PESSOAIS
-                                </Text>
-                                <Icon
-                                    size="xl"
-                                    as={<FontAwesome5 name="user-cog"/>}
-                                    color="primary"
-                                />
-                            </Stack>
-                            <Divider 
-                                backgroundColor="primary" 
-                                height={1}
-                                borderRadius={5}
-                            />
-                        </Stack>
-                        <Stack
-                            width="full"
-                            space={10}
-                        >
-                            <InputComponent 
-                                label="EMAIL"
-                                InputDefaultProps={{
-                                    value: user.email,
-                                    onChangeText: (value) => {
-                                        handleChangeUser({ email: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="CPF"
-                                InputDefaultProps={{
-                                    value: user.documentCpf,
-                                    onChangeText: (value) => {
-                                        handleChangeUser({ documentCpf: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="RG"
-                                InputDefaultProps={{
-                                    value: user.documentRg,
-                                    onChangeText: (value) => {
-                                        handleChangeUser({ documentRg: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="TELEFONE"
-                                InputDefaultProps={{
-                                    value: user.telephone,
-                                    onChangeText: (value) => {
-                                        handleChangeUser({ telephone: value });
-                                    }
-                                }}
-                            />
-                        </Stack>
-                    </Stack>
-                    <Stack
-                        width="full"
-                        space={10}
-                    >
-                        <Stack
-                            width="full"
-                            space={2}
-                            direction="column"
-                        >
-                            <Stack 
-                                direction="row"
-                                alignItems="flex-end"
-                                space={5}
-                                paddingBottom={2}
-                            >
-                                <Text
-                                    fontWeight={700}
-                                    color="primary"
-                                >
-                                    DADOS DE ENDEREÇO
-                                </Text>
-                                <Icon
-                                    size="xl"
-                                    as={<FontAwesome5 name="map-marker-alt"/>}
-                                    color="primary"
-                                />
-                            </Stack>
-                            <Divider 
-                                backgroundColor="primary" 
-                                height={1}
-                                borderRadius={5}
-                            />
-                        </Stack>
-                        <Stack
-                            width="full"
-                            space={10}
-                        >
-                            <SelectComponent
-                                label="UF"
-                                selectDefaultProps={{
-                                    itens: states,
+                    )
 
-                                    selectedValue:user.address.state,
-
-                                    onValueChange: (value) => {
-                                        handleChangeAddress({state: value});
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="CIDADE"
-                                InputDefaultProps={{
-                                    value: user.address.city,
-                                    onChangeText: (value) => {
-                                        handleChangeAddress({ city: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="BAIRRO"
-                                InputDefaultProps={{
-                                    value: user.address.district,
-                                    onChangeText: (value) => {
-                                        handleChangeAddress({ district: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="LOGRADOURO"
-                                InputDefaultProps={{
-                                    value: user.address.street,
-                                    onChangeText: (value) => {
-                                        handleChangeAddress({ street: value });
-                                    }
-                                }}
-                            />
-                            <InputComponent 
-                                label="NUMERO"
-                                InputDefaultProps={{
-                                    value: `${user.address.number}`,
-                                    onChangeText: (value) => {
-                                        handleChangeAddress({ number: value });
-                                    }
-                                }}
-                            />
-                        </Stack>
-                    </Stack>
-                    <Stack
-                        width="full"
-                        space={10}
-                    >
-                        <Stack
-                            width="full"
-                            space={2}
-                            direction="column"
+                    : (
+                        <ContainerDefault 
+                            background="secondary"
+                            justifyContent="flex-start"
+                            padding={5}
                         >
-                            <Stack 
-                                direction="row"
-                                alignItems="flex-end"
-                                space={5}
-                                paddingBottom={2}
+                            <Stack
+                                direction="column"
+                                space={20}
+                                width="full"
                             >
-                                <Text
-                                    fontWeight={700}
-                                    color="primary"
+                                <Stack 
+                                    direction="column" 
+                                    space={5}
+                                    alignItems="center"
+                                    width="full"
                                 >
-                                    VEÍCULOS CADASTRADOS
-                                </Text>
-                                <Icon
-                                    size="xl"
-                                    as={<FontAwesome5 name="car"/>}
-                                    color="primary"
-                                />
-                            </Stack>
-                            <Divider 
-                                backgroundColor="primary" 
-                                height={1}
-                                borderRadius={5}
-                            />
-                        </Stack>
-                        {
-                            user.vehicles.map((vehicle, index) => (
-                                <VehicleItemComponent 
-                                    {...vehicle}
-                                    onChange={() => {
-                                        setVehicleSelected(vehicle);
-                                        setShowVehicleModal(true);
-                                    }}
-                                    onDelete={() => {
-                                        setVehicleSelected(vehicle);
-                                        setShowModalConfirm(true);
-                                    }}
-                                    key={index}
-                                />
-                            ))
-                        }
-                    </Stack>
+                                    <Avatar 
+                                        size="xl"
+                                        backgroundColor="black"
+                                    />
+                                    <Heading
+                                        fontWeight={700}
+                                        color="white"
+                                        textAlign="center"
+                                        textTransform="capitalize"
+                                    >
+                                        {user.name}
+                                    </Heading>
+                                </Stack>
+                                <Stack
+                                    width="full"
+                                    space={10}
+                                >
+                                    <Stack
+                                        width="full"
+                                        space={2}
+                                        direction="column"
+                                    >
+                                        <Stack 
+                                            direction="row"
+                                            alignItems="flex-end"
+                                            space={5}
+                                            paddingBottom={2}
+                                        >
+                                            <Text
+                                                fontWeight={700}
+                                                color="primary"
+                                            >
+                                                DADOS PESSOAIS
+                                            </Text>
+                                            <Icon
+                                                size="4xl"
+                                                as={<FontAwesome5 name="user-cog"/>}
+                                                color="primary"
+                                            />
+                                        </Stack>
+                                        <Divider 
+                                            backgroundColor="primary" 
+                                            height={1}
+                                            borderRadius={5}
+                                        />
+                                    </Stack>
+                                    <Stack
+                                        width="full"
+                                        space={10}
+                                    >
+                                        <InputFormDefault 
+                                            label="EMAIL"
+                                            InputDefaultProps={{
+                                                value: user.email,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeUser({ email: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="CPF"
+                                            InputDefaultProps={{
+                                                value: user.documentCpf,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeUser({ documentCpf: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="RG"
+                                            InputDefaultProps={{
+                                                value: user.documentRg,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeUser({ documentRg: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="TELEFONE"
+                                            InputDefaultProps={{
+                                                value: user.telephone,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeUser({ telephone: value });
+                                                }
+                                            }}
+                                        />
+                                    </Stack>
+                                </Stack>
+                                <Stack
+                                    width="full"
+                                    space={10}
+                                >
+                                    <Stack
+                                        width="full"
+                                        space={2}
+                                        direction="column"
+                                    >
+                                        <Stack 
+                                            direction="row"
+                                            alignItems="flex-end"
+                                            space={5}
+                                            paddingBottom={2}
+                                        >
+                                            <Text
+                                                fontWeight={700}
+                                                color="primary"
+                                            >
+                                                DADOS DE ENDEREÇO
+                                            </Text>
+                                            <Icon
+                                                size="4xl"
+                                                as={<FontAwesome5 name="map-marker-alt"/>}
+                                                color="primary"
+                                            />
+                                        </Stack>
+                                        <Divider 
+                                            backgroundColor="primary" 
+                                            height={1}
+                                            borderRadius={5}
+                                        />
+                                    </Stack>
+                                    <Stack
+                                        width="full"
+                                        space={10}
+                                    >
+                                        <SelectFormDefault
+                                            label="UF"
+                                            selectDefaultProps={{
+                                                itens: states,
 
-                    <Stack 
-                        width="full"
-                        direction="column"
-                        alignItems="center"
-                        space={5}
-                        borderTopWidth={1}
-                        borderTopColor="#999999"
-                        paddingTop={5}
-                    >
-                        <ButtonDefault 
-                            text="Salvar Alterações"
-                            rightIcon={
-                                <Icon 
-                                    as={<FontAwesome5 name="user-edit"/>}
-                                    color="#FFFFFF"
-                                />
-                            }
-                            onPress={() => updateUser()}
-                        />
-                        <ButtonDefault 
-                            text="Adicionar Veículo"
-                            rightIcon={
-                                <Icon 
-                                    as={<FontAwesome5 name="car-side"/>}
-                                    color="#FFFFFF"
-                                />
-                            }
-                            onPress={() => setShowVehicleModal(true)}
-                        />
-                        <ButtonDefault
-                            backgroundColor="red"
-                            text="Sair"
-                            rightIcon={
-                                <Icon 
-                                    as={<MaterialCommunityIcons name="logout"/>}
-                                    color="#FFFFFF"
-                                />
-                            }
-                            onPress={() => logout()}
-                        />
-                    </Stack>
-                </Stack>
-            </ContainerDefault>
-            <InfoVehicleComponent 
-                open={showVehicleModal}
-                vehicle={vehicleSelected ? vehicleSelected: undefined}
-                onClose={resetProps}
-                onChange={(vehicle) => createOrUpdateVehicle(vehicle)}
-            />
+                                                selectedValue:user.address.state,
+
+                                                onValueChange: (value: any) => {
+                                                    handleChangeAddress({state: value});
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="CIDADE"
+                                            InputDefaultProps={{
+                                                value: user.address.city,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeAddress({ city: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault
+                                            label="BAIRRO"
+                                            InputDefaultProps={{
+                                                value: user.address.district,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeAddress({ district: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="LOGRADOURO"
+                                            InputDefaultProps={{
+                                                value: user.address.street,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeAddress({ street: value });
+                                                }
+                                            }}
+                                        />
+                                        <InputFormDefault 
+                                            label="NUMERO"
+                                            InputDefaultProps={{
+                                                value: `${user.address.number}`,
+                                                onChangeText: (value: any) => {
+                                                    handleChangeAddress({ number: value });
+                                                }
+                                            }}
+                                        />
+                                    </Stack>
+                                </Stack>
+                                <Stack
+                                    width="full"
+                                    space={10}
+                                >
+                                    <Stack
+                                        width="full"
+                                        space={2}
+                                        direction="column"
+                                    >
+                                        <Stack 
+                                            direction="row"
+                                            alignItems="flex-end"
+                                            space={5}
+                                            paddingBottom={2}
+                                        >
+                                            <Text
+                                                fontWeight={700}
+                                                color="primary"
+                                            >
+                                                VEÍCULOS CADASTRADOS
+                                            </Text>
+                                            <Icon
+                                                size="4xl"
+                                                as={<FontAwesome5 name="car"/>}
+                                                color="primary"
+                                            />
+                                        </Stack>
+                                        <Divider 
+                                            backgroundColor="primary" 
+                                            height={1}
+                                            borderRadius={5}
+                                        />
+                                    </Stack>
+                                    {
+                                        user.vehicles.map((vehicle, index) => (
+                                            <VehicleItemComponent 
+                                                {...vehicle}
+                                                onChange={() => {
+                                                    setVehicleSelected(vehicle);
+                                                    setShowVehicleModal(true);
+                                                }}
+                                                onDelete={() => {
+                                                    setVehicleSelected(vehicle);
+                                                    setShowModalConfirm(true);
+                                                }}
+                                                key={index}
+                                            />
+                                        ))
+                                    }
+                                </Stack>
+
+                                <Stack 
+                                    width="full"
+                                    direction="column"
+                                    alignItems="center"
+                                    space={5}
+                                    borderTopWidth={1}
+                                    borderTopColor="#999999"
+                                    paddingTop={5}
+                                >
+                                    <ButtonDefault 
+                                        text="Salvar Alterações"
+                                        rightIcon={
+                                            <Icon 
+                                                as={<FontAwesome5 name="user-edit"/>}
+                                                color="#FFFFFF"
+                                            />
+                                        }
+                                        onPress={() => updateUser()}
+                                    />
+                                    <ButtonDefault 
+                                        text="Adicionar Veículo"
+                                        rightIcon={
+                                            <Icon 
+                                                as={<FontAwesome5 name="car-side"/>}
+                                                color="#FFFFFF"
+                                            />
+                                        }
+                                        onPress={() => setShowVehicleModal(true)}
+                                    />
+                                    <ButtonDefault
+                                        backgroundColor="red"
+                                        text="Sair"
+                                        rightIcon={
+                                            <Icon 
+                                                as={<MaterialCommunityIcons name="logout"/>}
+                                                color="#FFFFFF"
+                                            />
+                                        }
+                                        onPress={() => logout()}
+                                    />
+                                </Stack>
+                            </Stack>
+                        </ContainerDefault>
+                    )
+            }
             <AlertDefault
                 {...alertState}
                 stateOpen={(open) =>{

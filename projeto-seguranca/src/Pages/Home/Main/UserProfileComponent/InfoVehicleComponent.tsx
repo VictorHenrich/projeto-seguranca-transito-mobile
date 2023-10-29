@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Stack } from "native-base";
+import { Stack, Divider, Icon, Text } from "native-base";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import InputDefault from "../../../../Components/InputDefault";
 import IVehiclePayload, { VehicleTypes } from "../../../../Patterns/IVehiclePayload";
-import SelectDefault from "../../../../Components/SelectDefault";
 import CheckboxDefault from "../../../../Components/CheckboxDefault";
 import { colors, vehicleTypes } from "../../../../Utils/Constants";
-import ModalDefault, { ModalDefaultProps } from "../../../../Components/ModalDefault";
+import ContainerDefault from "../../../../Components/ContainerDefault";
+import ButtonDefault from "../../../../Components/ButtonDefault";
+import HeadingDefault from "../../../../Components/HeadingDefault";
+import InputFormDefault from "../../../../Components/InputFormDefault";
+import SelectFormDefault from "../../../../Components/SelectFormDefault";
 
-export interface InfoVehicleComponentProps extends Partial<ModalDefaultProps>{
+export interface InfoVehicleComponentProps{
     vehicle?: IVehiclePayload,
     onChange: (vehicle: IVehiclePayload) => void
+    onCancel: () => void
 }
 
 export default function InfoVehicleComponent({
     vehicle,
     onChange,
-    ...props
+    onCancel
 }: InfoVehicleComponentProps): React.ReactElement{
 
     const vehicle_: IVehiclePayload = {
@@ -39,14 +42,37 @@ export default function InfoVehicleComponent({
     }
 
     return (
-        <ModalDefault
-            heading={`${serviceName} Veículo`}
-            ButtonConfirmProps={{
-                text: serviceName
-            }}
-            onConfirm={()=> onChange(vehicleSelected)}
-            {...props}
-        >
+        <ContainerDefault>
+            <Stack
+                width="full"
+                space={2}
+                direction="column"
+                paddingBottom={5}
+            >
+                <Stack 
+                    direction="row"
+                    alignItems="flex-end"
+                    space={5}
+                    paddingBottom={2}
+                >
+                    <Text
+                        fontWeight={700}
+                        color="primary"
+                    >
+                        {serviceName.toUpperCase()} VEÍCULO
+                    </Text>
+                    <Icon
+                        size="4xl"
+                        as={<MaterialCommunityIcons name="car-cog"/>}
+                        color="primary"
+                    />
+                </Stack>
+                <Divider 
+                    backgroundColor="primary" 
+                    height={1}
+                    borderRadius={5}
+                />
+            </Stack>
             <Stack 
                 direction="column" 
                 space={10} 
@@ -55,62 +81,68 @@ export default function InfoVehicleComponent({
                 paddingTop={5}
                 paddingBottom={5}
             >
-                <InputDefault
-                    placeholder='Placa'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={`${vehicleSelected.plate}`}
-                    onChangeText={(value) => {
-                        changeVehicle({
-                            plate: value
-                        });
+                <InputFormDefault
+                    label="Placa"
+                    InputDefaultProps={{
+                        value: `${vehicleSelected.plate}`,
+                        onChangeText: (value: string) => {
+                            changeVehicle({
+                                plate: value
+                            });
+                        }
                     }}
                 />
-                <InputDefault 
-                    placeholder='Renavam'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
-                    onChangeText={(value) => {
-                        changeVehicle({
-                            renavam: value
-                        });
-                    }}
-                    value={vehicleSelected.renavam}
-                />
-                <SelectDefault 
-                    placeholder='Tipo do veículo'
-                    selectedValue={vehicleSelected.vehicleType}
-                    itens={vehicleTypes}
-                    onValueChange={(value) => {
-                        changeVehicle({ vehicleType: value });
+                <InputFormDefault 
+                    label='Renavam'
+                    InputDefaultProps={{
+                        value: `${vehicleSelected.plate}`,
+                        onChangeText: (value: string) => {
+                            changeVehicle({
+                                renavam: value
+                            });
+                        }
                     }}
                 />
-                <InputDefault 
-                    placeholder='Modelo (Opcional)'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={vehicleSelected.model || ''}
-                    onChangeText={(value) => {
-                        changeVehicle({
-                            model: value
-                        });
+                <SelectFormDefault
+                    label="Tipo do veículo"
+                    selectDefaultProps={{
+                        selectedValue: vehicleSelected.vehicleType,
+                        itens: vehicleTypes,
+                        onValueChange: (value: string) => {
+                            changeVehicle({ vehicleType: value });
+                        }
                     }}
                 />
-                <InputDefault 
-                    placeholder='Ano (Opcional)'
-                    icon={<MaterialCommunityIcons name="format-text"/>}
-                    value={`${vehicleSelected.year || ''}`}
-                    onChangeText={(value) => {
-                        changeVehicle({
-                            year: value
-                        });
+                <InputFormDefault
+                    label='Modelo (Opcional)'
+                    InputDefaultProps={{
+                        value: vehicleSelected.model || '',
+                        onChangeText: (value: string) => {
+                            changeVehicle({
+                                model: value
+                            });
+                        }
                     }}
                 />
-                <SelectDefault 
-                    placeholder='Cor (Opcional)'
-                    selectedValue={vehicleSelected.color || ''}
-                    itens={colors}
-                    onValueChange={(value) => {
-                        changeVehicle({
-                            color: value
-                        });
+                <InputFormDefault
+                    label='Ano (Opcional)'
+                    InputDefaultProps={{
+                        value: `${vehicleSelected.year || ''}`,
+                        onChangeText: (value: string) => {
+                            changeVehicle({
+                                model: value
+                            });
+                        }
+                    }}
+                />
+                <SelectFormDefault 
+                    label="Cor (Opcional)"
+                    selectDefaultProps={{
+                        selectedValue: vehicleSelected.color || '',
+                        itens: colors,
+                        onValueChange: (value: string) => {
+                            changeVehicle({ color: value });
+                        }
                     }}
                 />
                 <CheckboxDefault 
@@ -124,6 +156,27 @@ export default function InfoVehicleComponent({
                     }}
                 />
             </Stack>
-        </ModalDefault>
+            <Divider backgroundColor="black"/>
+            <Stack
+                width="full"
+                height={100}
+                paddingTop={10}
+                space={5}
+                direction="row"
+                justifyContent="flex-end"
+            >
+                <ButtonDefault
+                    width={100}
+                    text={serviceName}
+                    onPress={() => onChange(vehicleSelected)}
+                />
+                <ButtonDefault 
+                    width={100}
+                    text="Voltar"
+                    backgroundColor="red"
+                    onPress={onCancel}
+                />
+            </Stack>
+        </ContainerDefault>
     );
 }

@@ -1,21 +1,21 @@
 import { FormControl, ITextProps, IFormControlProps, Text } from "native-base";
-import SelectDefault, {SelectDefaultProps} from "../../../../Components/SelectDefault";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import InputDefault, { InputDefaultProps } from "./InputDefault";
 
 
-export interface SelectComponent extends IFormControlProps{
-    selectDefaultProps?: SelectDefaultProps,
+
+export interface InputComponentProps extends IFormControlProps{
+    InputDefaultProps?: InputDefaultProps;
     LabelProps?: ITextProps;
     label: string;
 }
 
 
-export default function SelectComponent({
-    selectDefaultProps = {
-        itens: []
-    },
+export default function InputFormDefault({
+    InputDefaultProps = {},
     LabelProps = {},
     label
-}: SelectComponent){
+}: InputComponentProps){
 
     return (
         <FormControl width="full">
@@ -28,9 +28,10 @@ export default function SelectComponent({
                     {label}
                 </Text>
             </FormControl.Label>
-            <SelectDefault
+            <InputDefault
                 width="full"
-                {...selectDefaultProps}
+                icon={<MaterialCommunityIcons name="format-text"/>}
+                {...InputDefaultProps}
                 
             />
         </FormControl>

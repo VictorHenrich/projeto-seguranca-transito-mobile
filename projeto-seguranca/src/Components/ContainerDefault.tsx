@@ -12,6 +12,21 @@ export interface ContainerDefaultProps extends ICenterProps{
 }
 
 
+function CenterComponent(props: ICenterProps){
+    return (
+        <Center
+            backgroundColor="secondary"
+            width="full"
+            height="full"
+            paddingTop={20}
+            paddingBottom={10}
+            paddingLeft={5}
+            paddingRight={5}
+            {...props}
+        />
+    )
+}
+
 export default function ContainerDefault({
     haveScrool = true,
     ScroolProps = {},
@@ -25,27 +40,10 @@ export default function ContainerDefault({
                 height="full"
                 {...ScroolProps}
             >
-                <Center
-                    width="full"
-                    height="full"
-                    paddingTop={20}
-                    paddingBottom={10}
-                    paddingLeft={5}
-                    paddingRight={5}
-                    {...props}
-                />
+                <CenterComponent {...props}/>
             </ScrollView>
         ) :
         
-        <Center
-            width="full"
-            height="full"
-            paddingTop={20}
-            paddingBottom={10}
-            paddingLeft={5}
-            paddingRight={5}
-            {...props}
-        />
-
+        <CenterComponent {...props}/>
     )
 }
