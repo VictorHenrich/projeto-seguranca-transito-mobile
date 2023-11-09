@@ -4,22 +4,19 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import IVehiclePayload, { VehicleTypes } from "../../../../Patterns/IVehiclePayload";
 import CheckboxDefault from "../../../../Components/CheckboxDefault";
 import { colors, vehicleTypes } from "../../../../Utils/Constants";
-import ContainerDefault from "../../../../Components/ContainerDefault";
-import ButtonDefault from "../../../../Components/ButtonDefault";
-import HeadingDefault from "../../../../Components/HeadingDefault";
 import InputFormDefault from "../../../../Components/InputFormDefault";
 import SelectFormDefault from "../../../../Components/SelectFormDefault";
+import ModalDefault, { ModalDefaultProps } from "../../../../Components/ModalDefault";
 
-export interface InfoVehicleComponentProps{
+export interface InfoVehicleComponentProps extends Omit<ModalDefaultProps, "open" | "heading" | "onConfirm">{
     vehicle?: IVehiclePayload,
     onChange: (vehicle: IVehiclePayload) => void
-    onCancel: () => void
 }
 
 export default function InfoVehicleComponent({
     vehicle,
     onChange,
-    onCancel
+    ...props
 }: InfoVehicleComponentProps): React.ReactElement{
 
     const vehicle_: IVehiclePayload = {
@@ -42,7 +39,12 @@ export default function InfoVehicleComponent({
     }
 
     return (
-        <ContainerDefault>
+        <ModalDefault 
+            open={Boolean(vehicle)}
+            heading={`${serviceName} Veículo`}
+            {...props}
+            onConfirm={() => onChange(vehicleSelected)}
+        >
             <Stack
                 width="full"
                 space={2}
@@ -156,27 +158,6 @@ export default function InfoVehicleComponent({
                     }}
                 />
             </Stack>
-            <Divider backgroundColor="black"/>
-            <Stack
-                width="full"
-                height={100}
-                paddingTop={10}
-                space={5}
-                direction="row"
-                justifyContent="flex-end"
-            >
-                <ButtonDefault
-                    width={100}
-                    text={serviceName}
-                    onPress={() => onChange(vehicleSelected)}
-                />
-                <ButtonDefault 
-                    width={100}
-                    text="Voltar"
-                    backgroundColor="red"
-                    onPress={onCancel}
-                />
-            </Stack>
-        </ContainerDefault>
+        </ModalDefault>
     );
 }
