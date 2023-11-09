@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Stack, Divider, Icon, Text } from "native-base";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Stack } from "native-base";
 import IVehiclePayload, { VehicleTypes } from "../../../../Patterns/IVehiclePayload";
 import CheckboxDefault from "../../../../Components/CheckboxDefault";
 import { colors, vehicleTypes } from "../../../../Utils/Constants";
@@ -8,7 +7,7 @@ import InputFormDefault from "../../../../Components/InputFormDefault";
 import SelectFormDefault from "../../../../Components/SelectFormDefault";
 import ModalDefault, { ModalDefaultProps } from "../../../../Components/ModalDefault";
 
-export interface InfoVehicleComponentProps extends Omit<ModalDefaultProps, "open" | "heading" | "onConfirm">{
+export interface InfoVehicleComponentProps extends Omit<ModalDefaultProps, "heading" | "onConfirm">{
     vehicle?: IVehiclePayload,
     onChange: (vehicle: IVehiclePayload) => void
 }
@@ -16,6 +15,7 @@ export interface InfoVehicleComponentProps extends Omit<ModalDefaultProps, "open
 export default function InfoVehicleComponent({
     vehicle,
     onChange,
+    open,
     ...props
 }: InfoVehicleComponentProps): React.ReactElement{
 
@@ -40,41 +40,11 @@ export default function InfoVehicleComponent({
 
     return (
         <ModalDefault 
-            open={Boolean(vehicle)}
             heading={`${serviceName} Veículo`}
-            {...props}
             onConfirm={() => onChange(vehicleSelected)}
+            open={open}
+            {...props}
         >
-            <Stack
-                width="full"
-                space={2}
-                direction="column"
-                paddingBottom={5}
-            >
-                <Stack 
-                    direction="row"
-                    alignItems="flex-end"
-                    space={5}
-                    paddingBottom={2}
-                >
-                    <Text
-                        fontWeight={700}
-                        color="primary"
-                    >
-                        {serviceName.toUpperCase()} VEÍCULO
-                    </Text>
-                    <Icon
-                        size="4xl"
-                        as={<MaterialCommunityIcons name="car-cog"/>}
-                        color="primary"
-                    />
-                </Stack>
-                <Divider 
-                    backgroundColor="primary" 
-                    height={1}
-                    borderRadius={5}
-                />
-            </Stack>
             <Stack 
                 direction="column" 
                 space={10} 
