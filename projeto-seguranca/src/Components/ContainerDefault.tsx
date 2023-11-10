@@ -23,6 +23,7 @@ function CenterComponent(props: ICenterProps){
             paddingLeft={5}
             paddingRight={5}
             {...props}
+            position="relative"
         />
     )
 }
@@ -38,6 +39,7 @@ export default function ContainerDefault({
             <ScrollView
                 width="full"
                 height="full"
+                position="relative"
                 {...ScroolProps}
             >
                 <CenterComponent {...props}/>

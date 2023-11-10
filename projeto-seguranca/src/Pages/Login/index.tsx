@@ -75,7 +75,9 @@ function LoginPage(props: any): React.ReactElement{
                 padding={5}
                 flexDirection="column"
                 justifyContent="space-between"
-                haveScrool={false}
+                haveScrool={true}
+                minHeight={800}
+                backgroundColor="transparent"
             >
                 <Stack
                     width="full"
