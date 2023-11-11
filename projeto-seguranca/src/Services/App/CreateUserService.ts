@@ -37,12 +37,12 @@ export default class CreateUserService extends AbstractService<CreateUserService
                     plate: vehicle.plate,
                     renavam: vehicle.renavam,
                     vehicle_type: vehicle.vehicleType.toString(),
-                    brand: vehicle.brand,
-                    model: vehicle.model,
-                    chassi: vehicle.chassi,
-                    color: vehicle.color,
+                    brand: vehicle.brand || null,
+                    model: vehicle.model || null,
+                    chassi: vehicle.chassi || null,
+                    color: vehicle.color || null,
                     have_safe: vehicle.haveSafe,
-                    year: vehicle.year
+                    year: vehicle.year || null
                 }
             })
         }

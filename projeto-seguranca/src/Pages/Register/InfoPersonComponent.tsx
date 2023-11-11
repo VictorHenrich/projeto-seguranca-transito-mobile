@@ -17,6 +17,7 @@ import SelectDefault from "../../Components/SelectDefault";
 import ContainerRegisterComponent from "./ContainerRegisterComponent";
 import HeadingDefault from "../../Components/HeadingDefault";
 import { issueStates } from "../../Utils/Constants";
+import DatePickDefault from "../../Components/DatePickDefault";
 
 
 export default function InfoPersonComponent(props: any){
@@ -104,10 +105,13 @@ export default function InfoPersonComponent(props: any){
                         })
                     }}
                 />
-                <InputDefault 
+                <DatePickDefault 
+                    value={new Date()}
+                />
+                {/* <InputDefault 
                     placeholder='Data de nascimento'
                     icon={<MaterialIcons name="date-range"/>}
-                />
+                /> */}
             </Stack>
             <ButtonDefault 
                 text="Próximo"

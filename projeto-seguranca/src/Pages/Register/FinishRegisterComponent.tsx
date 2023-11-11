@@ -35,11 +35,14 @@ function FinishRegisterComponent(props: any): React.ReactElement{
                     />
                     <Box maxWidth="70%">
                         <HeadingDefault textAlign="left" fontSize={25}>
-                            Seu cadastro foi realizado com {` `}
+                            Seu 
                             <HeadingDefault color="primary" fontSize={25}>
-                                sucesso {" "}
+                                cadastro
+                            </HeadingDefault> 
+                            foi realizado com {` `}
+                            <HeadingDefault color="primary" fontSize={25}>
+                                sucesso!
                             </HeadingDefault>
-                            !
                         </HeadingDefault>
                     </Box>
                 </Stack>

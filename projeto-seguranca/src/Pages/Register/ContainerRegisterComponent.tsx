@@ -36,6 +36,7 @@ export default function ContainerRegisterComponent({
                 padding={10}
                 overflowY="auto"
                 minHeight={minHeight}
+                backgroundColor="transparent"
             >
                 {heading}
                 <PositionStepComponent />

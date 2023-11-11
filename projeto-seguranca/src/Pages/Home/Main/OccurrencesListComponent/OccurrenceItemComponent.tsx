@@ -5,6 +5,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ButtonDefault from "../../../../Components/ButtonDefault";
 import { OccurrenceItemType } from "../../../../Services/App/GetOccurrencesService";
 import { OccurrenceStatus } from "../../../../Patterns/IOccurrencePayload";
+import Moment from "moment";
 
 
 export default function OccurrenceItemComponent({
@@ -56,7 +57,7 @@ export default function OccurrenceItemComponent({
                     color="#a6a6a6"
                     fontSize={12}
                 >
-                    {`${created}`}
+                    {Moment(created).format("DD/MM/YYYY HH:mm:ss")}
                 </Text>
                 <Icon
                     color="primary"
