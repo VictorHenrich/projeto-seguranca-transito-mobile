@@ -49,8 +49,8 @@ function AccessCameraComponent(props: any){
         if(!newVideo) return;
 
         addMedia({
-            ...newVideo,
-            type: MediaTypes.VIDEO
+            type: MediaTypes.VIDEO,
+            ...newVideo
         });
     }
 

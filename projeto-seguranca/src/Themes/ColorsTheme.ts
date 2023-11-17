@@ -7,6 +7,7 @@ export default extendTheme({
         secondary: "#2d2d2d",
         red: "#ff6666",
         white: "#cccccc",
-        gray: "#a6a6a6"
+        gray: "#a6a6a6",
+        green: "#00e600"
     }
 })

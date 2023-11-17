@@ -1,4 +1,4 @@
-import { Camera, PermissionResponse, CameraCapturedPicture, CameraType } from 'expo-camera';
+import { Camera, PermissionResponse, CameraCapturedPicture, CameraType, VideoCodec } from 'expo-camera';
 import RequestCameraPermissionsError from '../../Exceptions/RequestCameraPermissionsError';
 import { MediaTypes } from './CameraProvider';
 
@@ -39,7 +39,8 @@ export default class CameraUtils{
         if(!cameraRef) return;
     
         return await cameraRef.recordAsync({ 
-            quality: 720
+            quality: '720p', 
+            codec: VideoCodec.H264
         });
     }
 

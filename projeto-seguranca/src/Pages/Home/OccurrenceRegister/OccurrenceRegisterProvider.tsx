@@ -1,6 +1,7 @@
 import React, { createContext, Context, useState, PropsWithChildren } from "react";
 import IVehiclePayload from "../../../Patterns/IVehiclePayload";
 import IOccurrencePayload, { OccurrenceStatus } from "../../../Patterns/IOccurrencePayload";
+import ProtocolsComponent from "./ProtocolsComponent";
 
 
 
@@ -41,6 +42,7 @@ function OccurrenceRegisterProvider({ children }: PropsWithChildren): React.Reac
             }}
         >
             {children}
+            <ProtocolsComponent />
         </OccurrenceRegisterContext.Provider>
     )
 }

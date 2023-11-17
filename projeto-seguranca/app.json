@@ -21,6 +21,13 @@
           "cameraPermission": "Allow ProjetoSegurançaTransito to access your camera.",
           "microphonePermission": "Allow ProjetoSegurançaTransito to access your microphone"
         }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow ProjetoSegurançaTransito to access your microphone.",
+          "NSMicrophoneUsageDescription": "Allow ProjetoSegurançaTransito to access your microphone."
+        }
       ]
     ],
     "ios": {
