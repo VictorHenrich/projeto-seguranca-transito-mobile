@@ -107,6 +107,14 @@ export default function InfoPersonComponent(props: any){
                 />
                 <DatePickDefault 
                     value={new Date()}
+                    onChange={(event, value) =>{
+                        if(!value) return;
+
+                        setUserPayload({
+                            ...userPayload,
+                            birthday: value
+                        })
+                    }}
                 />
                 {/* <InputDefault 
                     placeholder='Data de nascimento'

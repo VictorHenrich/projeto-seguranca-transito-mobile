@@ -14,14 +14,6 @@ export interface InputDefaultProps extends IInputProps{
     backgroundColor?: string
 }
 
-
-interface IStyleInput{
-    color: string,
-    backgroundColor: string,
-    opacity: number
-}
-
-
 export default function InputDefault({ 
     colorDefault = "#97A6B4",
     colorFocus = "primary",
