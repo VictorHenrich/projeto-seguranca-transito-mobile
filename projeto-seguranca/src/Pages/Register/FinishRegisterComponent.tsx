@@ -37,7 +37,7 @@ function FinishRegisterComponent(props: any): React.ReactElement{
                         <HeadingDefault textAlign="left" fontSize={25}>
                             Seu 
                             <HeadingDefault color="primary" fontSize={25}>
-                                cadastro
+                                cadastro {" "}
                             </HeadingDefault> 
                             foi realizado com {` `}
                             <HeadingDefault color="primary" fontSize={25}>
@@ -53,8 +53,8 @@ function FinishRegisterComponent(props: any): React.ReactElement{
                 height="50%"
             >
                 <Image
-                    width="full"
-                    height="full"
+                    width={200}
+                    height={200}
                     source={require("../../../assets/success.png")}
                     alt="success"
                 />
