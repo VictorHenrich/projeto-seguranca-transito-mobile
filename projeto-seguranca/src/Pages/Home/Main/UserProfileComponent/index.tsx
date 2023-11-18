@@ -24,6 +24,7 @@ import { loadUserFull } from "../../../../Redux/Functions";
 import ModalConfirm from "../../../../Components/ModalConfirm";
 import InputFormDefault from "../../../../Components/InputFormDefault";
 import SelectFormDefault from "../../../../Components/SelectFormDefault";
+import LoadingComponent from "../../../../Components/Loading";
 
 
 function UserProfileComponent(props: any): React.ReactElement{
@@ -46,6 +47,15 @@ function UserProfileComponent(props: any): React.ReactElement{
     });
 
     const [showModalConfirm, setShowModalConfirm] = useState<boolean>(false);
+
+    const [loadingState, setLoadingState] = useState<LoadingComponentProps>({
+        message: "",
+        open: false
+    });
+
+    function handleSetLoadingState(loadingStatePayload: Partial<LoadingComponentProps>): void{
+        setLoadingState({...loadingState, ...loadingStatePayload});
+    }
 
     useEffect(() => {
         setUser({...globalUser});
@@ -78,8 +88,20 @@ function UserProfileComponent(props: any): React.ReactElement{
     }
 
     async function createVehicle(vehicle: IVehiclePayload): Promise<void>{
+        resetProps();
+
         try{
+            handleSetLoadingState({
+                message: "Criando novo veículo",
+                open: true
+            });
+
             await new CreateVehicleService(vehicle).execute();
+
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
 
             setAlertState({
                 open: true,
@@ -88,6 +110,11 @@ function UserProfileComponent(props: any): React.ReactElement{
             });
 
         }catch(error){
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
+
             setAlertState({
                 open: true,
                 status: "error",
@@ -98,8 +125,20 @@ function UserProfileComponent(props: any): React.ReactElement{
 
 
     async function updateVehicle(vehicle: IVehiclePayload): Promise<void>{
+        resetProps();
+
         try{
+            handleSetLoadingState({
+                message: "Atualizando veículo",
+                open: true
+            });
+
             await new UpdateVehicleService(vehicle).execute();
+
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
 
             setAlertState({
                 open: true,
@@ -108,6 +147,11 @@ function UserProfileComponent(props: any): React.ReactElement{
             });
 
         }catch(error){
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
+
             setAlertState({
                 open: true,
                 text: "Falha ao atualizar novo veículo",
@@ -118,9 +162,19 @@ function UserProfileComponent(props: any): React.ReactElement{
 
     async function updateUser(): Promise<void>{
         try{
+            handleSetLoadingState({
+                message: "Atualizando dados da conta",
+                open: true
+            });
+
             await new UpdateUserService(user).execute();
 
             await loadUserFull(dispatch);
+
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
 
             setAlertState({
                 open: true,
@@ -129,6 +183,11 @@ function UserProfileComponent(props: any): React.ReactElement{
             });
 
         }catch(error){
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
+
             setAlertState({
                 open: true,
                 text: "Falha ao atualizar perfil",
@@ -148,8 +207,6 @@ function UserProfileComponent(props: any): React.ReactElement{
             await updateVehicle(vehicle);
 
         await loadUserFull(dispatch);
-
-        resetProps();
     }
 
 
@@ -157,9 +214,19 @@ function UserProfileComponent(props: any): React.ReactElement{
         if(!vehicleSelected) return;
 
         try{
+            handleSetLoadingState({
+                message: "Excluindo veículo",
+                open: false
+            });
+
             await new DeleteVehicleService(vehicleSelected).execute();
 
             await loadUserFull(dispatch);
+
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
 
             setAlertState({
                 open: true,
@@ -168,6 +235,11 @@ function UserProfileComponent(props: any): React.ReactElement{
             });
 
         }catch(error){
+            handleSetLoadingState({
+                message: "",
+                open: false
+            });
+
             setAlertState({
                 open: true,
                 text: "Falha ao excluir veículo",
@@ -483,6 +555,7 @@ function UserProfileComponent(props: any): React.ReactElement{
                 onConfirm={() => deleteVehicle()}
                 onClose={resetProps}
             />
+            <LoadingComponent {...loadingState}/>
         </>
     );
 }

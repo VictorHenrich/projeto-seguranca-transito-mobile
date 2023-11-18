@@ -21,6 +21,7 @@ import ContainerDefault from '../../Components/ContainerDefault';
 import AuthorizationService, {AuthorizationProps} from '../../Services/App/AuthorizationService';
 import AlertDefault, { AlertDefaultProps } from '../../Components/AlertDefault';
 import AuthRefreshService from "../../Services/App/AuthRefreshService";
+import LoadingComponent, { LoadingComponentProps } from "../../Components/Loading";
 
 
 
@@ -38,6 +39,11 @@ function LoginPage(props: any): React.ReactElement{
         status: "info"
     });
 
+    const [loadingState, setLoadingState] = useState<LoadingComponentProps>({
+        message: "Validando sua autenticidade",
+        open: false
+    });
+
     useEffect(() => {
         verifyUserLogged();
     }, []);
@@ -45,19 +51,30 @@ function LoginPage(props: any): React.ReactElement{
 
     async function authenticate(): Promise<void>{
         try{
+
+            handleSetLoadingState({ open: true });
+            
             await new AuthorizationService(userAuthPayload).execute();
+
+            handleSetLoadingState({ open: false });
             
             navigation.dispatch(
                 StackActions.push("HomePage")
             );
 
         }catch(error){
+            handleSetLoadingState({ open: false });
+
             setAlertState({
                 open: true,
                 text: "Falha ao realizar autenticação",
                 status: "error"
             });
         }
+    }
+
+    function handleSetLoadingState(loadingStatePayload: Partial<LoadingComponentProps>): void{
+        setLoadingState({...loadingState, ...loadingStatePayload});
     }
 
     async function verifyUserLogged(): Promise<void>{
@@ -174,6 +191,7 @@ function LoginPage(props: any): React.ReactElement{
                     setAlertState({ ...alertState, open })
                 }}
             />
+            <LoadingComponent {...loadingState}/>
         </>
     )
 }

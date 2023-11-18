@@ -11,6 +11,7 @@ import { IOccurrenceRegisterContext, OccurrenceRegisterContext } from "./Occurre
 import AlertDefault, { AlertDefaultProps } from "../../../Components/AlertDefault";
 import { useNavigation, NavigationProp } from "@react-navigation/native";
 import { loadUserFull } from "../../../Redux/Functions";
+import LoadingComponent, { LoadingComponentProps } from "../../../Components/Loading";
 
 
 function FinishOccurrenceComponent(props: any){
@@ -28,12 +29,25 @@ function FinishOccurrenceComponent(props: any){
         status: "info"
     });
 
+    const [loadingState, setLoadingState] = useState<LoadingComponentProps>({
+        message: "Cadastrando ocorrência",
+        open: false
+    });
+
+    function handleSetLoadingState(loadingStatePayload: Partial<LoadingComponentProps>): void{
+        setLoadingState({...loadingState, ...loadingStatePayload});
+    }
+
     async function registerOccurrence(): Promise<void>{
         try{
             if(!occurrence.vehicle)
                 throw new Error("Nenhum veículo foi selecionado!");
 
+            handleSetLoadingState({ open: true });
+
             await new CreateOccurrenceService(occurrence).execute();
+
+            handleSetLoadingState({ open: false });
 
             setAlertState({
                 text: "Ocorrência cadastrada com sucesso",
@@ -46,6 +60,8 @@ function FinishOccurrenceComponent(props: any){
             navigation.navigate("Main");
 
         }catch(error){
+            handleSetLoadingState({ open: false });
+
             setAlertState({
                 text: "Falha ao cadastrar ocorrência",
                 open: true,
@@ -56,65 +72,68 @@ function FinishOccurrenceComponent(props: any){
 
 
     return (
-        <OccurrenceRegisterContainer
-            minHeight={500}
-            haveScrool={true}
-            ComponentTop={(
-                <Stack
-                    width="full"
-                    space={10}
-                >
-                    <HeadingDefault fontSize={30} textAlign="left">
-                        Estamos na {" "}
-                        <HeadingDefault color="primary" fontSize={30}>
-                            fase final {" "}
+        <>
+            <OccurrenceRegisterContainer
+                minHeight={500}
+                haveScrool={true}
+                ComponentTop={(
+                    <Stack
+                        width="full"
+                        space={10}
+                    >
+                        <HeadingDefault fontSize={30} textAlign="left">
+                            Estamos na {" "}
+                            <HeadingDefault color="primary" fontSize={30}>
+                                fase final {" "}
+                            </HeadingDefault>
+                                e gostaríamos de confirmar se você {" "}
+                            <HeadingDefault color="primary" fontSize={30}>
+                                concorda {" "}
+                            </HeadingDefault>
+                            em prosseguir com o {" "}
+                            <HeadingDefault color="primary" fontSize={30}>
+                                cadastro.
+                            </HeadingDefault>
                         </HeadingDefault>
-                            e gostaríamos de confirmar se você {" "}
-                        <HeadingDefault color="primary" fontSize={30}>
-                            concorda {" "}
-                        </HeadingDefault>
-                        em prosseguir com o {" "}
-                        <HeadingDefault color="primary" fontSize={30}>
-                            cadastro.
-                        </HeadingDefault>
-                    </HeadingDefault>
 
-                    <Image 
-                        source={require("../../../../assets/success.png")}
-                        width={500}
-                        height={200}
-                        alt="map"
-                    />
-                </Stack>
-            )}
+                        <Image 
+                            source={require("../../../../assets/success.png")}
+                            width={500}
+                            height={200}
+                            alt="map"
+                        />
+                    </Stack>
+                )}
 
-            ComponentCenter={(
-                <>
-                    <ButtonDefault
-                        padding={5}
-                        text="Cadastrar"
-                        TextProps={{
-                            fontSize: 18
-                        }}
-                        endIcon={
-                            <Icon 
-                                as={<Ionicons name="add-circle"/>}   
-                                size="lg"
-                            />
-                        }
+                ComponentCenter={(
+                    <>
+                        <ButtonDefault
+                            padding={5}
+                            text="Cadastrar"
+                            TextProps={{
+                                fontSize: 18
+                            }}
+                            endIcon={
+                                <Icon 
+                                    as={<Ionicons name="add-circle"/>}   
+                                    size="lg"
+                                />
+                            }
 
-                        onPress={() => registerOccurrence()}
-                    /> 
-                    <AlertDefault
-                        {...alertState}
-                        stateOpen={(open) =>{
-                            setAlertState({ ...alertState, open })
-                        }}
-                    />
-                </>
-                
-            )}
-        />
+                            onPress={() => registerOccurrence()}
+                        /> 
+                        <AlertDefault
+                            {...alertState}
+                            stateOpen={(open) =>{
+                                setAlertState({ ...alertState, open })
+                            }}
+                        />
+                    </>
+                    
+                )}
+            />
+            <LoadingComponent {...loadingState}/>
+        </>
     );
 }
 
