@@ -119,6 +119,7 @@ function InfoAccessComponent(props: any): React.ReactElement{
                     />
                     <InputDefault 
                         placeholder='Senha'
+                        type="password"
                         value={userPayload.password}
                         icon={<Fontisto name="locked"/>}
                         onChangeText={(value) => {
