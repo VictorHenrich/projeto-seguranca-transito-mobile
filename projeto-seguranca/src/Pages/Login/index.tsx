@@ -93,7 +93,7 @@ function LoginPage(props: any): React.ReactElement{
                 flexDirection="column"
                 justifyContent="space-between"
                 haveScrool={true}
-                minHeight={800}
+                minHeight={900}
                 backgroundColor="transparent"
             >
                 <Stack

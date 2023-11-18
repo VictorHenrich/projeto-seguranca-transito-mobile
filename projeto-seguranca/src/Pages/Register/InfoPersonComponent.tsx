@@ -106,7 +106,7 @@ export default function InfoPersonComponent(props: any){
                     }}
                 />
                 <DatePickDefault 
-                    value={new Date()}
+                    value={userPayload.birthday}
                     onChange={(event, value) =>{
                         if(!value) return;
 
@@ -116,10 +116,6 @@ export default function InfoPersonComponent(props: any){
                         })
                     }}
                 />
-                {/* <InputDefault 
-                    placeholder='Data de nascimento'
-                    icon={<MaterialIcons name="date-range"/>}
-                /> */}
             </Stack>
             <ButtonDefault 
                 text="Próximo"
