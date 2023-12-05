@@ -214,6 +214,8 @@ function UserProfileComponent(props: any): React.ReactElement{
         if(!vehicleSelected) return;
 
         try{
+            setShowModalConfirm(false);
+            
             handleSetLoadingState({
                 message: "Excluindo veículo",
                 open: true
