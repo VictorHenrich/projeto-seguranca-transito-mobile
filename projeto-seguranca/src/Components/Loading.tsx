@@ -37,6 +37,7 @@ export default function LoadingComponent({
                 alignItems="center"
                 justifyContent="center"
                 space={10}
+                padding={2}
                 backgroundColor="rgba(0, 0, 0, 0.8)"
             >
                 <Spinner 
@@ -44,7 +45,12 @@ export default function LoadingComponent({
                     color="primary"
                     size="lg"
                 />
-                <HeadingDefault color="primary">{message}</HeadingDefault>
+                <HeadingDefault 
+                    color="primary"
+                    textAlign="center"
+                >
+                    {message}
+                </HeadingDefault>
             </Stack>
         </PresenceTransition>
     );  
