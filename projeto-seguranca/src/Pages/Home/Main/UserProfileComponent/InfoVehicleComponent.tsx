@@ -67,7 +67,7 @@ export default function InfoVehicleComponent({
                 <InputFormDefault 
                     label='Renavam'
                     InputDefaultProps={{
-                        value: `${vehicleSelected.plate}`,
+                        value: `${vehicleSelected.renavam}`,
                         onChangeText: (value: string) => {
                             changeVehicle({
                                 renavam: value
