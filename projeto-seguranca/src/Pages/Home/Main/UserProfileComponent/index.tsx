@@ -200,6 +200,8 @@ function UserProfileComponent(props: any): React.ReactElement{
     }
 
     async function createOrUpdateVehicle(vehicle: IVehiclePayload): Promise<void>{
+        setShowVehicleModal(false);
+        
         if(!vehicle.uuid)
             await createVehicle(vehicle);
 
