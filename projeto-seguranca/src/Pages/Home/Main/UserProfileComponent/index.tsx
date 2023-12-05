@@ -216,7 +216,7 @@ function UserProfileComponent(props: any): React.ReactElement{
         try{
             handleSetLoadingState({
                 message: "Excluindo veículo",
-                open: false
+                open: true
             });
 
             await new DeleteVehicleService(vehicleSelected).execute();
